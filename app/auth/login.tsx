@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#1E3A8A',
+    color: '#DF8020',
     marginBottom: 8,
   },
   subtitle: {
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F9FAFB',
   },
   button: {
-    backgroundColor: '#1E3A8A',
+    backgroundColor: '#DF8020',
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     fontSize: 16,
-    color: '#1E3A8A',
+    color: '#DF8020',
     fontWeight: '600',
   },
 });

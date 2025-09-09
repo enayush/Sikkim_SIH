@@ -223,8 +223,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
   },
   languageButtonActive: {
-    backgroundColor: '#3B82F6',
-    borderColor: '#3B82F6',
+    backgroundColor: '#DF8020',
+    borderColor: '#DF8020',
   },
   languageButtonText: {
     fontSize: 14,

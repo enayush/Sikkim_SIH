@@ -8,6 +8,8 @@ const resources = {
       home: 'Home',
       search: 'Search',
       profile: 'Profile',
+      map: 'Map',
+      contribute: 'Contribute',
       
       // Home Screen
       monasteries: 'Monasteries',
@@ -54,6 +56,8 @@ const resources = {
       home: 'घर',
       search: 'खोजें',
       profile: 'प्रोफाइल',
+      map: 'नक्शा',
+      contribute: 'योगदान दें',
       
       // Home Screen
       monasteries: 'मठ',
@@ -100,7 +104,9 @@ const resources = {
       home: 'घर',
       search: 'खोज',
       profile: 'प्रोफाइल',
-      
+      map: 'नक्सा',
+      contribute: 'योगदान दिनुहोस्',
+
       // Home Screen
       monasteries: 'मठहरू',
       cardView: 'कार्ड दृश्य',

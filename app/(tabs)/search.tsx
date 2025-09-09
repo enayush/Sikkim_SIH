@@ -91,7 +91,7 @@ export default function SearchScreen() {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
+        <ActivityIndicator size="large" color="#DF8020" />
         <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
@@ -105,7 +105,7 @@ export default function SearchScreen() {
           style={styles.filterButton}
           onPress={() => setShowFilters(!showFilters)}
         >
-          <Filter size={20} color="#3B82F6" />
+          <Filter size={20} color="#DF8020" />
         </TouchableOpacity>
       </View>
 
@@ -347,8 +347,8 @@ const styles = StyleSheet.create({
     borderColor: '#E5E7EB',
   },
   filterChipActive: {
-    backgroundColor: '#3B82F6',
-    borderColor: '#3B82F6',
+    backgroundColor: '#DF8020',
+    borderColor: '#DF8020',
   },
   filterChipText: {
     fontSize: 14,

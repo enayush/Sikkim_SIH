@@ -182,7 +182,7 @@ export default function MonasteryDetailScreen() {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
+        <ActivityIndicator size="large" color="#DF8020" />
         <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
@@ -235,7 +235,7 @@ export default function MonasteryDetailScreen() {
                 style={styles.writeReviewButton}
                 onPress={() => setShowReviewForm(!showReviewForm)}
               >
-                <MessageCircle size={16} color="#3B82F6" />
+                <MessageCircle size={16} color="#DF8020" />
                 <Text style={styles.writeReviewText}>{t('writeReview')}</Text>
               </TouchableOpacity>
             )}
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#3B82F6',
+    color: '#DF8020',
     fontWeight: '600',
   },
   heroImage: {
@@ -421,7 +421,7 @@ const styles = StyleSheet.create({
   },
   writeReviewText: {
     fontSize: 14,
-    color: '#3B82F6',
+    color: '#DF8020',
     fontWeight: '600',
   },
   reviewForm: {
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 12,
     borderRadius: 8,
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#DF8020',
     gap: 8,
   },
   submitButtonDisabled: {

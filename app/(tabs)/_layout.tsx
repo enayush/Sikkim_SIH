@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Home, Search, User } from 'lucide-react-native';
+import { Home, Search, User, Map as MapIcon, PlusSquare } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
@@ -12,7 +12,7 @@ export default function TabLayout() {
       <Tabs
         screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#3B82F6',
+        tabBarActiveTintColor: '#DF8020',
         tabBarInactiveTintColor: '#6B7280',
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
@@ -37,11 +37,29 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="map"
+        options={{
+          title: t('map'),
+          tabBarIcon: ({ size, color }) => (
+            <MapIcon size={size} color={color} strokeWidth={2} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="search"
         options={{
           title: t('search'),
           tabBarIcon: ({ size, color }) => (
             <Search size={size} color={color} strokeWidth={2} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="contribute"
+        options={{
+          title: t('contribute'),
+          tabBarIcon: ({ size, color }) => (
+            <PlusSquare size={size} color={color} strokeWidth={2} />
           ),
         }}
       />

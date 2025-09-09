@@ -113,7 +113,7 @@ export default function HomeScreen() {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
+        <ActivityIndicator size="large" color="#DF8020" />
         <Text style={styles.loadingText}>{t('loading')}</Text>
       </View>
     );
@@ -122,7 +122,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>{t('monasteries')}</Text>
+        <Text style={styles.title}>{t('Sacred Sikkim')}</Text>
         <View style={styles.headerControls}>
           <TouchableOpacity
             style={[
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F4F6',
   },
   viewModeButtonActive: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: '#DF8020',
   },
   searchContainer: {
     flexDirection: 'row',
