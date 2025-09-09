@@ -2,13 +2,15 @@ import React from 'react';
 import { Tabs } from 'expo-router';
 import { Home, Search, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 export default function TabLayout() {
   const { t } = useTranslation();
 
   return (
-    <Tabs
-      screenOptions={{
+    <ProtectedRoute>
+      <Tabs
+        screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: '#3B82F6',
         tabBarInactiveTintColor: '#6B7280',
@@ -52,6 +54,7 @@ export default function TabLayout() {
           ),
         }}
       />
-    </Tabs>
-  );
-}
+        </Tabs>
+      </ProtectedRoute>
+    );
+  }
