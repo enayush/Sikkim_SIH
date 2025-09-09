@@ -304,6 +304,14 @@ export default function MonasteryDetailScreen() {
           )}
         </View>
       </View>
+      <View style={styles.footer}>
+        <TouchableOpacity
+          style={styles.bookVisitButton}
+          onPress={() => router.push('/donations-bookings/booking')}
+        >
+          <Text style={styles.bookVisitButtonText}>Book a Visit</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 }
@@ -354,6 +362,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+  },
+  footer: {
+    padding: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    backgroundColor: '#FFFFFF',
+  },
+  bookVisitButton: {
+    backgroundColor: '#DF8020',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  bookVisitButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   backButtonText: {
     fontSize: 16,

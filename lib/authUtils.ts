@@ -10,7 +10,6 @@ export const checkAuthSession = async () => {
       return { session: null, user: null, error };
     }
     
-    console.log('Auth session result:', session ? `User: ${session.user?.email}` : 'No session');
     return { session, user: session?.user || null, error: null };
   } catch (error) {
     console.error('Auth session check failed:', error);

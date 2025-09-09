@@ -11,8 +11,8 @@ import {
   StatusBar,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { User, LogOut, Globe } from 'lucide-react-native';
-import { useAuth } from '../../contexts/AuthContext';
+import { User, LogOut, Globe, Heart, Award, ChevronRight } from 'lucide-react-native';
+import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'expo-router';
 
 export default function ProfileScreen() {
@@ -103,35 +103,38 @@ export default function ProfileScreen() {
                   i18n.language === 'hi' && styles.languageButtonTextActive,
                 ]}
               >
-                हिंदी
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.languageButton,
-                i18n.language === 'ne' && styles.languageButtonActive,
-              ]}
-              onPress={() => changeLanguage('ne')}
-            >
-              <Globe size={16} color={i18n.language === 'ne' ? '#FFF' : '#6B7280'} />
-              <Text
-                style={[
-                  styles.languageButtonText,
-                  i18n.language === 'ne' && styles.languageButtonTextActive,
-                ]}
-              >
-                नेपाली
+                हिन्दी
               </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={styles.section}>
-          <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
-            <LogOut size={20} color="#EF4444" />
-            <Text style={styles.signOutText}>Sign Out</Text>
+          <Text style={styles.sectionTitle}>Manage</Text>
+          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/donations-bookings')}>
+            <Heart size={20} color="#6B7280" />
+            <Text style={styles.menuItemText}>Donations & Bookings</Text>
+            <ChevronRight size={20} color="#6B7280" />
           </TouchableOpacity>
         </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Rewards</Text>
+          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/explorer-badges')}>
+            <Award size={20} color="#6B7280" />
+            <Text style={styles.menuItemText}>Explorer Badges</Text>
+            <ChevronRight size={20} color="#6B7280" />
+          </TouchableOpacity>
+        </View>
+
+        {user && (
+          <View style={styles.section}>
+            <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
+              <LogOut size={20} color="#EF4444" />
+              <Text style={styles.signOutButtonText}>{t('logout')}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -144,29 +147,27 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   header: {
-    paddingTop: 20,
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 24,
+    paddingVertical: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#1F2937',
   },
   profileCard: {
     backgroundColor: '#FFFFFF',
-    marginHorizontal: 20,
-    marginTop: 20,
     borderRadius: 12,
+    marginHorizontal: 24,
+    marginTop: 24,
     padding: 20,
+    elevation: 2,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
   },
   profileHeader: {
     flexDirection: 'row',
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#FFF3E0',
+    backgroundColor: '#FDEEDC',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -185,36 +186,46 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   profileName: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
     color: '#1F2937',
-    marginBottom: 4,
   },
   profileEmail: {
     fontSize: 14,
     color: '#6B7280',
+    marginTop: 2,
   },
   section: {
-    backgroundColor: '#FFFFFF',
-    marginHorizontal: 20,
-    marginTop: 20,
-    borderRadius: 12,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    marginTop: 32,
+    marginHorizontal: 24,
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#1F2937',
+    color: '#4B5563',
     marginBottom: 16,
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+  },
+  menuItemText: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1F2937',
+    marginLeft: 16,
   },
   languageButtons: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 8,
   },
   languageButton: {
     flex: 1,
@@ -222,21 +233,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
-    paddingHorizontal: 8,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#D1D5DB',
     marginHorizontal: 4,
   },
   languageButtonActive: {
     backgroundColor: '#DF8020',
-    borderColor: '#DF8020',
   },
   languageButtonText: {
-    fontSize: 14,
-    fontWeight: '500',
+    fontSize: 16,
+    fontWeight: '600',
     color: '#6B7280',
-    marginLeft: 6,
+    marginLeft: 8,
   },
   languageButtonTextActive: {
     color: '#FFFFFF',
@@ -244,14 +251,12 @@ const styles = StyleSheet.create({
   signOutButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    padding: 16,
     justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 8,
-    backgroundColor: '#FEF2F2',
-    borderWidth: 1,
-    borderColor: '#FECACA',
   },
-  signOutText: {
+  signOutButtonText: {
     fontSize: 16,
     fontWeight: '600',
     color: '#EF4444',

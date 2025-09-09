@@ -19,6 +19,10 @@ const resources = {
       
       // Filters
       filters: 'Filters',
+      all: 'All',
+      nearby: 'Nearby',
+      ancient: 'Ancient',
+      festivals: 'Festivals',
       allEras: 'All Eras',
       allLocations: 'All Locations',
       clearFilters: 'Clear Filters',
@@ -67,6 +71,10 @@ const resources = {
       
       // Filters
       filters: 'फिल्टर',
+      all: 'सभी',
+      nearby: 'आस-पास',
+      ancient: 'प्राचीन',
+      festivals: 'त्योहार',
       allEras: 'सभी युग',
       allLocations: 'सभी स्थान',
       clearFilters: 'फिल्टर साफ़ करें',

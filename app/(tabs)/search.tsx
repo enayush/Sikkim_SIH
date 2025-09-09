@@ -8,6 +8,9 @@ import {
   TextInput,
   Image,
   ActivityIndicator,
+  SafeAreaView,
+  StatusBar,
+  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -98,7 +101,7 @@ export default function SearchScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{t('search')}</Text>
         <TouchableOpacity
@@ -249,7 +252,7 @@ export default function SearchScreen() {
           </View>
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -257,6 +260,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   loadingContainer: {
     flex: 1,
@@ -274,7 +278,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 20,
     paddingBottom: 20,
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,

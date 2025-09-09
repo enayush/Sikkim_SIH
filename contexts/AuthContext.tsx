@@ -34,7 +34,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
         
         if (mounted) {
-          console.log('AuthProvider: Initial session result:', session ? `Found user: ${user?.email}` : 'Not found');
           setSession(session);
           setUser(user);
           setInitialized(true);
@@ -60,7 +59,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('Auth state changed:', event, session ? `User: ${session.user?.email}` : 'No user');
       
       if (mounted) {
         // Handle sign out event specifically
