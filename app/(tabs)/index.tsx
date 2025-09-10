@@ -17,21 +17,7 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Grid, List, Bell, Book, Mic, MessageSquare, Calendar } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
-import { mockMonasteries } from '../../lib/mockData';
-
-type Monastery = {
-  id: string;
-  name: string;
-  location: string;
-  era: string;
-  description: string;
-  history: string;
-  cultural_significance: string;
-  images: string[];
-  latitude: number | null;
-  longitude: number | null;
-  created_at: string;
-};
+import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -51,20 +37,7 @@ export default function HomeScreen() {
   const fetchMonasteries = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('monasteries')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      let monasteryData: Monastery[] = [];
-      if (error) {
-        console.error('Error fetching monasteries:', error);
-        monasteryData = mockMonasteries;
-      } else if (data && data.length > 0) {
-        monasteryData = data;
-      } else {
-        monasteryData = mockMonasteries;
-      }
+      const monasteryData = await getAllMonasteries();
       
       setMonasteries(monasteryData);
 
@@ -73,9 +46,8 @@ export default function HomeScreen() {
 
     } catch (error) {
       console.error('Error:', error);
-      setMonasteries(mockMonasteries);
-      const shuffled = [...mockMonasteries].sort(() => 0.5 - Math.random());
-      setCarouselMonasteries(shuffled.slice(0, 3));
+      setMonasteries([]);
+      setCarouselMonasteries([]);
     } finally {
       setLoading(false);
     }

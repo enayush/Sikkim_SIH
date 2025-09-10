@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Session, User } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 import { checkAuthSession } from '../lib/authUtils';
+import { clearAllLocationData } from '../components/splash/locationUtils';
 
 interface AuthContextType {
   user: User | null;
@@ -99,6 +100,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signOut = async () => {
     try {
       console.log('AuthProvider: Signing out user');
+      
+      // Clear location data first
+      await clearAllLocationData();
+      
       const result = await supabase.auth.signOut();
       // Clear state immediately to prevent any timing issues
       setSession(null);
