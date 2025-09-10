@@ -269,25 +269,23 @@ export default function Map() {
       </View>
 
       {/* Control Panel - Only Refresh and Center buttons */}
-      {permissionStatus?.granted && (
-        <View style={Mapstyle.controlPanel}>
-          <TouchableOpacity
-            style={Mapstyle.circularButton}
-            onPress={handleRefreshLocation}
-            disabled={locationLoading}
-          >
-            <Ionicons name="refresh" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
+      <View style={Mapstyle.controlPanel}>
+        <TouchableOpacity
+          style={Mapstyle.circularButton}
+          onPress={handleRefreshLocation}
+          disabled={locationLoading}
+        >
+          <Ionicons name="refresh" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[Mapstyle.circularButton, { marginTop: 12 }]}
-            onPress={handleCenterOnUser}
-            disabled={!userLocation}
-          >
-            <Ionicons name="navigate" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-      )}
+        <TouchableOpacity
+          style={[Mapstyle.circularButton, { marginTop: 12 }]}
+          onPress={handleCenterOnUser}
+          disabled={!userLocation}
+        >
+          <Ionicons name="navigate" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
+      </View>
 
       {/* Monastery Details Modal */}
       <Modal
