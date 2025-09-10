@@ -16,21 +16,7 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Search as SearchIcon, Filter, X } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
-import { mockMonasteries } from '../../lib/mockData';
-
-type Monastery = {
-  id: string;
-  name: string;
-  location: string;
-  era: string;
-  description: string;
-  history: string;
-  cultural_significance: string;
-  images: string[];
-  latitude: number | null;
-  longitude: number | null;
-  created_at: string;
-};
+import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
 
 export default function SearchScreen() {
   const { t } = useTranslation();
@@ -49,22 +35,11 @@ export default function SearchScreen() {
   const fetchMonasteries = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase
-        .from('monasteries')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) {
-        console.error('Error fetching monasteries:', error);
-        setMonasteries(mockMonasteries);
-      } else if (data && data.length > 0) {
-        setMonasteries(data);
-      } else {
-        setMonasteries(mockMonasteries);
-      }
+      const data = await getAllMonasteries();
+      setMonasteries(data);
     } catch (error) {
-      console.error('Error:', error);
-      setMonasteries(mockMonasteries);
+      console.error('Error fetching monasteries:', error);
+      setMonasteries([]);
     } finally {
       setLoading(false);
     }
@@ -300,7 +275,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 16,
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 8,
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     borderWidth: 1,
