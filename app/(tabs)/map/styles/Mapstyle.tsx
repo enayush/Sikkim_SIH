@@ -30,6 +30,7 @@ const Mapstyle = StyleSheet.create({
   loadingText: {
     fontSize: 14,
     color: '#6B7280',
+    marginTop: 8,
   },
   
   // Control Panel
@@ -209,6 +210,7 @@ const Mapstyle = StyleSheet.create({
     color: '#6B7280',
     marginTop: 2,
   },
+
 });
 
 export default Mapstyle;

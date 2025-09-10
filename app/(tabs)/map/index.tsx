@@ -1,25 +1,24 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
 import { 
   Text, 
   View, 
-  StyleSheet, 
   TouchableOpacity, 
-  Dimensions,
   Modal,
-  Platform,
   TextInput,
   FlatList,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Alert,
+  ActivityIndicator
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useLocation } from '@/contexts/LocationContext';
 import { getAllMonasteries, Monastery } from '@/lib/monasteryService';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import Mapstyle from './styles/Mapstyle';
-
-const { width, height } = Dimensions.get('window');
+import { MapErrorBoundary } from '@/components/MapErrorBoundary';
+import { MAP_CONFIG, mapHelpers } from '@/lib/mapConfig';
 
 export default function Map() {
   const {
@@ -35,122 +34,220 @@ export default function Map() {
   const [showMonasteryModal, setShowMonasteryModal] = useState(false);
   const [monasteries, setMonasteries] = useState<Monastery[]>([]);
   const [loadingMonasteries, setLoadingMonasteries] = useState(true);
+  const [mapError, setMapError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredMonasteries, setFilteredMonasteries] = useState<Monastery[]>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
+  const [mapReady, setMapReady] = useState(false);
   const mapRef = useRef<MapView>(null);
+  const searchTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load monasteries on component mount
   useEffect(() => {
     loadMonasteries();
+    return () => {
+      // Cleanup search timeout on unmount
+      if (searchTimeoutRef.current) {
+        clearTimeout(searchTimeoutRef.current);
+      }
+    };
   }, []);
 
-  const loadMonasteries = async () => {
+  const loadMonasteries = useCallback(async () => {
     try {
       setLoadingMonasteries(true);
+      setMapError(null);
       const data = await getAllMonasteries();
       setMonasteries(data);
     } catch (error) {
       console.error('Error loading monasteries:', error);
+      setMapError('Failed to load monastery data. Please check your internet connection.');
+      // Show user-friendly error
+      Alert.alert(
+        'Loading Error',
+        'Unable to load monastery locations. Please check your internet connection and try again.',
+        [
+          { text: 'Retry', onPress: loadMonasteries },
+          { text: 'Cancel', style: 'cancel' }
+        ]
+      );
     } finally {
       setLoadingMonasteries(false);
     }
-  };
+  }, []);
 
-  const handleRefreshLocation = async () => {
+  const handleRefreshLocation = useCallback(async () => {
     try {
+      if (!permissionStatus?.granted) {
+        const permission = await requestPermission();
+        if (!permission.granted) {
+          Alert.alert(
+            'Location Permission Required',
+            'Please enable location services to use this feature.',
+            [{ text: 'OK' }]
+          );
+          return;
+        }
+      }
       await refreshLocation();
     } catch (error) {
       console.error('Failed to refresh location:', error);
+      Alert.alert(
+        'Location Error',
+        'Unable to get your current location. Please try again.',
+        [{ text: 'OK' }]
+      );
     }
-  };
+  }, [permissionStatus, requestPermission, refreshLocation]);
 
-  const handleCenterOnUser = () => {
-    if (userLocation && mapRef.current) {
-      mapRef.current.animateToRegion({
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      });
+  const handleCenterOnUser = useCallback(() => {
+    if (!userLocation) {
+      Alert.alert(
+        'Location Unavailable',
+        'Your location is not available. Please enable location services and try again.',
+        [
+          { text: 'Refresh Location', onPress: handleRefreshLocation },
+          { text: 'Cancel', style: 'cancel' }
+        ]
+      );
+      return;
     }
-  };
 
-  const handleZoomIn = () => {
-    if (mapRef.current) {
+    if (mapRef.current && mapReady) {
+      const region = mapHelpers.createRegion(
+        userLocation.latitude,
+        userLocation.longitude,
+        MAP_CONFIG.ZOOM_LEVELS.USER_FOCUS
+      );
+      mapRef.current.animateToRegion(region, MAP_CONFIG.ANIMATION.PAN);
+    }
+  }, [userLocation, mapReady, handleRefreshLocation]);
+
+  const handleCenterOnSikkim = useCallback(() => {
+    if (mapRef.current && mapReady) {
+      const sikkimRegion = mapHelpers.getSikkimRegion();
+      mapRef.current.animateToRegion(sikkimRegion, MAP_CONFIG.ANIMATION.PAN);
+    }
+  }, [mapReady]);
+
+  const handleZoomIn = useCallback(() => {
+    if (mapRef.current && mapReady) {
       mapRef.current.getCamera().then((camera) => {
-        const newCamera = {
-          ...camera,
-          zoom: (camera.zoom || 10) + 1
-        };
-        mapRef.current?.animateCamera(newCamera, { duration: 200 });
+        const currentZoom = camera.zoom || MAP_CONFIG.ZOOM_LEVELS.DEFAULT;
+        const newZoom = Math.min(currentZoom + 1, MAP_CONFIG.ZOOM_LEVELS.MAX);
+        const newCamera = { ...camera, zoom: newZoom };
+        mapRef.current?.animateCamera(newCamera, { duration: MAP_CONFIG.ANIMATION.ZOOM });
+      }).catch((error) => {
+        console.warn('Zoom in failed:', error);
       });
     }
-  };
+  }, [mapReady]);
 
-  const handleZoomOut = () => {
-    if (mapRef.current) {
+  const handleZoomOut = useCallback(() => {
+    if (mapRef.current && mapReady) {
       mapRef.current.getCamera().then((camera) => {
-        const newCamera = {
-          ...camera,
-          zoom: Math.max((camera.zoom || 10) - 1, 1)
-        };
-        mapRef.current?.animateCamera(newCamera, { duration: 200 });
+        const currentZoom = camera.zoom || MAP_CONFIG.ZOOM_LEVELS.DEFAULT;
+        const newZoom = Math.max(currentZoom - 1, MAP_CONFIG.ZOOM_LEVELS.MIN);
+        const newCamera = { ...camera, zoom: newZoom };
+        mapRef.current?.animateCamera(newCamera, { duration: MAP_CONFIG.ANIMATION.ZOOM });
+      }).catch((error) => {
+        console.warn('Zoom out failed:', error);
       });
     }
-  };
+  }, [mapReady]);
 
-  const handleMarkerPress = (monastery: Monastery) => {
+  const handleMarkerPress = useCallback((monastery: Monastery) => {
     setSelectedMonastery(monastery);
     setShowMonasteryModal(true);
-  };
+  }, []);
 
-  const handleViewDetails = () => {
+  const handleViewDetails = useCallback(() => {
     if (selectedMonastery) {
       setShowMonasteryModal(false);
       router.push(`/monastery/${selectedMonastery.id}`);
     }
-  };
+  }, [selectedMonastery]);
 
-  const handleSearch = (query: string) => {
+  const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
-    if (query.trim().length > 0) {
-      const filtered = monasteries.filter(monastery =>
-        monastery.name.toLowerCase().includes(query.toLowerCase()) ||
-        monastery.location.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredMonasteries(filtered);
-      setShowSearchResults(true);
-    } else {
-      setFilteredMonasteries([]);
-      setShowSearchResults(false);
+    
+    // Clear previous timeout
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
     }
-  };
 
-  const handleSelectMonastery = (monastery: Monastery) => {
+    // Debounce search to avoid excessive filtering
+    searchTimeoutRef.current = setTimeout(() => {
+      if (query.trim().length >= MAP_CONFIG.SEARCH.MIN_QUERY_LENGTH) {
+        const filtered = monasteries.filter(monastery =>
+          monastery.name.toLowerCase().includes(query.toLowerCase()) ||
+          monastery.location.toLowerCase().includes(query.toLowerCase())
+        );
+        setFilteredMonasteries(filtered);
+        setShowSearchResults(true);
+      } else {
+        setFilteredMonasteries([]);
+        setShowSearchResults(false);
+      }
+    }, MAP_CONFIG.SEARCH.DEBOUNCE_MS);
+  }, [monasteries]);
+
+  // Memoize the initial region to prevent unnecessary re-renders
+  const initialMapRegion = useMemo(() => {
+    // Always start with Sikkim as the default region
+    return MAP_CONFIG.DEFAULT_REGION;
+  }, []);
+
+  // Memoize monastery markers for better performance
+  const monasteryMarkers = useMemo(() => {
+    return monasteries
+      .filter(monastery => 
+        mapHelpers.isValidCoordinate(monastery.latitude, monastery.longitude)
+      )
+      .map((monastery) => (
+        <Marker
+          key={monastery.id}
+          coordinate={{
+            latitude: monastery.latitude,
+            longitude: monastery.longitude,
+          }}
+          title={monastery.name}
+          description={monastery.location}
+          onPress={() => handleMarkerPress(monastery)}
+          tracksViewChanges={false} // Optimize performance
+        />
+      ));
+  }, [monasteries, handleMarkerPress]);
+
+  const handleSelectMonastery = useCallback((monastery: Monastery) => {
     setSearchQuery('');
     setShowSearchResults(false);
     Keyboard.dismiss();
     
     // Animate to monastery location
-    if (mapRef.current) {
-      mapRef.current.animateToRegion({
-        latitude: monastery.latitude,
-        longitude: monastery.longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
-      }, 1000);
-    }
-    
-    // Show monastery details after a short delay
-    setTimeout(() => {
+    if (mapRef.current && mapReady) {
+      const region = mapHelpers.createRegion(
+        monastery.latitude,
+        monastery.longitude,
+        MAP_CONFIG.ZOOM_LEVELS.MONASTERY_FOCUS
+      );
+      mapRef.current.animateToRegion(region, MAP_CONFIG.ANIMATION.PAN);
+      
+      // Show monastery details after a short delay
+      setTimeout(() => {
+        setSelectedMonastery(monastery);
+        setShowMonasteryModal(true);
+      }, MAP_CONFIG.ANIMATION.MODAL_DELAY);
+    } else {
+      // If map not ready, show details immediately
       setSelectedMonastery(monastery);
       setShowMonasteryModal(true);
-    }, 1200);
-  };
+    }
+  }, [mapReady]);
 
   return (
-    <View style={Mapstyle.container}>
+    <MapErrorBoundary>
+      <View style={Mapstyle.container}>
       {/* Search Bar */}
       <View style={Mapstyle.searchContainer}>
         <View style={Mapstyle.searchInputContainer}>
@@ -211,42 +308,50 @@ export default function Map() {
         <MapView
           ref={mapRef}
           style={Mapstyle.map}
-          provider={PROVIDER_GOOGLE}
-          initialRegion={{
-            latitude: 27.3389,
-            longitude: 88.6100,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1,
+          initialRegion={initialMapRegion}
+          {...MAP_CONFIG.MAP_SETTINGS}
+          showsUserLocation={permissionStatus?.granted && !locationLoading && MAP_CONFIG.MAP_SETTINGS.showsUserLocation}
+          onMapReady={() => {
+            setMapReady(true);
+            setMapError(null);
           }}
-          showsUserLocation={permissionStatus?.granted}
-          showsMyLocationButton={false}
-          showsCompass={false}
-          showsScale={false}
-          showsBuildings={false}
-          showsTraffic={false}
-          showsIndoors={false}
-          rotateEnabled={false}
-          pitchEnabled={false}
+          onMapLoaded={() => {
+            // Map loaded successfully
+          }}
         >
-          {/* Monastery Markers */}
-          {monasteries.map((monastery) => (
-            <Marker
-              key={monastery.id}
-              coordinate={{
-                latitude: monastery.latitude,
-                longitude: monastery.longitude,
-              }}
-              title={monastery.name}
-              description={monastery.location}
-              onPress={() => handleMarkerPress(monastery)}
-            />
-          ))}
+          {/* Monastery Markers - Memoized for performance */}
+          {monasteryMarkers}
         </MapView>
         
         {/* Loading Overlay */}
-        {loadingMonasteries && (
+        {(loadingMonasteries || !mapReady) && (
           <View style={Mapstyle.loadingOverlay}>
-            <Text style={Mapstyle.loadingText}>Loading monasteries...</Text>
+            <ActivityIndicator size="small" color="#DF8020" />
+            <Text style={Mapstyle.loadingText}>
+              {loadingMonasteries ? 'Loading monasteries...' : 'Initializing map...'}
+            </Text>
+          </View>
+        )}
+
+        {/* Error Overlay */}
+        {mapError && !loadingMonasteries && (
+          <View style={[Mapstyle.loadingOverlay, { backgroundColor: 'rgba(255, 0, 0, 0.1)' }]}>
+            <Ionicons name="warning" size={20} color="#DC2626" />
+            <Text style={[Mapstyle.loadingText, { color: '#DC2626', textAlign: 'center' }]}>
+              {mapError}
+            </Text>
+            <TouchableOpacity
+              onPress={loadMonasteries}
+              style={{
+                marginTop: 8,
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                backgroundColor: '#DC2626',
+                borderRadius: 4,
+              }}
+            >
+              <Text style={{ color: 'white', fontSize: 12 }}>Retry</Text>
+            </TouchableOpacity>
           </View>
         )}
       </View>
@@ -254,40 +359,70 @@ export default function Map() {
       {/* Zoom Control Panel - Left Bottom */}
       <View style={Mapstyle.zoomControlPanel}>
         <TouchableOpacity
-          style={Mapstyle.circularButton}
+          style={[
+            Mapstyle.circularButton,
+            !mapReady && { opacity: 0.5 }
+          ]}
           onPress={handleZoomIn}
+          disabled={!mapReady}
         >
           <Ionicons name="add" size={20} color="#FFFFFF" />
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[Mapstyle.circularButton, { marginTop: 12 }]}
+          style={[
+            Mapstyle.circularButton,
+            { marginTop: 12 },
+            !mapReady && { opacity: 0.5 }
+          ]}
           onPress={handleZoomOut}
+          disabled={!mapReady}
         >
           <Ionicons name="remove" size={20} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
 
       {/* Control Panel - Only Refresh and Center buttons */}
-      {permissionStatus?.granted && (
-        <View style={Mapstyle.controlPanel}>
-          <TouchableOpacity
-            style={Mapstyle.circularButton}
-            onPress={handleRefreshLocation}
-            disabled={locationLoading}
-          >
+      <View style={Mapstyle.controlPanel}>
+        <TouchableOpacity
+          style={[
+            Mapstyle.circularButton,
+            locationLoading && { opacity: 0.5 }
+          ]}
+          onPress={handleRefreshLocation}
+          disabled={locationLoading}
+        >
+          {locationLoading ? (
+            <ActivityIndicator size="small" color="#FFFFFF" />
+          ) : (
             <Ionicons name="refresh" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
+          )}
+        </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[Mapstyle.circularButton, { marginTop: 12 }]}
-            onPress={handleCenterOnUser}
-            disabled={!userLocation}
-          >
-            <Ionicons name="navigate" size={20} color="#FFFFFF" />
-          </TouchableOpacity>
-        </View>
-      )}
+        <TouchableOpacity
+          style={[
+            Mapstyle.circularButton,
+            { marginTop: 12 },
+            (!userLocation || !mapReady) && { opacity: 0.5 }
+          ]}
+          onPress={handleCenterOnUser}
+          disabled={!userLocation || !mapReady}
+        >
+          <Ionicons name="navigate" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[
+            Mapstyle.circularButton,
+            { marginTop: 12 },
+            !mapReady && { opacity: 0.5 }
+          ]}
+          onPress={handleCenterOnSikkim}
+          disabled={!mapReady}
+        >
+          <Ionicons name="home" size={20} color="#FFFFFF" />
+        </TouchableOpacity>
+      </View>
 
       {/* Monastery Details Modal */}
       <Modal
@@ -342,5 +477,6 @@ export default function Map() {
         </TouchableWithoutFeedback>
       </Modal>
     </View>
+    </MapErrorBoundary>
   );
 }
