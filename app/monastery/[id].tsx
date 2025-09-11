@@ -17,6 +17,7 @@ import { supabase } from '../../lib/supabase';
 import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReview } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
 import Monstyles  from './styles/style';
+import SafeScreen from '../../components/SafeScreen';
 
 export default function MonasteryDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -147,8 +148,9 @@ export default function MonasteryDetailScreen() {
   }
 
   return (
+    <SafeScreen>
       <ScrollView style={Monstyles.container}>
-        <View style={{ position: 'absolute', top: 60, left: 0, right: 0, zIndex: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20 }}>
+        <View style={Monstyles.headerControls}>
           <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
             <ArrowLeft size={24} color="#1F2937" />
           </TouchableOpacity>
@@ -260,11 +262,18 @@ export default function MonasteryDetailScreen() {
       <View style={Monstyles.footer}>
         <TouchableOpacity
           style={Monstyles.bookVisitButton}
-          onPress={() => router.push('/donations-bookings/booking')}
+          onPress={() => {
+            console.log('Book a Visit clicked for monastery:', monastery.id);
+            router.push({
+              pathname: '/booking',
+              params: { monasteryId: monastery.id, monasteryName: monastery.name }
+            } as any);
+          }}
         >
           <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeScreen>
   );
 }

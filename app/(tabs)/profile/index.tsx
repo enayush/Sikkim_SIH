@@ -6,14 +6,13 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
-  SafeAreaView,
-  Platform,
-  StatusBar,
+  Image,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { User, LogOut, Globe, Heart, Award, ChevronRight } from 'lucide-react-native';
+import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar } from 'lucide-react-native';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'expo-router';
+import SafeScreen from '../../../components/SafeScreen';
 
 export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
@@ -51,10 +50,13 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeScreen style={styles.container}>
       <ScrollView>
-        <View style={styles.header}>
-          <Text style={styles.title}>{t('profile')}</Text>
+        <View style={styles.topBar}>
+          <View style={styles.logoContainer}>
+            <Image source={require('../../../assets/images/icon.png')} style={styles.logo} />
+            <Text style={styles.appName}>{t('profile')}</Text>
+          </View>
         </View>
 
         <View style={styles.profileCard}>
@@ -111,6 +113,11 @@ export default function ProfileScreen() {
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Manage</Text>
+          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/profile/user-bookings')}>
+            <Heart size={20} color="#6B7280" />
+            <Text style={styles.menuItemText}>Your Bookings</Text>
+            <ChevronRight size={20} color="#6B7280" />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/donations-bookings')}>
             <Heart size={20} color="#6B7280" />
             <Text style={styles.menuItemText}>Donations & Bookings</Text>
@@ -136,7 +143,7 @@ export default function ProfileScreen() {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 
@@ -144,16 +151,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F3F4F6',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
-  header: {
-    paddingHorizontal: 24,
-    paddingVertical: 20,
+  topBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
-  title: {
-    fontSize: 28,
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 32,
+    height: 32,
+    marginRight: 8,
+  },
+  appName: {
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#1F2937',
   },
