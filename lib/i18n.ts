@@ -52,6 +52,16 @@ const resources = {
       error: 'Error',
       success: 'Success',
       retry: 'Retry',
+      
+      // Calendar
+      timeline: 'Timeline',
+      monthly: 'Monthly',
+      book: 'Book',
+      addToCalendar: 'Add to Calendar',
+      events: 'Events',
+      calendar: 'Calendar',
+      upcoming: 'Upcoming',
+      rsvp: 'RSVP',
     },
   },
   hi: {
@@ -104,6 +114,16 @@ const resources = {
       error: 'त्रुटि',
       success: 'सफलता',
       retry: 'पुनः प्रयास',
+      
+      // Calendar
+      timeline: 'टाइमलाइन',
+      monthly: 'मासिक',
+      book: 'बुक करें',
+      addToCalendar: 'कैलेंडर में जोड़ें',
+      events: 'इवेंट्स',
+      calendar: 'कैलेंडर',
+      upcoming: 'आगामी',
+      rsvp: 'आरएसवीपी',
     },
   },
   ne: {
@@ -152,6 +172,16 @@ const resources = {
       error: 'त्रुटि',
       success: 'सफलता',
       retry: 'पुनः प्रयास',
+      
+      // Calendar
+      timeline: 'टाइमलाइन',
+      monthly: 'मासिक',
+      book: 'बुक',
+      addToCalendar: 'क्यालेन्डरमा थप्नुहोस्',
+      events: 'कार्यक्रमहरू',
+      calendar: 'क्यालेन्डर',
+      upcoming: 'आगामी',
+      rsvp: 'RSVP',
     },
   },
 };

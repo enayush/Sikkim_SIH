@@ -1,0 +1,3378 @@
+[
+  {
+    "id": 1,
+    "monastery": "Dubde Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-10-20",
+    "date_end": "2026-10-22",
+    "description": "Guru Rinpoche Day at Dubde Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 2,
+    "monastery": "Dubde Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-09-17",
+    "date_end": "2026-09-19",
+    "description": "Cham Mask Dance at Dubde Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 3,
+    "monastery": "Dubde Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-06-22",
+    "date_end": "2026-06-23",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Dubde Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 4,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-17",
+    "date_end": "2026-10-19",
+    "description": "Butter Lamp Festival at Sang-Ngag Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 5,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-03-29",
+    "date_end": "2027-03-30",
+    "description": "Cham Mask Dance at Sang-Ngag Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 6,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2027-05-30",
+    "date_end": "2027-06-02",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Sang-Ngag Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 7,
+    "monastery": "Pemayangtse Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-05-13",
+    "date_end": "2027-05-15",
+    "description": "Cham Mask Dance at Pemayangtse Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 8,
+    "monastery": "Tashiding Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-04-05",
+    "date_end": "2026-04-06",
+    "description": "Annual Prayer Gathering at Tashiding Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 9,
+    "monastery": "Tashiding Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-07-31",
+    "date_end": "2026-08-03",
+    "description": "Butter Lamp Festival at Tashiding Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 10,
+    "monastery": "Silnon Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-11-19",
+    "date_end": "2026-11-21",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Silnon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 11,
+    "monastery": "Silnon Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-14",
+    "date_end": "2026-03-15",
+    "description": "Annual Prayer Gathering at Silnon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 12,
+    "monastery": "Silnon Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-07-02",
+    "date_end": "2026-07-03",
+    "description": "Bumchu Festival at Silnon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 13,
+    "monastery": "Rinchenpung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-11-23",
+    "date_end": "2025-11-24",
+    "description": "Drupchen Rituals at Rinchenpung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 14,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-11-12",
+    "date_end": "2026-11-15",
+    "description": "Bumchu Festival at Melli-Atsing Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 15,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-02-15",
+    "date_end": "2027-02-16",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Melli-Atsing Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 16,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-08-09",
+    "date_end": "2027-08-12",
+    "description": "Bumchu Festival at Melli-Atsing Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 17,
+    "monastery": "Khachoedpalri Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-30",
+    "date_end": "2026-11-01",
+    "description": "Butter Lamp Festival at Khachoedpalri Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 18,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-11-14",
+    "date_end": "2025-11-16",
+    "description": "Bumchu Festival at Lhuntse Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 19,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-11-03",
+    "date_end": "2026-11-05",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Lhuntse Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 20,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-10-24",
+    "date_end": "2025-10-25",
+    "description": "Annual Prayer Gathering at Lhuntse Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 21,
+    "monastery": "Chakung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-14",
+    "date_end": "2025-11-16",
+    "description": "Cham Mask Dance at Chakung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 22,
+    "monastery": "Nubling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-19",
+    "date_end": "2025-11-22",
+    "description": "Cham Mask Dance at Nubling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 23,
+    "monastery": "Aden Wolung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-02",
+    "date_end": "2027-04-05",
+    "description": "Drupchen Rituals at Aden Wolung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 24,
+    "monastery": "Aden Wolung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-05-01",
+    "date_end": "2027-05-03",
+    "description": "Drupchen Rituals at Aden Wolung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 25,
+    "monastery": "Hungri Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-07-17",
+    "date_end": "2027-07-18",
+    "description": "Butter Lamp Festival at Hungri Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 26,
+    "monastery": "Okhery Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-21",
+    "date_end": "2026-04-22",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Okhery Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 27,
+    "monastery": "Tashi Samboling Tamang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-04-23",
+    "date_end": "2027-04-25",
+    "description": "Butter Lamp Festival at Tashi Samboling Tamang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 28,
+    "monastery": "Tashi Samboling Tamang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-04-07",
+    "date_end": "2026-04-10",
+    "description": "Bumchu Festival at Tashi Samboling Tamang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 29,
+    "monastery": "Sri Badam Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-10-06",
+    "date_end": "2026-10-09",
+    "description": "Cham Mask Dance at Sri Badam Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 30,
+    "monastery": "Rinchen Choling Tamu Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-02",
+    "date_end": "2026-03-04",
+    "description": "Annual Prayer Gathering at Rinchen Choling Tamu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 31,
+    "monastery": "Dodak Tamu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-17",
+    "date_end": "2025-11-18",
+    "description": "Cham Mask Dance at Dodak Tamu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 32,
+    "monastery": "Old Rumtek Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-02-26",
+    "date_end": "2026-02-28",
+    "description": "Butter Lamp Festival at Old Rumtek Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 33,
+    "monastery": "Old Rumtek Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-03-26",
+    "date_end": "2026-03-28",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Old Rumtek Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 34,
+    "monastery": "Kathog Dorjeden Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-08-11",
+    "date_end": "2027-08-13",
+    "description": "Drupchen Rituals at Kathog Dorjeden Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 35,
+    "monastery": "Enchey Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-05-11",
+    "date_end": "2027-05-13",
+    "description": "Annual Prayer Gathering at Enchey Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 36,
+    "monastery": "Linkoed Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-12-20",
+    "date_end": "2026-12-23",
+    "description": "Annual Prayer Gathering at Linkoed Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 37,
+    "monastery": "Rinak Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-09-09",
+    "date_end": "2027-09-12",
+    "description": "Butter Lamp Festival at Rinak Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 38,
+    "monastery": "Rinak Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-10-11",
+    "date_end": "2026-10-14",
+    "description": "Annual Prayer Gathering at Rinak Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 39,
+    "monastery": "Rinak Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-07-23",
+    "date_end": "2027-07-26",
+    "description": "Bumchu Festival at Rinak Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 40,
+    "monastery": "Simig Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-05-31",
+    "date_end": "2026-06-01",
+    "description": "Bumchu Festival at Simig Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 41,
+    "monastery": "Simig Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-07-04",
+    "date_end": "2026-07-06",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Simig Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 42,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-06-12",
+    "date_end": "2027-06-14",
+    "description": "Losar (Tibetan New Year) at Pathing Matsang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 43,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2025-11-21",
+    "date_end": "2025-11-24",
+    "description": "Guru Rinpoche Day at Pathing Matsang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 44,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-06-02",
+    "date_end": "2026-06-05",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Pathing Matsang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 45,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-04-19",
+    "date_end": "2026-04-22",
+    "description": "Guru Rinpoche Day at Lingdok TsangkhAR Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 46,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-02-12",
+    "date_end": "2026-02-14",
+    "description": "Annual Prayer Gathering at Lingdok TsangkhAR Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 47,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-08-24",
+    "date_end": "2026-08-26",
+    "description": "Drupchen Rituals at Lingdok TsangkhAR Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 48,
+    "monastery": "Ray Mindu Katenling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-12-04",
+    "date_end": "2025-12-07",
+    "description": "Bumchu Festival at Ray Mindu Katenling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 49,
+    "monastery": "Ray Mindu Katenling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-21",
+    "date_end": "2027-04-22",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Ray Mindu Katenling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 50,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-08-02",
+    "date_end": "2026-08-05",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Pabyuk Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 51,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-02-26",
+    "date_end": "2027-02-28",
+    "description": "Bumchu Festival at Pabyuk Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 52,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-04-11",
+    "date_end": "2027-04-13",
+    "description": "Cham Mask Dance at Pabyuk Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 53,
+    "monastery": "Tsangek Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-07-16",
+    "date_end": "2026-07-18",
+    "description": "Drupchen Rituals at Tsangek Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 54,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2025-11-06",
+    "date_end": "2025-11-09",
+    "description": "Butter Lamp Festival at Tsulakhang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 55,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-11-15",
+    "date_end": "2026-11-16",
+    "description": "Guru Rinpoche Day at Tsulakhang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 56,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-07",
+    "date_end": "2027-04-08",
+    "description": "Drupchen Rituals at Tsulakhang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 57,
+    "monastery": "Sang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-11-12",
+    "date_end": "2025-11-14",
+    "description": "Bumchu Festival at Sang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 58,
+    "monastery": "Sang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-03-25",
+    "date_end": "2027-03-27",
+    "description": "Cham Mask Dance at Sang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 59,
+    "monastery": "Samdong Mintokgang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-01-02",
+    "date_end": "2027-01-03",
+    "description": "Bumchu Festival at Samdong Mintokgang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 60,
+    "monastery": "Samdong Mintokgang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-10-17",
+    "date_end": "2026-10-18",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Samdong Mintokgang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 61,
+    "monastery": "Martam Namdzong",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-12-17",
+    "date_end": "2025-12-19",
+    "description": "Losar (Tibetan New Year) at Martam Namdzong. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 62,
+    "monastery": "Thumon Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-08-10",
+    "date_end": "2026-08-11",
+    "description": "Cham Mask Dance at Thumon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 63,
+    "monastery": "Thumon Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-04-19",
+    "date_end": "2026-04-20",
+    "description": "Bumchu Festival at Thumon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 64,
+    "monastery": "Sumon Thubten Gatsalling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-12-02",
+    "date_end": "2026-12-03",
+    "description": "Drupchen Rituals at Sumon Thubten Gatsalling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 65,
+    "monastery": "Amba Mamring Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-07-08",
+    "date_end": "2027-07-10",
+    "description": "Annual Prayer Gathering at Amba Mamring Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 66,
+    "monastery": "Choten Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-06-28",
+    "date_end": "2027-06-30",
+    "description": "Losar (Tibetan New Year) at Choten Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 67,
+    "monastery": "Martam TsangkhAR Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-03",
+    "date_end": "2026-06-04",
+    "description": "Bumchu Festival at Martam TsangkhAR Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 68,
+    "monastery": "Martam TsangkhAR Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-09-07",
+    "date_end": "2027-09-09",
+    "description": "Losar (Tibetan New Year) at Martam TsangkhAR Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 69,
+    "monastery": "Pandam Tashi Palden Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-01-02",
+    "date_end": "2026-01-05",
+    "description": "Cham Mask Dance at Pandam Tashi Palden Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 70,
+    "monastery": "Raloong Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-09-11",
+    "date_end": "2026-09-12",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Raloong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 71,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-05-15",
+    "date_end": "2026-05-16",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Radong Tensung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 72,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-02-26",
+    "date_end": "2026-03-01",
+    "description": "Losar (Tibetan New Year) at Radong Tensung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 73,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-12",
+    "date_end": "2026-04-14",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Radong Tensung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 74,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-11-07",
+    "date_end": "2026-11-08",
+    "description": "Butter Lamp Festival at Sang-Ngor Ngor Gonpa Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 75,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2025-12-02",
+    "date_end": "2025-12-05",
+    "description": "Guru Rinpoche Day at Sang-Ngor Ngor Gonpa Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 76,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-03-29",
+    "date_end": "2027-03-30",
+    "description": "Annual Prayer Gathering at Sang-Ngor Ngor Gonpa Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 77,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-08-26",
+    "date_end": "2026-08-28",
+    "description": "Cham Mask Dance at Rumtek Dharma Chakra Centre. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 78,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-03-28",
+    "date_end": "2026-03-30",
+    "description": "Bumchu Festival at Rumtek Dharma Chakra Centre. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 79,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-01-30",
+    "date_end": "2026-02-02",
+    "description": "Butter Lamp Festival at Rumtek Dharma Chakra Centre. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 80,
+    "monastery": "Bakcham Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2027-06-20",
+    "date_end": "2027-06-23",
+    "description": "Guru Rinpoche Day at Bakcham Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 81,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-01-02",
+    "date_end": "2027-01-05",
+    "description": "Losar (Tibetan New Year) at Kagon Tshechhogling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 82,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-04-23",
+    "date_end": "2026-04-26",
+    "description": "Butter Lamp Festival at Kagon Tshechhogling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 83,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-02-01",
+    "date_end": "2027-02-04",
+    "description": "Annual Prayer Gathering at Kagon Tshechhogling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 84,
+    "monastery": "Taktse Ani Gonpa Ugen Chokhorling",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-28",
+    "date_end": "2027-04-29",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Taktse Ani Gonpa Ugen Chokhorling. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 85,
+    "monastery": "Tingkye GonjAng Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-04-21",
+    "date_end": "2026-04-24",
+    "description": "Annual Prayer Gathering at Tingkye GonjAng Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 86,
+    "monastery": "Khatek Pema Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-05-25",
+    "date_end": "2027-05-26",
+    "description": "Cham Mask Dance at Khatek Pema Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 87,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-05-05",
+    "date_end": "2026-05-08",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Dichen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 88,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-09-05",
+    "date_end": "2026-09-06",
+    "description": "Guru Rinpoche Day at Dichen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 89,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2025-10-19",
+    "date_end": "2025-10-22",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Dichen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 90,
+    "monastery": "Taglung Domsumling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-12-24",
+    "date_end": "2025-12-25",
+    "description": "Losar (Tibetan New Year) at Taglung Domsumling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 91,
+    "monastery": "Taglung Domsumling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-03-04",
+    "date_end": "2026-03-05",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Taglung Domsumling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 92,
+    "monastery": "Dolepchen Boudha Sanskrit Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-29",
+    "date_end": "2026-05-31",
+    "description": "Annual Prayer Gathering at Dolepchen Boudha Sanskrit Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 93,
+    "monastery": "Dolepchen Boudha Sanskrit Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-29",
+    "date_end": "2026-12-31",
+    "description": "Losar (Tibetan New Year) at Dolepchen Boudha Sanskrit Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 94,
+    "monastery": "Singtam Karma Thuje Choling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-10-24",
+    "date_end": "2026-10-27",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Singtam Karma Thuje Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 95,
+    "monastery": "Singtam Karma Thuje Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2027-06-17",
+    "date_end": "2027-06-18",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Singtam Karma Thuje Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 96,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-05-02",
+    "date_end": "2027-05-03",
+    "description": "Bumchu Festival at Lingdum Zurmang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 97,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-11-24",
+    "date_end": "2025-11-26",
+    "description": "Annual Prayer Gathering at Lingdum Zurmang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 98,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-12-02",
+    "date_end": "2026-12-04",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Lingdum Zurmang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 99,
+    "monastery": "Burtuk Ugen Pemacholing Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-01",
+    "date_end": "2026-03-03",
+    "description": "Annual Prayer Gathering at Burtuk Ugen Pemacholing Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 100,
+    "monastery": "Burtuk Ugen Pemacholing Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-06-03",
+    "date_end": "2027-06-04",
+    "description": "Drupchen Rituals at Burtuk Ugen Pemacholing Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 101,
+    "monastery": "Duchi Gyalton Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2025-12-12",
+    "date_end": "2025-12-13",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Duchi Gyalton Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 102,
+    "monastery": "Duchi Gyalton Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-08-14",
+    "date_end": "2027-08-15",
+    "description": "Losar (Tibetan New Year) at Duchi Gyalton Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 103,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-01-12",
+    "date_end": "2026-01-14",
+    "description": "Guru Rinpoche Day at Bongyong Ani Gonpa. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 104,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-08-15",
+    "date_end": "2027-08-16",
+    "description": "Cham Mask Dance at Bongyong Ani Gonpa. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 105,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-10-27",
+    "date_end": "2026-10-28",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Bongyong Ani Gonpa. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 106,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-12-12",
+    "date_end": "2026-12-13",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Namtse Nga-Dag Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 107,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-26",
+    "date_end": "2026-12-28",
+    "description": "Losar (Tibetan New Year) at Namtse Nga-Dag Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 108,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-08-28",
+    "date_end": "2026-08-31",
+    "description": "Butter Lamp Festival at Namtse Nga-Dag Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 109,
+    "monastery": "Doling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-05-23",
+    "date_end": "2026-05-25",
+    "description": "Bumchu Festival at Doling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 110,
+    "monastery": "Doling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-09-19",
+    "date_end": "2026-09-20",
+    "description": "Annual Prayer Gathering at Doling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 111,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-02-11",
+    "date_end": "2026-02-12",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Ralong Karma Rabtenling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 112,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-03-13",
+    "date_end": "2027-03-15",
+    "description": "Bumchu Festival at Ralong Karma Rabtenling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 113,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-11-13",
+    "date_end": "2026-11-16",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Ralong Karma Rabtenling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 114,
+    "monastery": "Yangang Gonpa Tashi Palding Gon",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-12-06",
+    "date_end": "2025-12-07",
+    "description": "Losar (Tibetan New Year) at Yangang Gonpa Tashi Palding Gon. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 115,
+    "monastery": "Yangang Gonpa Tashi Palding Gon",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-08-21",
+    "date_end": "2026-08-24",
+    "description": "Losar (Tibetan New Year) at Yangang Gonpa Tashi Palding Gon. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 116,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-19",
+    "date_end": "2026-06-22",
+    "description": "Bumchu Festival at Mangbro Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 117,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-11-26",
+    "date_end": "2026-11-29",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Mangbro Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 118,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-02-08",
+    "date_end": "2027-02-09",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Mangbro Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 119,
+    "monastery": "Linge Phagyal Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-05-18",
+    "date_end": "2027-05-21",
+    "description": "Drupchen Rituals at Linge Phagyal Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 120,
+    "monastery": "BurmioK Wosel Choling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-29",
+    "date_end": "2026-05-02",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at BurmioK Wosel Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 121,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-07-30",
+    "date_end": "2026-08-01",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Ben Karma Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 122,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-22",
+    "date_end": "2026-12-25",
+    "description": "Losar (Tibetan New Year) at Ben Karma Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 123,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-12-23",
+    "date_end": "2026-12-25",
+    "description": "Butter Lamp Festival at Ben Karma Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 124,
+    "monastery": "Namthang Norbu Tsho-Ling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-01-05",
+    "date_end": "2026-01-06",
+    "description": "Losar (Tibetan New Year) at Namthang Norbu Tsho-Ling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 125,
+    "monastery": "Namthang Norbu Tsho-Ling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-06-21",
+    "date_end": "2026-06-24",
+    "description": "Cham Mask Dance at Namthang Norbu Tsho-Ling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 126,
+    "monastery": "Malli Tashi Chodarling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-06-21",
+    "date_end": "2027-06-22",
+    "description": "Butter Lamp Festival at Malli Tashi Chodarling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 127,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-10-24",
+    "date_end": "2026-10-26",
+    "description": "Guru Rinpoche Day at Wok Pabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 128,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-06-18",
+    "date_end": "2027-06-21",
+    "description": "Butter Lamp Festival at Wok Pabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 129,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-05-18",
+    "date_end": "2026-05-20",
+    "description": "Losar (Tibetan New Year) at Wok Pabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 130,
+    "monastery": "Sangmo Sharchog Bephug Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-06-13",
+    "date_end": "2026-06-16",
+    "description": "Guru Rinpoche Day at Sangmo Sharchog Bephug Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 131,
+    "monastery": "Sangmo Sharchog Bephug Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-04-11",
+    "date_end": "2027-04-13",
+    "description": "Annual Prayer Gathering at Sangmo Sharchog Bephug Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 132,
+    "monastery": "Parbing Samten Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-02-17",
+    "date_end": "2027-02-18",
+    "description": "Losar (Tibetan New Year) at Parbing Samten Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 133,
+    "monastery": "Parbing Samten Choling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-11-05",
+    "date_end": "2025-11-07",
+    "description": "Drupchen Rituals at Parbing Samten Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 134,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-04-27",
+    "date_end": "2026-04-28",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Tekling Dzokchen Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 135,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-12-20",
+    "date_end": "2025-12-21",
+    "description": "Bumchu Festival at Tekling Dzokchen Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 136,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-04-17",
+    "date_end": "2026-04-18",
+    "description": "Cham Mask Dance at Tekling Dzokchen Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 137,
+    "monastery": "Bumtar Namdroling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-08-21",
+    "date_end": "2027-08-22",
+    "description": "Bumchu Festival at Bumtar Namdroling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 138,
+    "monastery": "Namtse Ahaley Dechen Choling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-10-23",
+    "date_end": "2026-10-26",
+    "description": "Annual Prayer Gathering at Namtse Ahaley Dechen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 139,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-08-21",
+    "date_end": "2026-08-22",
+    "description": "Bumchu Festival at Sorok Tamang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 140,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-05-22",
+    "date_end": "2027-05-23",
+    "description": "Butter Lamp Festival at Sorok Tamang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 141,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-03",
+    "date_end": "2026-05-04",
+    "description": "Annual Prayer Gathering at Sorok Tamang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 142,
+    "monastery": "Serdup Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-02-05",
+    "date_end": "2027-02-07",
+    "description": "Cham Mask Dance at Serdup Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 143,
+    "monastery": "Serdup Choling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-18",
+    "date_end": "2026-06-19",
+    "description": "Bumchu Festival at Serdup Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 144,
+    "monastery": "Rabong Kunphenling Tsechu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-07-14",
+    "date_end": "2026-07-15",
+    "description": "Cham Mask Dance at Rabong Kunphenling Tsechu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 145,
+    "monastery": "Kewzing Tashi Gyephelling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-04-08",
+    "date_end": "2026-04-10",
+    "description": "Drupchen Rituals at Kewzing Tashi Gyephelling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 146,
+    "monastery": "Kewzing Tashi Gyephelling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-02-15",
+    "date_end": "2026-02-16",
+    "description": "Butter Lamp Festival at Kewzing Tashi Gyephelling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 147,
+    "monastery": "Bon Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-09-10",
+    "date_end": "2026-09-13",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Bon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 148,
+    "monastery": "Bon Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-11-22",
+    "date_end": "2025-11-25",
+    "description": "Losar (Tibetan New Year) at Bon Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 149,
+    "monastery": "Yangang Changchub Tamu Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-06-14",
+    "date_end": "2026-06-15",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Yangang Changchub Tamu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 150,
+    "monastery": "BurmioK Norbugang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-09-05",
+    "date_end": "2026-09-06",
+    "description": "Butter Lamp Festival at BurmioK Norbugang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 151,
+    "monastery": "Ralong Palchen Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-04-05",
+    "date_end": "2027-04-06",
+    "description": "Butter Lamp Festival at Ralong Palchen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 152,
+    "monastery": "Ralong Palchen Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2027-06-16",
+    "date_end": "2027-06-17",
+    "description": "Guru Rinpoche Day at Ralong Palchen Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 153,
+    "monastery": "Suiram Risung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-10-14",
+    "date_end": "2025-10-17",
+    "description": "Drupchen Rituals at Suiram Risung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 154,
+    "monastery": "Suiram Risung Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-02-22",
+    "date_end": "2026-02-25",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Suiram Risung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 155,
+    "monastery": "Suiram Risung Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-03-03",
+    "date_end": "2026-03-04",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Suiram Risung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 156,
+    "monastery": "Namthang Nyima Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-03-04",
+    "date_end": "2026-03-06",
+    "description": "Butter Lamp Festival at Namthang Nyima Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 157,
+    "monastery": "Namthang Nyima Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-12-18",
+    "date_end": "2026-12-20",
+    "description": "Cham Mask Dance at Namthang Nyima Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 158,
+    "monastery": "Gagyong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-10-02",
+    "date_end": "2026-10-03",
+    "description": "Losar (Tibetan New Year) at Gagyong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 159,
+    "monastery": "Rabong Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-08-30",
+    "date_end": "2026-09-01",
+    "description": "Guru Rinpoche Day at Rabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 160,
+    "monastery": "Rabong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-11-28",
+    "date_end": "2025-11-29",
+    "description": "Losar (Tibetan New Year) at Rabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 161,
+    "monastery": "Rabong Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-01-27",
+    "date_end": "2026-01-29",
+    "description": "Drupchen Rituals at Rabong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 162,
+    "monastery": "Phensang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-01-11",
+    "date_end": "2027-01-12",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Phensang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 163,
+    "monastery": "Phodong Karma Thubten Tashi Chokhorling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-06-18",
+    "date_end": "2027-06-20",
+    "description": "Losar (Tibetan New Year) at Phodong Karma Thubten Tashi Chokhorling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 164,
+    "monastery": "Phodong Karma Thubten Tashi Chokhorling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-04-21",
+    "date_end": "2026-04-24",
+    "description": "Drupchen Rituals at Phodong Karma Thubten Tashi Chokhorling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 165,
+    "monastery": "Tsungthang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-11-14",
+    "date_end": "2026-11-16",
+    "description": "Guru Rinpoche Day at Tsungthang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 166,
+    "monastery": "Tsungthang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-07-04",
+    "date_end": "2027-07-07",
+    "description": "Cham Mask Dance at Tsungthang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 167,
+    "monastery": "Tholung Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2025-10-17",
+    "date_end": "2025-10-20",
+    "description": "Butter Lamp Festival at Tholung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 168,
+    "monastery": "Tholung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-02-04",
+    "date_end": "2027-02-05",
+    "description": "Cham Mask Dance at Tholung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 169,
+    "monastery": "Tholung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-12-15",
+    "date_end": "2025-12-17",
+    "description": "Drupchen Rituals at Tholung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 170,
+    "monastery": "Tingbung Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-12-27",
+    "date_end": "2026-12-28",
+    "description": "Bumchu Festival at Tingbung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 171,
+    "monastery": "Tingbung Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-05-12",
+    "date_end": "2027-05-14",
+    "description": "Bumchu Festival at Tingbung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 172,
+    "monastery": "Labrang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-11-02",
+    "date_end": "2026-11-03",
+    "description": "Guru Rinpoche Day at Labrang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 173,
+    "monastery": "Labrang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-12-18",
+    "date_end": "2026-12-21",
+    "description": "Cham Mask Dance at Labrang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 174,
+    "monastery": "Labrang Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-09-11",
+    "date_end": "2027-09-13",
+    "description": "Losar (Tibetan New Year) at Labrang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 175,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-03-15",
+    "date_end": "2027-03-18",
+    "description": "Drupchen Rituals at Lachung Samten Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 176,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-02-03",
+    "date_end": "2026-02-04",
+    "description": "Guru Rinpoche Day at Lachung Samten Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 177,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-08-07",
+    "date_end": "2026-08-10",
+    "description": "Losar (Tibetan New Year) at Lachung Samten Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 178,
+    "monastery": "Lingthem Rikzing Chopel Targelling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-09-13",
+    "date_end": "2026-09-16",
+    "description": "Butter Lamp Festival at Lingthem Rikzing Chopel Targelling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 179,
+    "monastery": "Lachen Ngodub Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-06-18",
+    "date_end": "2026-06-19",
+    "description": "Butter Lamp Festival at Lachen Ngodub Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 180,
+    "monastery": "Sontam Tensung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-07-28",
+    "date_end": "2027-07-29",
+    "description": "Cham Mask Dance at Sontam Tensung Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 181,
+    "monastery": "Singchit Ngadag Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-07-01",
+    "date_end": "2027-07-02",
+    "description": "Butter Lamp Festival at Singchit Ngadag Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 182,
+    "monastery": "Singchit Ngadag Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-01-26",
+    "date_end": "2026-01-28",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Singchit Ngadag Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 183,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-10-17",
+    "date_end": "2025-10-19",
+    "description": "Losar (Tibetan New Year) at Ship Kunzang Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 184,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-01-04",
+    "date_end": "2026-01-07",
+    "description": "Cham Mask Dance at Ship Kunzang Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 185,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-02-15",
+    "date_end": "2026-02-16",
+    "description": "Losar (Tibetan New Year) at Ship Kunzang Choling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 186,
+    "monastery": "Kabi Sanga Dargyeling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-11",
+    "date_end": "2026-05-12",
+    "description": "Annual Prayer Gathering at Kabi Sanga Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 187,
+    "monastery": "Kabi Sanga Dargyeling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-03-16",
+    "date_end": "2027-03-18",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Kabi Sanga Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 188,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-22",
+    "date_end": "2027-04-23",
+    "description": "Drupchen Rituals at Hee Gyathang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 189,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-07-16",
+    "date_end": "2027-07-18",
+    "description": "Bumchu Festival at Hee Gyathang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 190,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-05-07",
+    "date_end": "2026-05-08",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Hee Gyathang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 191,
+    "monastery": "Malam Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-04",
+    "date_end": "2026-10-06",
+    "description": "Butter Lamp Festival at Malam Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 192,
+    "monastery": "Malam Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-22",
+    "date_end": "2027-04-23",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Malam Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 193,
+    "monastery": "Malam Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-11-22",
+    "date_end": "2025-11-24",
+    "description": "Annual Prayer Gathering at Malam Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 194,
+    "monastery": "Tareng Gonpa Dargye Choling",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-04-24",
+    "date_end": "2027-04-26",
+    "description": "Annual Prayer Gathering at Tareng Gonpa Dargye Choling. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 195,
+    "monastery": "Tareng Gonpa Dargye Choling",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-07-21",
+    "date_end": "2026-07-24",
+    "description": "Saga Dawa (Buddha’s Birth Anniversary) at Tareng Gonpa Dargye Choling. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 196,
+    "monastery": "Tawang Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-06-22",
+    "date_end": "2026-06-24",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Tawang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 197,
+    "monastery": "Tawang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-12-14",
+    "date_end": "2026-12-17",
+    "description": "Cham Mask Dance at Tawang Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 198,
+    "monastery": "Nage Ugen Sangdoling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-03-30",
+    "date_end": "2026-04-02",
+    "description": "Drupchen Rituals at Nage Ugen Sangdoling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 199,
+    "monastery": "Shagyong Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-03-22",
+    "date_end": "2026-03-24",
+    "description": "Butter Lamp Festival at Shagyong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 200,
+    "monastery": "Shagyong Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-01-05",
+    "date_end": "2026-01-06",
+    "description": "Butter Lamp Festival at Shagyong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 201,
+    "monastery": "Shagyong Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-20",
+    "date_end": "2027-04-21",
+    "description": "Drupchen Rituals at Shagyong Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 202,
+    "monastery": "Barphog Chhodub Dargyeling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-06-05",
+    "date_end": "2027-06-07",
+    "description": "Cham Mask Dance at Barphog Chhodub Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 203,
+    "monastery": "Barphog Chhodub Dargyeling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-01-17",
+    "date_end": "2026-01-20",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Barphog Chhodub Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 204,
+    "monastery": "Silem Phagyal Tashi Dargyeling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-09-05",
+    "date_end": "2027-09-07",
+    "description": "Butter Lamp Festival at Silem Phagyal Tashi Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 205,
+    "monastery": "Silem Phagyal Tashi Dargyeling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-09-09",
+    "date_end": "2026-09-10",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Silem Phagyal Tashi Dargyeling Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 206,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-03-09",
+    "date_end": "2026-03-11",
+    "description": "Bumchu Festival at Lachen Thangu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 207,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-10-15",
+    "date_end": "2025-10-18",
+    "description": "Cham Mask Dance at Lachen Thangu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 208,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-12-15",
+    "date_end": "2025-12-17",
+    "description": "Cham Mask Dance at Lachen Thangu Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 209,
+    "monastery": "Gor Rinchen Khando Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-02-14",
+    "date_end": "2027-02-16",
+    "description": "Cham Mask Dance at Gor Rinchen Khando Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 210,
+    "monastery": "Gor Rinchen Khando Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2025-12-05",
+    "date_end": "2025-12-08",
+    "description": "Pang Lhabsol (Worship of Mt. Kanchenjunga) at Gor Rinchen Khando Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  },
+  {
+    "id": 211,
+    "monastery": "Gor Rinchen Khando Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-07-02",
+    "date_end": "2026-07-03",
+    "description": "Cham Mask Dance at Gor Rinchen Khando Monastery. A celebration of cultural and spiritual heritage.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events"
+  }
+]
