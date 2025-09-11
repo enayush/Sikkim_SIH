@@ -151,15 +151,19 @@ export default function MonasteryDetailScreen() {
     <SafeScreen>
       <ScrollView style={Monstyles.container}>
         <View style={Monstyles.headerControls}>
-          <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
-            <ArrowLeft size={24} color="#1F2937" />
-          </TouchableOpacity>
-          <TouchableOpacity 
-              style={Monstyles.backButton}
+          <View style={Monstyles.headerBtnWrapper}>
+            <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
+              <ArrowLeft size={24} color="#1F2937" />
+            </TouchableOpacity>
+          </View>
+          <View style={Monstyles.headerBtnWrapperRight}>
+            <TouchableOpacity 
+              style={Monstyles.circleButton}
               onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
             >
-              <Text style={{ color: '#DF8020', fontWeight: 'bold' }}>360°</Text>
+              <Text style={{ color: '#DF8020', fontWeight: 'bold', fontSize: 16 }}>360°</Text>
             </TouchableOpacity>
+          </View>
         </View>
 
         <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
