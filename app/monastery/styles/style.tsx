@@ -1,10 +1,13 @@
 import { StyleSheet } from 'react-native';
 
 const Monstyles = StyleSheet.create({
+  // Base layout styles
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
   },
+  
+  // Loading and error states
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -28,6 +31,8 @@ const Monstyles = StyleSheet.create({
     color: '#6B7280',
     marginBottom: 20,
   },
+  
+  // Header controls
   headerControls: {
     position: 'absolute',
     top: 40,
@@ -95,6 +100,8 @@ const Monstyles = StyleSheet.create({
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   bookVisitButtonText: {
     color: '#FFFFFF',
@@ -269,6 +276,156 @@ const Monstyles = StyleSheet.create({
     color: '#6B7280',
     textAlign: 'center',
   },
+  // Tab styles
+  tabContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+    paddingHorizontal: 20,
+  },
+  tabButton: {
+    flex: 1,
+    paddingVertical: 16,
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: 'transparent',
+  },
+  activeTabButton: {
+    borderBottomColor: '#DF8020',
+  },
+  tabButtonText: {
+    fontSize: 16,
+    color: '#6B7280',
+    fontWeight: '600',
+  },
+  activeTabButtonText: {
+    color: '#DF8020',
+  },
+  tabContent: {
+    flex: 1,
+    padding: 20,
+  },
+  // Image grid styles
+  imageGridContainer: {
+    paddingTop: 10,
+  },
+  imageGridRow: {
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  imageGridItem: {
+    borderRadius: 12,
+    overflow: 'hidden',
+    backgroundColor: '#F3F4F6',
+  },
+  gridImage: {
+    width: '100%',
+    height: '100%',
+  },
+  // Reviews list
+  reviewsList: {
+    flex: 1,
+    marginTop: 10,
+  },
+  // Fixed bottom sections
+  fixedBottomSection: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    padding: 20,
+    paddingBottom: 30, // Extra padding for safe area
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  starRatingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    marginBottom: 12,
+  },
+  starsContainer: {
+    flexDirection: 'row',
+    marginRight: 8,
+  },
+  ratingText: {
+    fontSize: 14,
+    color: '#666',
+    fontWeight: '500',
+  },
+  // Image Modal styles
+  imageModalContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  imageModalCloseButton: {
+    position: 'absolute',
+    top: 50,
+    right: 20,
+    zIndex: 10,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageModalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+  },
+  modalImage: {
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
+  imageNavButton: {
+    position: 'absolute',
+    top: '50%',
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: -25,
+  },
+  imageNavButtonLeft: {
+    left: 20,
+  },
+  imageNavButtonRight: {
+    right: 20,
+  },
+  imageCounter: {
+    position: 'absolute',
+    bottom: 50,
+    alignSelf: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  imageCounterText: {
+    color: '#FFFFFF',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
 });
 
 export default Monstyles;
