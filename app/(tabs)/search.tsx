@@ -8,15 +8,13 @@ import {
   TextInput,
   Image,
   ActivityIndicator,
-  SafeAreaView,
-  StatusBar,
-  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Search as SearchIcon, Filter, X } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
 import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
+import SafeScreen from '../../components/SafeScreen';
 
 export default function SearchScreen() {
   const { t } = useTranslation();
@@ -76,9 +74,12 @@ export default function SearchScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{t('search')}</Text>
+    <SafeScreen style={styles.container}>
+      <View style={styles.topBar}>
+        <View style={styles.logoContainer}>
+          <Image source={require('../../assets/images/icon.png')} style={styles.logo} />
+          <Text style={styles.appName}>{t('search')}</Text>
+        </View>
         <TouchableOpacity
           style={styles.filterButton}
           onPress={() => setShowFilters(!showFilters)}
@@ -227,7 +228,7 @@ export default function SearchScreen() {
           </View>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 
@@ -235,7 +236,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   loadingContainer: {
     flex: 1,
@@ -248,19 +248,26 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#6B7280',
   },
-  header: {
+  topBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 20,
-    backgroundColor: '#FFFFFF',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
   },
-  title: {
-    fontSize: 28,
+  logoContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 32,
+    height: 32,
+    marginRight: 8,
+  },
+  appName: {
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#1F2937',
   },

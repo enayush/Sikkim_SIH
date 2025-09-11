@@ -53,7 +53,7 @@ const Mapstyle = StyleSheet.create({
     backgroundColor: '#DF8020',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#FFFFFF',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -133,7 +133,7 @@ const Mapstyle = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 25,
     gap: 8,
-    shadowColor: '#FFFFFF',
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 8,
@@ -148,7 +148,7 @@ const Mapstyle = StyleSheet.create({
   // Search Styles
   searchContainer: {
     position: 'absolute',
-    top: 60,
+    top: 35,
     left: 20,
     right: 20,
     zIndex: 1000,

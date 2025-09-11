@@ -28,6 +28,17 @@ const Monstyles = StyleSheet.create({
     color: '#6B7280',
     marginBottom: 20,
   },
+  headerControls: {
+    position: 'absolute',
+    top: 10,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
   header: {
     position: 'absolute',
     top: 60,

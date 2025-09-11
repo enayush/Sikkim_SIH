@@ -58,6 +58,38 @@ export type Database = {
           comment: string;
         };
       };
+      bookings: {
+        Row: {
+          id: string;
+          monastery_id: string;
+          user_id: string;
+          email: string;
+          phone: string;
+          number_of_people: number;
+          visit_date: string;
+          special_requests: string | null;
+          status: 'pending' | 'confirmed' | 'cancelled';
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          monastery_id: string;
+          user_id: string;
+          email: string;
+          phone: string;
+          number_of_people: number;
+          visit_date: string;
+          special_requests?: string | null;
+          status?: 'pending' | 'confirmed' | 'cancelled';
+        };
+        Update: {
+          phone?: string;
+          number_of_people?: number;
+          visit_date?: string;
+          special_requests?: string | null;
+          status?: 'pending' | 'confirmed' | 'cancelled';
+        };
+      };
     };
   };
 };

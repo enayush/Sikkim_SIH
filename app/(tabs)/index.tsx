@@ -9,15 +9,13 @@ import {
   ActivityIndicator,
   Dimensions,
   ImageBackground,
-  SafeAreaView,
-  StatusBar,
-  Platform,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Grid, List, Bell, Book, Mic, MessageSquare, Calendar } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
 import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
+import SafeScreen from '../../components/SafeScreen';
 
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -128,7 +126,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeScreen style={styles.container}>
       <View style={styles.topBar}>
         <View style={styles.logoContainer}>
           <Image source={require('../../assets/images/icon.png')} style={styles.logo} />
@@ -253,7 +251,7 @@ export default function HomeScreen() {
       >
         <MessageSquare size={30} color="#FFFFFF" />
       </TouchableOpacity>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 
@@ -262,7 +260,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   chatbotButton: {
     position: 'absolute',
