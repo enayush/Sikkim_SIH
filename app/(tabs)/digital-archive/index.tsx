@@ -1,9 +1,17 @@
 
 
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Platform, StatusBar, TextInput } from 'react-native';
-import { ArrowLeft, BookOpen, Share2, Eye, Trash2, Filter } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from 'react-native-reanimated';
+import { Share2, Eye } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
+import SafeScreen from '../../../components/SafeScreen';
 
 const dummyArchives = [
   {
@@ -91,9 +99,38 @@ const dummyArchives = [
 const archiveTypes = ['All', 'Image', 'Audio', 'Document'];
 
 export default function DigitalArchivePage() {
-  const router = useRouter();
+  const { t } = useTranslation();
   const [selectedType, setSelectedType] = useState('All');
   const [search, setSearch] = useState('');
+
+  // Animation states for header using reanimated
+  const lastScrollY = useSharedValue(0);
+  const scrollY = useSharedValue(0);
+  
+  const HEADER_HEIGHT = 60; // Same as home page
+  
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      const y = event.contentOffset.y;
+      const diff = y - lastScrollY.value;
+  
+      if (diff > 0) {
+        // scrolling down → hide
+        scrollY.value = Math.min(scrollY.value + diff, HEADER_HEIGHT);
+      } else {
+        // scrolling up → show
+        scrollY.value = Math.max(scrollY.value + diff, 0);
+      }
+  
+      lastScrollY.value = y;
+    },
+  });
+  
+  const headerStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateY: -scrollY.value }],
+    };
+  });
 
   const filteredArchives = dummyArchives.filter((archive) => {
     const matchesType = selectedType === 'All' || archive.type === selectedType;
@@ -105,31 +142,30 @@ export default function DigitalArchivePage() {
   });
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-          <ArrowLeft size={24} color="#1F2937" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Digital Archives</Text>
-        <View style={{ width: 24 }} />
-      </View>
+    <SafeScreen>
+      <View style={styles.container}>
+        {/* Filter Bar as Top Bar - Clean without logo */}
+        <Animated.View style={[styles.filterHeader, headerStyle]}>
+          <View style={styles.segmentedControl}>
+            {archiveTypes.map((type) => (
+              <TouchableOpacity
+                key={type}
+                style={[styles.segment, selectedType === type && styles.segmentSelected]}
+                onPress={() => setSelectedType(type)}
+              >
+                <Text style={[styles.segmentText, selectedType === type && styles.segmentTextSelected]}>{type}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </Animated.View>
 
-      {/* Filter & Search Bar */}
-      <View style={styles.filterBar}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.segmentedControl}>
-          {archiveTypes.map((type) => (
-            <TouchableOpacity
-              key={type}
-              style={[styles.segment, selectedType === type && styles.segmentSelected]}
-              onPress={() => setSelectedType(type)}
-            >
-              <Text style={[styles.segmentText, selectedType === type && styles.segmentTextSelected]}>{type}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <Animated.ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={[styles.scrollContent, { paddingTop: 60 }]} 
+          showsVerticalScrollIndicator={false}
+          onScroll={scrollHandler}
+          scrollEventThrottle={16}
+        >
         {filteredArchives.map((archive) => (
           <View key={archive.id} style={styles.card}>
             <Image source={{ uri: archive.image }} style={styles.cardImage} />
@@ -163,10 +199,11 @@ export default function DigitalArchivePage() {
         {filteredArchives.length === 0 && (
           <Text style={styles.noResults}>No archives found.</Text>
         )}
-      </ScrollView>
+      </Animated.ScrollView>
 
     
-    </View>
+      </View>
+    </SafeScreen>
   );
 }
 
@@ -174,57 +211,44 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
-  header: {
+  filterHeader: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
     backgroundColor: '#FFFFFF',
-  },
-  backButton: {
-    padding: 4,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#DF8020',
-    textAlign: 'center',
-  },
-  filterBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 0,
-    paddingVertical: 10,
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    zIndex: 1000,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   segmentedControl: {
     flexDirection: 'row',
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#F9FAFB',
     borderRadius: 12,
     padding: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
   },
   segment: {
     paddingVertical: 6,
-    paddingHorizontal: 14,
-    borderRadius: 10,
-    marginRight: 4,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    marginHorizontal: 1,
   },
   segmentSelected: {
     backgroundColor: '#DF8020',
   },
   segmentText: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#1F2937',
     fontWeight: '500',
   },
@@ -250,28 +274,32 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     paddingVertical: 0,
   },
+  scrollView: {
+    flex: 1,
+  },
   scrollContent: {
     padding: 16,
-    paddingBottom: 32,
+    paddingBottom: 100, // Extra bottom padding
   },
   card: {
     width: '100%',
-    backgroundColor: '#FFF7ED',
-    borderRadius: 18,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 20,
     marginBottom: 20,
     overflow: 'hidden',
-    elevation: 2,
-    shadowColor: '#DF8020',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.10,
-    shadowRadius: 6,
-    padding: 0,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    borderWidth: 1,
+    borderColor: '#F3F4F6',
   },
   cardImage: {
     width: '100%',
-    height: 160,
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
+    height: 180,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     backgroundColor: '#F3F4F6',
   },
   cardContentStack: {
@@ -337,7 +365,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     marginRight: 10,
     elevation: 1,
-    shadowColor: '#DF8020',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 2,
@@ -365,7 +393,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     elevation: 6,
-    shadowColor: '#DF8020',
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.18,
     shadowRadius: 8,

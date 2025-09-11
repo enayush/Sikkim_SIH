@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   StyleSheet,
   TouchableOpacity,
   Image,
@@ -10,9 +9,16 @@ import {
   Dimensions,
   ImageBackground,
 } from 'react-native';
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from 'react-native-reanimated';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Grid, List, Bell, Book, Mic, MessageSquare, Calendar } from 'lucide-react-native';
+import { Grid, List, Bell, Mic, MessageSquare, Calendar } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
 import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
 import SafeScreen from '../../components/SafeScreen';
@@ -27,6 +33,35 @@ export default function HomeScreen() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayCount, setDisplayCount] = useState(10);
   const [activeFilter, setActiveFilter] = useState('All');
+
+  // Animation states for header using reanimated
+  const lastScrollY = useSharedValue(0);
+  const scrollY = useSharedValue(0);
+
+const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
+
+const scrollHandler = useAnimatedScrollHandler({
+  onScroll: (event) => {
+    const y = event.contentOffset.y;
+    const diff = y - lastScrollY.value;
+
+    if (diff > 0) {
+      // scrolling down → hide
+      scrollY.value = Math.min(scrollY.value + diff, HEADER_MAX_HEIGHT);
+    } else {
+      // scrolling up → show
+      scrollY.value = Math.max(scrollY.value + diff, 0);
+    }
+
+    lastScrollY.value = y;
+  },
+});
+
+const headerStyle = useAnimatedStyle(() => {
+  return {
+    transform: [{ translateY: -scrollY.value }],
+  };
+});
 
   useEffect(() => {
     fetchMonasteries();
@@ -127,7 +162,7 @@ export default function HomeScreen() {
 
   return (
     <SafeScreen style={styles.container}>
-      <View style={styles.topBar}>
+      <Animated.View style={[styles.topBar, headerStyle]}>
         <View style={styles.logoContainer}>
           <Image source={require('../../assets/images/icon.png')} style={styles.logo} />
           <Text style={styles.appName}>Sacred Sikkim</Text>
@@ -135,10 +170,14 @@ export default function HomeScreen() {
         <TouchableOpacity onPress={() => router.push('/notification')}>
           <Bell size={24} color="#1F2937" />
         </TouchableOpacity>
-      </View>
-      <ScrollView>
+      </Animated.View>
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.carouselContainer}>
-          <ScrollView
+          <Animated.ScrollView
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
@@ -146,7 +185,7 @@ export default function HomeScreen() {
             scrollEventThrottle={16}
           >
             {carouselMonasteries.map(renderCarouselItem)}
-          </ScrollView>
+          </Animated.ScrollView>
           <View style={styles.pagination}>
             {carouselMonasteries.map((_, index) => (
               <View
@@ -160,12 +199,6 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity style={styles.largeButton} onPress={() => router.push('/digital-archive')}>
-            <Book size={24} color="#FFFFFF" style={{ marginRight: 12 }} />
-            <Text style={styles.largeButtonText}>Digital Archive</Text>
-          </TouchableOpacity>
-        </View>
         <View style={styles.smallButtonsContainer}>
           <TouchableOpacity style={styles.smallButton} onPress={() => router.push('/cultural-calendar')}>
             <Calendar size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
@@ -244,7 +277,7 @@ export default function HomeScreen() {
             <Text style={styles.loadMoreButtonText}>{t('loadMore', 'Load More')}</Text>
           </TouchableOpacity>
         )}
-      </ScrollView>
+      </Animated.ScrollView>
       <TouchableOpacity
         style={styles.chatbotButton}
         onPress={() => router.push('/chatbot')}
@@ -260,6 +293,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  scrollContent: {
+    paddingTop: 60, // Height of the topBar
   },
   chatbotButton: {
     position: 'absolute',
@@ -278,6 +314,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   topBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -285,6 +325,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
+    backgroundColor: '#FFFFFF',
+    zIndex: 1000,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   logoContainer: {
     flexDirection: 'row',
@@ -293,7 +340,13 @@ const styles = StyleSheet.create({
   logo: {
     width: 32,
     height: 32,
+    borderRadius: 16,
     marginRight: 8,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   appName: {
     fontSize: 20,
@@ -307,6 +360,7 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     height: 220,
+    marginTop: -60, // Pull carousel up to touch the header
   },
   carouselItem: {
     width: width,
@@ -354,8 +408,9 @@ const styles = StyleSheet.create({
   },
   smallButtonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
+    paddingTop: 16,
     paddingBottom: 10,
   },
   largeButton: {
@@ -381,11 +436,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#DF8020',
     paddingVertical: 12,
-    paddingHorizontal: 18,
+    paddingHorizontal: 16,
     borderRadius: 8,
     alignItems: 'center',
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 6,
     justifyContent: 'center',
   },
   actionButtonText: {

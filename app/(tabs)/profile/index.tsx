@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Alert,
-  ScrollView,
   Image,
 } from 'react-native';
+import Animated, {
+  useAnimatedScrollHandler,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolate,
+  Extrapolate,
+} from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
 import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar } from 'lucide-react-native';
 import { useAuth } from '../../../contexts/AuthContext';
@@ -18,6 +24,33 @@ export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
   const { user, signOut } = useAuth();
   const router = useRouter();
+  const lastScrollY = useSharedValue(0);
+  const scrollY = useSharedValue(0);
+
+const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
+
+const scrollHandler = useAnimatedScrollHandler({
+  onScroll: (event) => {
+    const y = event.contentOffset.y;
+    const diff = y - lastScrollY.value;
+
+    if (diff > 0) {
+      // scrolling down → hide
+      scrollY.value = Math.min(scrollY.value + diff, HEADER_MAX_HEIGHT);
+    } else {
+      // scrolling up → show
+      scrollY.value = Math.max(scrollY.value + diff, 0);
+    }
+
+    lastScrollY.value = y;
+  },
+});
+
+const headerStyle = useAnimatedStyle(() => {
+  return {
+    transform: [{ translateY: -scrollY.value }],
+  };
+});
 
   const handleSignOut = async () => {
     Alert.alert(
@@ -51,14 +84,17 @@ export default function ProfileScreen() {
 
   return (
     <SafeScreen style={styles.container}>
-      <ScrollView>
-        <View style={styles.topBar}>
-          <View style={styles.logoContainer}>
-            <Image source={require('../../../assets/images/icon.png')} style={styles.logo} />
-            <Text style={styles.appName}>{t('profile')}</Text>
-          </View>
+      <Animated.View style={[styles.topBar, headerStyle]}>
+        <View style={styles.logoContainer}>
+          <Image source={require('../../../assets/images/icon.png')} style={styles.logo} />
+          <Text style={styles.appName}>{t('profile')}</Text>
         </View>
-
+      </Animated.View>
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.profileCard}>
           <View style={styles.profileHeader}>
             <View style={styles.avatarContainer}>
@@ -142,7 +178,7 @@ export default function ProfileScreen() {
             </TouchableOpacity>
           </View>
         )}
-      </ScrollView>
+      </Animated.ScrollView>
     </SafeScreen>
   );
 }
@@ -152,7 +188,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F3F4F6',
   },
+  scrollContent: {
+    paddingTop: 60, // Height of the topBar
+  },
   topBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -160,6 +203,13 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
+    backgroundColor: '#FFFFFF',
+    zIndex: 1000,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
   },
   logoContainer: {
     flexDirection: 'row',
@@ -168,7 +218,13 @@ const styles = StyleSheet.create({
   logo: {
     width: 32,
     height: 32,
+    borderRadius: 16,
     marginRight: 8,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   appName: {
     fontSize: 20,

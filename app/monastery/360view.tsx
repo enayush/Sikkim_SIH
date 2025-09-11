@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { ArrowLeft, RotateCcw } from 'lucide-react-native';
+import { ArrowLeft } from 'lucide-react-native';
 import { WebView } from 'react-native-webview';
 import { supabase } from '../../lib/supabase';
 import { ENV_CONFIG } from '../../lib/envConfig';
@@ -9,8 +9,6 @@ import { ENV_CONFIG } from '../../lib/envConfig';
 export default function Monastery360View() {
   const [webViewLoading, setWebViewLoading] = useState(true);
   const [streetViewAvailable, setStreetViewAvailable] = useState(true);
-  const [loadingTimeout, setLoadingTimeout] = useState(false);
-  const [refreshKey, setRefreshKey] = useState(0);
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null);
@@ -29,22 +27,15 @@ export default function Monastery360View() {
             setCoords({ lat: Number(data.latitude), lng: Number(data.longitude) });
           } else {
             setStreetViewAvailable(false);
+            setWebViewLoading(false);
           }
         } catch (err) {
           setStreetViewAvailable(false);
+          setWebViewLoading(false);
         }
       }
     }
     fetchCoords();
-
-    // Set timeout for loading state
-    const timeout = setTimeout(() => {
-      setLoadingTimeout(true);
-      setWebViewLoading(false);
-      setStreetViewAvailable(false);
-    }, 10000); // 10 seconds timeout
-
-    return () => clearTimeout(timeout);
   }, [id]);
 
   const handleBackPress = () => {
@@ -54,12 +45,6 @@ export default function Monastery360View() {
   const handleWebViewError = () => {
     setWebViewLoading(false);
     setStreetViewAvailable(false);
-  };
-
-  const handleRefresh = () => {
-    setWebViewLoading(true);
-    setStreetViewAvailable(true);
-    setRefreshKey(prev => prev + 1);
   };
 
   return (
@@ -75,17 +60,6 @@ export default function Monastery360View() {
         <ArrowLeft size={22} color="#333333" strokeWidth={2.5} />
       </TouchableOpacity>
 
-      {/* Refresh Button - only show when there's an error or no street view */}
-      {!streetViewAvailable && coords && (
-        <TouchableOpacity 
-          style={styles.refreshButton} 
-          onPress={handleRefresh}
-          activeOpacity={0.7}
-        >
-          <RotateCcw size={18} color="#FFFFFF" strokeWidth={2.5} />
-        </TouchableOpacity>
-      )}
-
       {coords && streetViewAvailable ? (
         <View style={styles.webViewContainer}>
           {webViewLoading && (
@@ -95,7 +69,6 @@ export default function Monastery360View() {
             </View>
           )}
           <WebView
-            key={refreshKey} // This will force WebView to remount when refreshKey changes
             source={{
               html: `
                 <html>
@@ -236,6 +209,7 @@ export default function Monastery360View() {
               `
             }}
             style={styles.webView}
+            onLoadStart={() => setWebViewLoading(true)}
             onLoadEnd={() => setWebViewLoading(false)}
             onError={handleWebViewError}
             onMessage={(event) => {
@@ -270,7 +244,7 @@ export default function Monastery360View() {
       ) : (
         <View style={styles.noImageContainer}>
           <Text style={styles.noImageText}>
-            No 360° images available at the moment
+            No 360° images available for this location
           </Text>
         </View>
       )}
@@ -289,25 +263,6 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 1000,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    borderRadius: 22,
-    width: 44,
-    height: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  refreshButton: {
-    position: 'absolute',
-    top: 45,
-    right: 20,
-    zIndex: 1000,
-    backgroundColor: '#DF8020',
     borderRadius: 22,
     width: 44,
     height: 44,

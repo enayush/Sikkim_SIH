@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { Home, Search, User, Map as MapIcon, PlusSquare } from 'lucide-react-native';
+import { Home, Search, User, Map as MapIcon, Archive } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import ProtectedRoute from '@/components/ProtectedRoute';
 
@@ -55,11 +55,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="contribute"
+        name="digital-archive"
         options={{
-          title: t('contribute'),
+          title: t('archive'),
           tabBarIcon: ({ size, color }) => (
-            <PlusSquare size={size} color={color} strokeWidth={2} />
+            <Archive size={size} color={color} strokeWidth={2} />
           ),
         }}
       />
