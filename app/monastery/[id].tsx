@@ -14,32 +14,10 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Star, MessageCircle, Send } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
-import { mockMonasteries, mockReviews } from '../../lib/mockData';
+import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReview } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
 import Monstyles  from './styles/style';
-
-type Monastery = {
-  id: string;
-  name: string;
-  location: string;
-  era: string;
-  description: string;
-  history: string;
-  cultural_significance: string;
-  images: string[];
-  latitude: number | null;
-  longitude: number | null;
-  created_at: string;
-};
-
-type Review = {
-  id: string;
-  monastery_id: string;
-  user_id: string;
-  rating: number;
-  comment: string;
-  created_at: string;
-};
+import SafeScreen from '../../components/SafeScreen';
 
 export default function MonasteryDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -48,7 +26,7 @@ export default function MonasteryDetailScreen() {
   const { user } = useAuth();
   
   const [monastery, setMonastery] = useState<Monastery | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<MonasteryReview[]>([]);
   const [loading, setLoading] = useState(true);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newRating, setNewRating] = useState(5);
@@ -62,27 +40,11 @@ export default function MonasteryDetailScreen() {
 
   const fetchMonasteryDetails = async () => {
     try {
-      const { data, error } = await supabase
-        .from('monasteries')
-        .select('*')
-        .eq('id', id)
-        .single();
-
-      if (error || !data) {
-        // Fallback to mock data
-        const mockMonastery = mockMonasteries.find((m) => m.id === id);
-        if (mockMonastery) {
-          setMonastery(mockMonastery);
-        }
-      } else {
-        setMonastery(data);
-      }
+      const data = await getMonasteryById(id as string);
+      setMonastery(data);
     } catch (error) {
       console.error('Error fetching monastery:', error);
-      const mockMonastery = mockMonasteries.find((m) => m.id === id);
-      if (mockMonastery) {
-        setMonastery(mockMonastery);
-      }
+      Alert.alert('Error', 'Failed to load monastery details');
     } finally {
       setLoading(false);
     }
@@ -90,27 +52,12 @@ export default function MonasteryDetailScreen() {
 
   const fetchReviews = async () => {
     try {
-      const { data, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .eq('monastery_id', id)
-        .order('created_at', { ascending: false });
-
-      if (error || !data || data.length === 0) {
-        // Fallback to mock data
-        const mockReviewsForMonastery = mockReviews.filter(
-          (r) => r.monastery_id === id
-        );
-        setReviews(mockReviewsForMonastery);
-      } else {
-        setReviews(data);
-      }
+      const data = await getMonasteryReviews(id as string);
+      setReviews(data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
-      const mockReviewsForMonastery = mockReviews.filter(
-        (r) => r.monastery_id === id
-      );
-      setReviews(mockReviewsForMonastery);
+      // Set empty array on error
+      setReviews([]);
     }
   };
 
@@ -201,14 +148,25 @@ export default function MonasteryDetailScreen() {
   }
 
   return (
-    <ScrollView style={Monstyles.container}>
-      <View style={Monstyles.header}>
-        <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
-          <ArrowLeft size={24} color="#1F2937" />
-        </TouchableOpacity>
-      </View>
+    <SafeScreen>
+      <ScrollView style={Monstyles.container}>
+        <View style={Monstyles.headerControls}>
+          <View style={Monstyles.headerBtnWrapper}>
+            <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
+              <ArrowLeft size={24} color="#1F2937" />
+            </TouchableOpacity>
+          </View>
+          <View style={Monstyles.headerBtnWrapperRight}>
+            <TouchableOpacity 
+              style={Monstyles.circleButton}
+              onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
+            >
+              <Text style={{ color: '#DF8020', fontWeight: 'bold', fontSize: 16 }}>360°</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
 
-      <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
+        <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
 
       <View style={Monstyles.content}>
         <Text style={Monstyles.monasteryName}>{monastery.name}</Text>
@@ -308,11 +266,18 @@ export default function MonasteryDetailScreen() {
       <View style={Monstyles.footer}>
         <TouchableOpacity
           style={Monstyles.bookVisitButton}
-          onPress={() => router.push('/donations-bookings/booking')}
+          onPress={() => {
+            console.log('Book a Visit clicked for monastery:', monastery.id);
+            router.push({
+              pathname: '/booking',
+              params: { monasteryId: monastery.id, monasteryName: monastery.name }
+            } as any);
+          }}
         >
           <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeScreen>
   );
 }

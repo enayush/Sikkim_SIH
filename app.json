@@ -5,11 +5,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "sacredSikkim",
+    "scheme": "sacredsikkim",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ashhhh1535.sacredsikkim",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show nearby monasteries."
+      }
     },
     "web": {
       "bundler": "metro",
@@ -18,6 +22,14 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "This app needs access to your location to show nearby monasteries.",
+          "locationWhenInUsePermission": "This app needs access to your location to show nearby monasteries."
+        }
+      ],
+      "expo-maps",
       "expo-font",
       "expo-web-browser"
     ],
@@ -25,13 +37,14 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "d04d49d6-16c3-4eec-b505-f9665b1f7374"
-      }
+      "router": {}
     },
     "android": {
-      "package": "com.ashhhh1535.sacredsikkim"
+      "package": "com.ashhhh1535.sacredsikkim",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "INTERNET"
+      ]
     }
   }
 }

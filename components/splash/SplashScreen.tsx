@@ -1,8 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, Image, StyleSheet, ImageBackground, Animated, Easing } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { BlurView } from 'expo-blur';
+import LocationPermissionModal from './LocationPermissionModal';
+import { 
+  LocationPermissionResult, 
+  getLocationPermissionStatus,
+  getUserLocationWithCache 
+} from './locationUtils';
 
 const FADE_IN_DURATION = 800;
 const SLIDE_UP_DURATION = 700;
@@ -11,6 +17,9 @@ const STAGGER_DELAY = 150;
 export default function SplashScreen() {
   const { user, loading } = useAuth();
   const router = useRouter();
+
+  const [showLocationModal, setShowLocationModal] = useState(false);
+  const [locationPermissionChecked, setLocationPermissionChecked] = useState(false);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
@@ -80,8 +89,48 @@ export default function SplashScreen() {
     };
   }, []);
 
+  // Check location permission after auth loading is complete
   useEffect(() => {
-    if (loading) {
+    if (!loading && !locationPermissionChecked) {
+      checkLocationPermission();
+    }
+  }, [loading, locationPermissionChecked]);
+
+  const checkLocationPermission = async () => {
+    try {
+      const permissionStatus = await getLocationPermissionStatus();
+      
+      // If user is logged in and location permission hasn't been granted, show modal
+      if (user && !permissionStatus.granted) {
+        setShowLocationModal(true);
+      }
+      
+      setLocationPermissionChecked(true);
+    } catch (error) {
+      console.error('Error checking location permission:', error);
+      setLocationPermissionChecked(true);
+    }
+  };
+
+  const handleLocationPermissionResult = async (result: LocationPermissionResult) => {
+    setShowLocationModal(false);
+    
+    if (result.granted) {
+      console.log('Location permission granted, caching initial location...');
+      // Try to get and cache initial location
+      try {
+        await getUserLocationWithCache();
+        console.log('Initial location cached successfully');
+      } catch (error) {
+        console.error('Error getting initial location:', error);
+      }
+    } else {
+      console.log('Location permission denied');
+    }
+  };
+
+  useEffect(() => {
+    if (loading || showLocationModal) {
       return;
     }
 
@@ -99,13 +148,13 @@ export default function SplashScreen() {
     const timer = setTimeout(handleRedirect, Math.max(0, remaining));
 
     return () => clearTimeout(timer);
-  }, [user, loading, router]);
+  }, [user, loading, router, showLocationModal]);
 
 
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('@/assets/images/splash-bg.png')}
+        source={require('@/assets/images/splash.png')}
         style={styles.backgroundImage}
         resizeMode="cover"
       >
@@ -135,6 +184,13 @@ export default function SplashScreen() {
           </Animated.View>
         </BlurView>
       </ImageBackground>
+
+      {/* Location Permission Modal */}
+      <LocationPermissionModal
+        visible={showLocationModal}
+        onPermissionResult={handleLocationPermissionResult}
+        onClose={() => setShowLocationModal(false)}
+      />
     </View>
   );
 }

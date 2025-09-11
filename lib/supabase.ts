@@ -1,8 +1,14 @@
 import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ENV_CONFIG } from './envConfig';
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
+// Use centralized environment configuration
+const supabaseUrl = ENV_CONFIG.SUPABASE.URL;
+const supabaseKey = ENV_CONFIG.SUPABASE.ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('Supabase configuration missing. Please check your environment variables.');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseKey, {
   auth: {
@@ -10,6 +16,11 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: false,
+  },
+  global: {
+    headers: {
+      'X-Client-Info': 'sacred-sikkim-app',
+    },
   },
 });
 
@@ -45,6 +56,38 @@ export type Database = {
           user_id: string;
           rating: number;
           comment: string;
+        };
+      };
+      bookings: {
+        Row: {
+          id: string;
+          monastery_id: string;
+          user_id: string;
+          email: string;
+          phone: string;
+          number_of_people: number;
+          visit_date: string;
+          special_requests: string | null;
+          status: 'pending' | 'confirmed' | 'cancelled';
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          monastery_id: string;
+          user_id: string;
+          email: string;
+          phone: string;
+          number_of_people: number;
+          visit_date: string;
+          special_requests?: string | null;
+          status?: 'pending' | 'confirmed' | 'cancelled';
+        };
+        Update: {
+          phone?: string;
+          number_of_people?: number;
+          visit_date?: string;
+          special_requests?: string | null;
+          status?: 'pending' | 'confirmed' | 'cancelled';
         };
       };
     };
