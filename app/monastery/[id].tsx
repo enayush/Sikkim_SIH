@@ -147,14 +147,20 @@ export default function MonasteryDetailScreen() {
   }
 
   return (
-    <ScrollView style={Monstyles.container}>
-      <View style={Monstyles.header}>
-        <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
-          <ArrowLeft size={24} color="#1F2937" />
-        </TouchableOpacity>
-      </View>
+      <ScrollView style={Monstyles.container}>
+        <View style={{ position: 'absolute', top: 60, left: 0, right: 0, zIndex: 10, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 20 }}>
+          <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
+            <ArrowLeft size={24} color="#1F2937" />
+          </TouchableOpacity>
+          <TouchableOpacity 
+              style={Monstyles.backButton}
+              onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
+            >
+              <Text style={{ color: '#DF8020', fontWeight: 'bold' }}>360°</Text>
+            </TouchableOpacity>
+        </View>
 
-      <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
+        <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
 
       <View style={Monstyles.content}>
         <Text style={Monstyles.monasteryName}>{monastery.name}</Text>
