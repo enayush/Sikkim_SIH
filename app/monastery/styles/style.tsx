@@ -102,9 +102,31 @@ const Monstyles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    flex: 1,
   },
   bookVisitButtonText: {
     color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  // Button row for two buttons
+  buttonRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  audioGuideButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#DF8020',
+  },
+  audioGuideButtonText: {
+    color: '#DF8020',
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -116,6 +138,53 @@ const Monstyles = StyleSheet.create({
   heroImage: {
     width: '100%',
     height: 300,
+  },
+  // Hero container and text overlay styles
+  heroContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 300,
+  },
+  heroTextOverlay: {
+    position: 'absolute',
+    bottom: 20,
+    left: 20,
+    right: 20,
+  },
+  heroMonasteryName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+  },
+  // Row container for monastery name and 360 button
+  monasteryNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  // 360 button in hero overlay
+  hero360Button: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  hero360ButtonText: {
+    color: '#DF8020',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
   content: {
     padding: 20,
@@ -179,22 +248,22 @@ const Monstyles = StyleSheet.create({
   },
   reviewForm: {
     backgroundColor: '#FFFFFF',
-    padding: 16,
+    padding: 12,
     borderRadius: 12,
-    marginBottom: 16,
+    marginBottom: 8,
     borderWidth: 1,
     borderColor: '#E5E7EB',
   },
   formLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
     color: '#1F2937',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   ratingSelector: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 16,
+    gap: 6,
+    marginBottom: 12,
   },
   commentInput: {
     borderWidth: 1,
@@ -203,8 +272,9 @@ const Monstyles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     color: '#1F2937',
-    minHeight: 100,
-    marginBottom: 16,
+    minHeight: 80,
+    maxHeight: 120,
+    marginBottom: 12,
   },
   formButtons: {
     flexDirection: 'row',
@@ -277,12 +347,24 @@ const Monstyles = StyleSheet.create({
     textAlign: 'center',
   },
   // Tab styles
+  tabContainerWithRounding: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    marginTop: -24, // Overlap with hero image slightly
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
   tabContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
     paddingHorizontal: 20,
+    paddingTop: 8,
   },
   tabButton: {
     flex: 1,
@@ -305,6 +387,8 @@ const Monstyles = StyleSheet.create({
   tabContent: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#FFFFFF',
+    marginBottom: 120, // Space for fixed bottom buttons
   },
   // Image grid styles
   imageGridContainer: {
@@ -345,6 +429,31 @@ const Monstyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
+  // Keyboard-aware styles
+  keyboardAvoidingContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  fixedBottomSectionKeyboard: {
+    position: 'absolute',
+    bottom: 280, // Move up above keyboard
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    padding: 16,
+    paddingBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+    maxHeight: 250,
+  },
+  reviewFormScroll: {
+    maxHeight: 250,
+  },
   starRatingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -359,6 +468,15 @@ const Monstyles = StyleSheet.create({
     fontSize: 14,
     color: '#666',
     fontWeight: '500',
+  },
+  // Special styling for hero overlay rating text
+  heroRatingText: {
+    fontSize: 14,
+    color: '#FFFFFF',
+    fontWeight: '500',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
   // Image Modal styles
   imageModalContainer: {

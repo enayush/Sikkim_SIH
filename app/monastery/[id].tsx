@@ -13,11 +13,14 @@ import {
   Dimensions,
   Modal,
   StatusBar,
+  KeyboardAvoidingView,
+  Platform,
+  Keyboard,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Star, MessageCircle, Send, X, ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { ArrowLeft, Star, MessageCircle, Send, X, ChevronLeft, ChevronRight, Volume2 } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
 import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReview } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -41,6 +44,7 @@ export default function MonasteryDetailScreen() {
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   // Screen dimensions
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -49,6 +53,21 @@ export default function MonasteryDetailScreen() {
     fetchMonasteryDetails();
     fetchReviews();
   }, [id]);
+
+  // Keyboard listeners for better UX
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
+      setKeyboardVisible(true);
+    });
+    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+      setKeyboardVisible(false);
+    });
+
+    return () => {
+      keyboardDidShowListener?.remove();
+      keyboardDidHideListener?.remove();
+    };
+  }, []);
 
   // Data fetching
   const fetchMonasteryDetails = async () => {
@@ -345,8 +364,6 @@ export default function MonasteryDetailScreen() {
 
   const renderOverviewContent = () => (
     <ScrollView style={Monstyles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={Monstyles.monasteryName}>{monastery?.name}</Text>
-      {renderStarRating(calculateAverageRating())}
       <Text style={Monstyles.monasteryLocation}>{monastery?.location}</Text>
       <Text style={Monstyles.monasteryEra}>{monastery?.era}</Text>
       <Text style={Monstyles.monasteryDescription}>{monastery?.description}</Text>
@@ -362,7 +379,7 @@ export default function MonasteryDetailScreen() {
           {monastery?.cultural_significance}
         </Text>
       </View>
-      <View style={{ height: 100 }} />
+      <View style={{ height: 150 }} />
     </ScrollView>
   );
 
@@ -427,31 +444,46 @@ export default function MonasteryDetailScreen() {
   return (
     <SafeScreen>
       <View style={Monstyles.container}>
-        {/* Header with back button and 360 button */}
+        {/* Header with back button only */}
         <View style={Monstyles.headerControls}>
           <View style={Monstyles.headerBtnWrapper}>
             <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
               <ArrowLeft size={24} color="#1F2937" />
             </TouchableOpacity>
           </View>
-          <View style={Monstyles.headerBtnWrapperRight}>
-            <TouchableOpacity 
-              style={Monstyles.circleButton}
-              onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
-            >
-              <Text style={{ color: '#DF8020', fontWeight: 'bold', fontSize: 16 }}>360°</Text>
-            </TouchableOpacity>
+        </View>
+
+        {/* Hero Image with Text Overlay */}
+        <View style={Monstyles.heroContainer}>
+          <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
+          <View style={Monstyles.heroTextOverlay}>
+            <View style={Monstyles.monasteryNameRow}>
+              <Text style={Monstyles.heroMonasteryName}>{monastery?.name}</Text>
+              <TouchableOpacity 
+                style={Monstyles.hero360Button}
+                onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
+              >
+                <Text style={Monstyles.hero360ButtonText}>360°</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={Monstyles.starRatingContainer}>
+              <View style={Monstyles.starsContainer}>
+                {renderStars(calculateAverageRating(), 18)}
+              </View>
+              <Text style={Monstyles.heroRatingText}>
+                {calculateAverageRating().toFixed(1)} ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
+              </Text>
+            </View>
           </View>
         </View>
 
-        {/* Hero Image */}
-        <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
-
-        {/* Tab Navigation */}
-        <View style={Monstyles.tabContainer}>
-          {renderTabButton('overview', 'Overview')}
-          {renderTabButton('images', 'Images')}
-          {renderTabButton('reviews', 'Reviews')}
+        {/* Tab Navigation with Rounded Top */}
+        <View style={Monstyles.tabContainerWithRounding}>
+          <View style={Monstyles.tabContainer}>
+            {renderTabButton('overview', 'Overview')}
+            {renderTabButton('images', 'Images')}
+            {renderTabButton('reviews', 'Reviews')}
+          </View>
         </View>
 
         {/* Tab Content */}
@@ -462,18 +494,30 @@ export default function MonasteryDetailScreen() {
         {/* Fixed Bottom Section */}
         {activeTab === 'overview' && (
           <View style={Monstyles.fixedBottomSection}>
-            <TouchableOpacity
-              style={Monstyles.bookVisitButton}
-              onPress={navigateToBooking}
-            >
-              <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
-            </TouchableOpacity>
+            <View style={Monstyles.buttonRow}>
+              <TouchableOpacity
+                style={Monstyles.audioGuideButton}
+                onPress={() => router.push('/audio-guide')}
+              >
+                <Volume2 size={16} color="#DF8020" style={{ marginRight: 8 }} />
+                <Text style={Monstyles.audioGuideButtonText}>Audio Guide</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={Monstyles.bookVisitButton}
+                onPress={navigateToBooking}
+              >
+                <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
 
         {/* Write Review Section - Fixed at bottom for Reviews tab */}
         {activeTab === 'reviews' && (
-          <View style={Monstyles.fixedBottomSection}>
+          <View style={[
+            Monstyles.fixedBottomSection,
+            keyboardVisible && Monstyles.fixedBottomSectionKeyboard
+          ]}>
             {!showReviewForm ? (
               <TouchableOpacity
                 style={Monstyles.bookVisitButton}
@@ -489,43 +533,54 @@ export default function MonasteryDetailScreen() {
                 <Text style={Monstyles.bookVisitButtonText}>Write a Review</Text>
               </TouchableOpacity>
             ) : (
-              <View style={Monstyles.reviewForm}>
-                <Text style={Monstyles.formLabel}>{t('rating')}</Text>
-                {renderRatingSelector()}
-                
-                <Text style={Monstyles.formLabel}>{t('comment')}</Text>
-                <TextInput
-                  style={Monstyles.commentInput}
-                  placeholder="Share your experience..."
-                  value={newComment}
-                  onChangeText={setNewComment}
-                  multiline
-                  numberOfLines={4}
-                  textAlignVertical="top"
-                />
-                
-                <View style={Monstyles.formButtons}>
-                  <TouchableOpacity
-                    style={Monstyles.cancelButton}
-                    onPress={() => setShowReviewForm(false)}
-                  >
-                    <Text style={Monstyles.cancelButtonText}>{t('cancel')}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[
-                      Monstyles.submitButton,
-                      submittingReview && Monstyles.submitButtonDisabled,
-                    ]}
-                    onPress={submitReview}
-                    disabled={submittingReview}
-                  >
-                    <Send size={16} color="#FFFFFF" />
-                    <Text style={Monstyles.submitButtonText}>
-                      {submittingReview ? t('loading') : t('submit')}
-                    </Text>
-                  </TouchableOpacity>
+              <KeyboardAvoidingView 
+                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? -50 : -100}
+                style={Monstyles.keyboardAvoidingContainer}
+              >
+                <View style={Monstyles.reviewForm}>
+                  <Text style={Monstyles.formLabel}>{t('rating')}</Text>
+                  {renderRatingSelector()}
+                  
+                  <Text style={Monstyles.formLabel}>{t('comment')}</Text>
+                  <TextInput
+                    style={Monstyles.commentInput}
+                    placeholder="Share your experience..."
+                    value={newComment}
+                    onChangeText={setNewComment}
+                    multiline
+                    numberOfLines={3}
+                    textAlignVertical="top"
+                    returnKeyType="done"
+                    blurOnSubmit={true}
+                  />
+                  
+                  <View style={Monstyles.formButtons}>
+                    <TouchableOpacity
+                      style={Monstyles.cancelButton}
+                      onPress={() => {
+                        setShowReviewForm(false);
+                        Keyboard.dismiss();
+                      }}
+                    >
+                      <Text style={Monstyles.cancelButtonText}>{t('cancel')}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        Monstyles.submitButton,
+                        submittingReview && Monstyles.submitButtonDisabled,
+                      ]}
+                      onPress={submitReview}
+                      disabled={submittingReview}
+                    >
+                      <Send size={16} color="#FFFFFF" />
+                      <Text style={Monstyles.submitButtonText}>
+                        {submittingReview ? t('loading') : t('submit')}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
+              </KeyboardAvoidingView>
             )}
           </View>
         )}
