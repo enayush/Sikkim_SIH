@@ -45,37 +45,139 @@ export default function MonasteryDetailScreen() {
   // Screen dimensions
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-  useEffect(() => {
-    fetchMonasteryDetails();
-    fetchReviews();
-  }, [id]);
+  // Import events data directly
+  const eventsData = require('../data/sikkim_monastery_calendar_with_coords (1).json');
 
-  // Data fetching
+  // Function to get monastery details from event ID
+  const getMonasteryFromEvent = (eventId: string) => {
+    try {
+      return eventsData.find((e: any) => e.id && e.id.toString() === eventId) || null;
+    } catch (error) {
+      console.error('Error finding event:', error);
+      return null;
+    }
+  };
+
   const fetchMonasteryDetails = async () => {
-    if (!id) return;
+    if (!id) {
+      setLoading(false);
+      return;
+    }
     
     try {
-      const data = await getMonasteryById(id as string);
-      setMonastery(data);
+      // First check if the ID is a valid UUID
+      const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(id as string);
+      
+      if (isUuid) {
+        // If it's a UUID, fetch directly
+        const { data, error } = await supabase
+          .from('monasteries')
+          .select('*')
+          .eq('id', id)
+          .single();
+          
+        if (error) throw error;
+        setMonastery(data);
+      } else {
+        // If not a UUID, try to get the event data
+        const eventData = await getMonasteryFromEvent(id as string);
+        
+        if (eventData && eventData.monastery) {
+          // If it's an event, find the monastery by name
+          const { data, error } = await supabase
+            .from('monasteries')
+            .select('*')
+            .ilike('name', `%${eventData.monastery}%`)
+            .maybeSingle();
+            
+          if (error) throw error;
+          if (data) {
+            setMonastery(data);
+          } else {
+            // If no monastery found by name, create a minimal monastery object from event data
+            const now = new Date().toISOString();
+            const minimalMonastery: Monastery = {
+              id: id as string,
+              name: eventData.monastery || 'Unknown Monastery',
+              location: eventData.latitude && eventData.longitude 
+                ? `${eventData.latitude},${eventData.longitude}`
+                : '',
+              description: eventData.description || '',
+              era: '',
+              history: '',
+              cultural_significance: '',
+              latitude: eventData.latitude || 0,
+              longitude: eventData.longitude || 0,
+              images: [],
+              created_at: now
+            };
+            setMonastery(minimalMonastery);
+          }
+        } else {
+          // If not an event, try to fetch by name as a last resort
+          const { data, error } = await supabase
+            .from('monasteries')
+            .select('*')
+            .ilike('name', `%${id}%`)
+            .maybeSingle();
+            
+          if (error) throw error;
+          if (data) {
+            setMonastery(data);
+          } else {
+            // If no monastery found at all, set to null to show not found state
+            setMonastery(null);
+          }
+        }
+      }
     } catch (error) {
-      console.error('Error fetching monastery:', error);
-      Alert.alert('Error', 'Failed to load monastery details');
+      console.error('Error loading monastery:', error);
+      setMonastery(null);
     } finally {
       setLoading(false);
     }
   };
 
   const fetchReviews = async () => {
-    if (!id) return;
+    if (!monastery) return;
     
     try {
-      const data = await getMonasteryReviews(id as string);
+      let query = supabase
+        .from('reviews')
+        .select('*');
+      
+      // Try to match by monastery_id first if it's a UUID
+      if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-5][0-9a-f]{3}-[089ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(monastery.id)) {
+        query = query.eq('monastery_id', monastery.id);
+      } else {
+        // Fall back to name matching if ID is not a UUID
+        query = query.eq('monastery_name', monastery.name);
+      }
+      
+      const { data, error } = await query;
+      
+      if (error) throw error;
       setReviews(data || []);
     } catch (error) {
       console.error('Error fetching reviews:', error);
       setReviews([]);
     }
   };
+
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      await fetchMonasteryDetails();
+    };
+    
+    loadData();
+  }, [id]);
+
+  useEffect(() => {
+    if (monastery) {
+      fetchReviews();
+    }
+  }, [monastery]);
 
   // Review submission
   const submitReview = async () => {
@@ -406,21 +508,46 @@ export default function MonasteryDetailScreen() {
 
   if (loading) {
     return (
-      <View style={Monstyles.loadingContainer}>
-        <ActivityIndicator size="large" color="#DF8020" />
-        <Text style={Monstyles.loadingText}>{t('loading')}</Text>
-      </View>
+      <SafeScreen>
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}>
+          <ActivityIndicator size="large" color="#0000ff" />
+          <Text style={{ marginTop: 10 }}>Loading monastery details...</Text>
+        </View>
+      </SafeScreen>
     );
   }
 
   if (!monastery) {
     return (
-      <View style={Monstyles.errorContainer}>
-        <Text style={Monstyles.errorText}>Monastery not found</Text>
-        <TouchableOpacity style={Monstyles.backButton} onPress={() => router.back()}>
-          <Text style={Monstyles.backButtonText}>Go Back</Text>
-        </TouchableOpacity>
-      </View>
+      <SafeScreen>
+        <View style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 20,
+        }}>
+          <Text style={{ fontSize: 18, textAlign: 'center' }}>
+            Monastery not found. The event might be associated with a monastery that is no longer listed.
+          </Text>
+          <TouchableOpacity 
+            onPress={() => router.back()} 
+            style={{
+              backgroundColor: '#3b82f6',
+              padding: 12,
+              borderRadius: 8,
+              marginTop: 20,
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: '#fff', fontWeight: 'bold' }}>Go Back</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeScreen>
     );
   }
 

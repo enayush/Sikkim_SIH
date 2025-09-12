@@ -1,0 +1,3242 @@
+[
+  {
+    "id": 1,
+    "monastery": "Dubde Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-10-20",
+    "date_end": "2026-10-22",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3831,
+    "longitude": 88.2174
+  },
+  {
+    "id": 2,
+    "monastery": "Dubde Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-09-17",
+    "date_end": "2026-09-19",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3831,
+    "longitude": 88.2174
+  },
+  {
+    "id": 3,
+    "monastery": "Dubde Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-06-22",
+    "date_end": "2026-06-23",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3831,
+    "longitude": 88.2174
+  },
+  {
+    "id": 4,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-17",
+    "date_end": "2026-10-19",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2639,
+    "longitude": 88.2214
+  },
+  {
+    "id": 5,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-03-29",
+    "date_end": "2027-03-30",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2639,
+    "longitude": 88.2214
+  },
+  {
+    "id": 6,
+    "monastery": "Sang-Ngag Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2027-05-30",
+    "date_end": "2027-06-02",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2639,
+    "longitude": 88.2214
+  },
+  {
+    "id": 7,
+    "monastery": "Pemayangtse Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-05-13",
+    "date_end": "2027-05-15",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3044,
+    "longitude": 88.2528
+  },
+  {
+    "id": 8,
+    "monastery": "Tashiding Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-04-05",
+    "date_end": "2026-04-06",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3083,
+    "longitude": 88.2981
+  },
+  {
+    "id": 9,
+    "monastery": "Tashiding Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-07-31",
+    "date_end": "2026-08-03",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3083,
+    "longitude": 88.2981
+  },
+  {
+    "id": 10,
+    "monastery": "Silnon Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-11-19",
+    "date_end": "2026-11-21",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.315,
+    "longitude": 88.271
+  },
+  {
+    "id": 11,
+    "monastery": "Silnon Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-14",
+    "date_end": "2026-03-15",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.315,
+    "longitude": 88.271
+  },
+  {
+    "id": 12,
+    "monastery": "Silnon Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-07-02",
+    "date_end": "2026-07-03",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.315,
+    "longitude": 88.271
+  },
+  {
+    "id": 13,
+    "monastery": "Rinchenpung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-11-23",
+    "date_end": "2025-11-24",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2353,
+    "longitude": 88.2685
+  },
+  {
+    "id": 14,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-11-12",
+    "date_end": "2026-11-15",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.337,
+    "longitude": 88.2065
+  },
+  {
+    "id": 15,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-02-15",
+    "date_end": "2027-02-16",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.337,
+    "longitude": 88.2065
+  },
+  {
+    "id": 16,
+    "monastery": "Melli-Atsing Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-08-09",
+    "date_end": "2027-08-12",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.337,
+    "longitude": 88.2065
+  },
+  {
+    "id": 17,
+    "monastery": "Khachoedpalri Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-30",
+    "date_end": "2026-11-01",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3517,
+    "longitude": 88.1836
+  },
+  {
+    "id": 18,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-11-14",
+    "date_end": "2025-11-16",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1735,
+    "longitude": 88.255
+  },
+  {
+    "id": 19,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-11-03",
+    "date_end": "2026-11-05",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1735,
+    "longitude": 88.255
+  },
+  {
+    "id": 20,
+    "monastery": "Lhuntse Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-10-24",
+    "date_end": "2025-10-25",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1735,
+    "longitude": 88.255
+  },
+  {
+    "id": 21,
+    "monastery": "Chakung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-14",
+    "date_end": "2025-11-16",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1528,
+    "longitude": 88.2438
+  },
+  {
+    "id": 22,
+    "monastery": "Nubling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-19",
+    "date_end": "2025-11-22",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.216,
+    "longitude": 88.235
+  },
+  {
+    "id": 23,
+    "monastery": "Aden Wolung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-02",
+    "date_end": "2027-04-05",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.143,
+    "longitude": 88.166
+  },
+  {
+    "id": 24,
+    "monastery": "Aden Wolung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-05-01",
+    "date_end": "2027-05-03",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.143,
+    "longitude": 88.166
+  },
+  {
+    "id": 25,
+    "monastery": "Hungri Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-07-17",
+    "date_end": "2027-07-18",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3,
+    "longitude": 88.22
+  },
+  {
+    "id": 26,
+    "monastery": "Okhery Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-21",
+    "date_end": "2026-04-22",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.221,
+    "longitude": 88.225
+  },
+  {
+    "id": 27,
+    "monastery": "Tashi Samboling Tamang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-04-23",
+    "date_end": "2027-04-25",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.24,
+    "longitude": 88.21
+  },
+  {
+    "id": 28,
+    "monastery": "Tashi Samboling Tamang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-04-07",
+    "date_end": "2026-04-10",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.24,
+    "longitude": 88.21
+  },
+  {
+    "id": 29,
+    "monastery": "Sri Badam Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-10-06",
+    "date_end": "2026-10-09",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.235,
+    "longitude": 88.22
+  },
+  {
+    "id": 30,
+    "monastery": "Rinchen Choling Tamu Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-02",
+    "date_end": "2026-03-04",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 31,
+    "monastery": "Dodak Tamu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-11-17",
+    "date_end": "2025-11-18",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.171,
+    "longitude": 88.17
+  },
+  {
+    "id": 32,
+    "monastery": "Old Rumtek Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-02-26",
+    "date_end": "2026-02-28",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2887581,
+    "longitude": 88.56141972
+  },
+  {
+    "id": 33,
+    "monastery": "Old Rumtek Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-03-26",
+    "date_end": "2026-03-28",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2887581,
+    "longitude": 88.56141972
+  },
+  {
+    "id": 34,
+    "monastery": "Kathog Dorjeden Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-08-11",
+    "date_end": "2027-08-13",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.23998,
+    "longitude": 87.14802
+  },
+  {
+    "id": 35,
+    "monastery": "Enchey Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-05-11",
+    "date_end": "2027-05-13",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.33618682,
+    "longitude": 88.61927102
+  },
+  {
+    "id": 36,
+    "monastery": "Linkoed Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-12-20",
+    "date_end": "2026-12-23",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.33,
+    "longitude": 88.61
+  },
+  {
+    "id": 37,
+    "monastery": "Rinak Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-09-09",
+    "date_end": "2027-09-12",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.25074766,
+    "longitude": 88.27278043
+  },
+  {
+    "id": 38,
+    "monastery": "Rinak Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-10-11",
+    "date_end": "2026-10-14",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.25074766,
+    "longitude": 88.27278043
+  },
+  {
+    "id": 39,
+    "monastery": "Rinak Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-07-23",
+    "date_end": "2027-07-26",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.25074766,
+    "longitude": 88.27278043
+  },
+  {
+    "id": 40,
+    "monastery": "Simig Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-05-31",
+    "date_end": "2026-06-01",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.296136,
+    "longitude": 88.472931
+  },
+  {
+    "id": 41,
+    "monastery": "Simig Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-07-04",
+    "date_end": "2026-07-06",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.296136,
+    "longitude": 88.472931
+  },
+  {
+    "id": 42,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-06-12",
+    "date_end": "2027-06-14",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.22796224,
+    "longitude": 88.66769291
+  },
+  {
+    "id": 43,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2025-11-21",
+    "date_end": "2025-11-24",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.22796224,
+    "longitude": 88.66769291
+  },
+  {
+    "id": 44,
+    "monastery": "Pathing Matsang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-06-02",
+    "date_end": "2026-06-05",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.22796224,
+    "longitude": 88.66769291
+  },
+  {
+    "id": 45,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-04-19",
+    "date_end": "2026-04-22",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 46,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-02-12",
+    "date_end": "2026-02-14",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 47,
+    "monastery": "Lingdok TsangkhAR Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-08-24",
+    "date_end": "2026-08-26",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 48,
+    "monastery": "Ray Mindu Katenling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-12-04",
+    "date_end": "2025-12-07",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.318913,
+    "longitude": 88.580321
+  },
+  {
+    "id": 49,
+    "monastery": "Ray Mindu Katenling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-21",
+    "date_end": "2027-04-22",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.318913,
+    "longitude": 88.580321
+  },
+  {
+    "id": 50,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-08-02",
+    "date_end": "2026-08-05",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.35261,
+    "longitude": 88.201584
+  },
+  {
+    "id": 51,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-02-26",
+    "date_end": "2027-02-28",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.35261,
+    "longitude": 88.201584
+  },
+  {
+    "id": 52,
+    "monastery": "Pabyuk Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-04-11",
+    "date_end": "2027-04-13",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.35261,
+    "longitude": 88.201584
+  },
+  {
+    "id": 53,
+    "monastery": "Tsangek Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-07-16",
+    "date_end": "2026-07-18",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2282,
+    "longitude": 88.5879
+  },
+  {
+    "id": 54,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2025-11-06",
+    "date_end": "2025-11-09",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.326149,
+    "longitude": 88.614784
+  },
+  {
+    "id": 55,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-11-15",
+    "date_end": "2026-11-16",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.326149,
+    "longitude": 88.614784
+  },
+  {
+    "id": 56,
+    "monastery": "Tsulakhang Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-07",
+    "date_end": "2027-04-08",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.326149,
+    "longitude": 88.614784
+  },
+  {
+    "id": 57,
+    "monastery": "Sang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-11-12",
+    "date_end": "2025-11-14",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 58,
+    "monastery": "Sang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-03-25",
+    "date_end": "2027-03-27",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 59,
+    "monastery": "Samdong Mintokgang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-01-02",
+    "date_end": "2027-01-03",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.363822,
+    "longitude": 88.503239
+  },
+  {
+    "id": 60,
+    "monastery": "Samdong Mintokgang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-10-17",
+    "date_end": "2026-10-18",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.363822,
+    "longitude": 88.503239
+  },
+  {
+    "id": 61,
+    "monastery": "Martam Namdzong",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-12-17",
+    "date_end": "2025-12-19",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.28875,
+    "longitude": 88.56136
+  },
+  {
+    "id": 62,
+    "monastery": "Thumon Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-08-10",
+    "date_end": "2026-08-11",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2333,
+    "longitude": 88.6167
+  },
+  {
+    "id": 63,
+    "monastery": "Thumon Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-04-19",
+    "date_end": "2026-04-20",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2333,
+    "longitude": 88.6167
+  },
+  {
+    "id": 65,
+    "monastery": "Amba Mamring Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-07-08",
+    "date_end": "2027-07-10",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.18653,
+    "longitude": 88.54859
+  },
+  {
+    "id": 66,
+    "monastery": "Choten Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-06-28",
+    "date_end": "2027-06-30",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3222,
+    "longitude": 88.613
+  },
+  {
+    "id": 67,
+    "monastery": "Martam TsangkhAR Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-03",
+    "date_end": "2026-06-04",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2739,
+    "longitude": 88.6138
+  },
+  {
+    "id": 68,
+    "monastery": "Martam TsangkhAR Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-09-07",
+    "date_end": "2027-09-09",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2739,
+    "longitude": 88.6138
+  },
+  {
+    "id": 69,
+    "monastery": "Pandam Tashi Palden Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-01-02",
+    "date_end": "2026-01-05",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.205,
+    "longitude": 88.563
+  },
+  {
+    "id": 70,
+    "monastery": "Raloong Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-09-11",
+    "date_end": "2026-09-12",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.175,
+    "longitude": 88.53
+  },
+  {
+    "id": 71,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-05-15",
+    "date_end": "2026-05-16",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.32,
+    "longitude": 88.6
+  },
+  {
+    "id": 72,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-02-26",
+    "date_end": "2026-03-01",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.32,
+    "longitude": 88.6
+  },
+  {
+    "id": 73,
+    "monastery": "Radong Tensung Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-12",
+    "date_end": "2026-04-14",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.32,
+    "longitude": 88.6
+  },
+  {
+    "id": 74,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-11-07",
+    "date_end": "2026-11-08",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 75,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2025-12-02",
+    "date_end": "2025-12-05",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 76,
+    "monastery": "Sang-Ngor Ngor Gonpa Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-03-29",
+    "date_end": "2027-03-30",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 77,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-08-26",
+    "date_end": "2026-08-28",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 78,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-03-28",
+    "date_end": "2026-03-30",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 79,
+    "monastery": "Rumtek Dharma Chakra Centre",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-01-30",
+    "date_end": "2026-02-02",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 80,
+    "monastery": "Bakcham Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2027-06-20",
+    "date_end": "2027-06-23",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.337,
+    "longitude": 88.6293
+  },
+  {
+    "id": 81,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-01-02",
+    "date_end": "2027-01-05",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 82,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-04-23",
+    "date_end": "2026-04-26",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 83,
+    "monastery": "Kagon Tshechhogling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-02-01",
+    "date_end": "2027-02-04",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 84,
+    "monastery": "Taktse Ani Gonpa Ugen Chokhorling",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-28",
+    "date_end": "2027-04-29",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.34,
+    "longitude": 88.61
+  },
+  {
+    "id": 85,
+    "monastery": "Tingkye GonjAng Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-04-21",
+    "date_end": "2026-04-24",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.34,
+    "longitude": 88.61
+  },
+  {
+    "id": 86,
+    "monastery": "Khatek Pema Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-05-25",
+    "date_end": "2027-05-26",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.35,
+    "longitude": 88.62
+  },
+  {
+    "id": 87,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-05-05",
+    "date_end": "2026-05-08",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 88,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-09-05",
+    "date_end": "2026-09-06",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 89,
+    "monastery": "Dichen Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2025-10-19",
+    "date_end": "2025-10-22",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 90,
+    "monastery": "Taglung Domsumling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-12-24",
+    "date_end": "2025-12-25",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 91,
+    "monastery": "Taglung Domsumling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-03-04",
+    "date_end": "2026-03-05",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 92,
+    "monastery": "Dolepchen Boudha Sanskrit Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-29",
+    "date_end": "2026-05-31",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 93,
+    "monastery": "Dolepchen Boudha Sanskrit Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-29",
+    "date_end": "2026-12-31",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 96,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-05-02",
+    "date_end": "2027-05-03",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.318913,
+    "longitude": 88.580321
+  },
+  {
+    "id": 97,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-11-24",
+    "date_end": "2025-11-26",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.318913,
+    "longitude": 88.580321
+  },
+  {
+    "id": 98,
+    "monastery": "Lingdum Zurmang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-12-02",
+    "date_end": "2026-12-04",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.318913,
+    "longitude": 88.580321
+  },
+  {
+    "id": 99,
+    "monastery": "Burtuk Ugen Pemacholing Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-03-01",
+    "date_end": "2026-03-03",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 100,
+    "monastery": "Burtuk Ugen Pemacholing Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-06-03",
+    "date_end": "2027-06-04",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 101,
+    "monastery": "Duchi Gyalton Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2025-12-12",
+    "date_end": "2025-12-13",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3365,
+    "longitude": 88.6155
+  },
+  {
+    "id": 102,
+    "monastery": "Duchi Gyalton Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-08-14",
+    "date_end": "2027-08-15",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3365,
+    "longitude": 88.6155
+  },
+  {
+    "id": 103,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-01-12",
+    "date_end": "2026-01-14",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 104,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-08-15",
+    "date_end": "2027-08-16",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 105,
+    "monastery": "Bongyong Ani Gonpa",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-10-27",
+    "date_end": "2026-10-28",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 106,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-12-12",
+    "date_end": "2026-12-13",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 107,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-26",
+    "date_end": "2026-12-28",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 108,
+    "monastery": "Namtse Nga-Dag Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-08-28",
+    "date_end": "2026-08-31",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 109,
+    "monastery": "Doling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-05-23",
+    "date_end": "2026-05-25",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2931,
+    "longitude": 88.3492
+  },
+  {
+    "id": 110,
+    "monastery": "Doling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-09-19",
+    "date_end": "2026-09-20",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2931,
+    "longitude": 88.3492
+  },
+  {
+    "id": 111,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-02-11",
+    "date_end": "2026-02-12",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3082,
+    "longitude": 88.3607
+  },
+  {
+    "id": 112,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-03-13",
+    "date_end": "2027-03-15",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3082,
+    "longitude": 88.3607
+  },
+  {
+    "id": 113,
+    "monastery": "Ralong Karma Rabtenling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-11-13",
+    "date_end": "2026-11-16",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3082,
+    "longitude": 88.3607
+  },
+  {
+    "id": 116,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-19",
+    "date_end": "2026-06-22",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.26,
+    "longitude": 88.362
+  },
+  {
+    "id": 117,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-11-26",
+    "date_end": "2026-11-29",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.26,
+    "longitude": 88.362
+  },
+  {
+    "id": 118,
+    "monastery": "Mangbro Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-02-08",
+    "date_end": "2027-02-09",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.26,
+    "longitude": 88.362
+  },
+  {
+    "id": 119,
+    "monastery": "Linge Phagyal Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-05-18",
+    "date_end": "2027-05-21",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2714,
+    "longitude": 88.3624
+  },
+  {
+    "id": 120,
+    "monastery": "BurmioK Wosel Choling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-04-29",
+    "date_end": "2026-05-02",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 121,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-07-30",
+    "date_end": "2026-08-01",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.18,
+    "longitude": 88.32
+  },
+  {
+    "id": 122,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-12-22",
+    "date_end": "2026-12-25",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.18,
+    "longitude": 88.32
+  },
+  {
+    "id": 123,
+    "monastery": "Ben Karma Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-12-23",
+    "date_end": "2026-12-25",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.18,
+    "longitude": 88.32
+  },
+  {
+    "id": 124,
+    "monastery": "Namthang Norbu Tsho-Ling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-01-05",
+    "date_end": "2026-01-06",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 125,
+    "monastery": "Namthang Norbu Tsho-Ling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-06-21",
+    "date_end": "2026-06-24",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 126,
+    "monastery": "Malli Tashi Chodarling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-06-21",
+    "date_end": "2027-06-22",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 127,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-10-24",
+    "date_end": "2026-10-26",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 128,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-06-18",
+    "date_end": "2027-06-21",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 129,
+    "monastery": "Wok Pabong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-05-18",
+    "date_end": "2026-05-20",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 130,
+    "monastery": "Sangmo Sharchog Bephug Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-06-13",
+    "date_end": "2026-06-16",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 131,
+    "monastery": "Sangmo Sharchog Bephug Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2027-04-11",
+    "date_end": "2027-04-13",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3319,
+    "longitude": 88.6019
+  },
+  {
+    "id": 132,
+    "monastery": "Parbing Samten Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2027-02-17",
+    "date_end": "2027-02-18",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 133,
+    "monastery": "Parbing Samten Choling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-11-05",
+    "date_end": "2025-11-07",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 134,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-04-27",
+    "date_end": "2026-04-28",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.229,
+    "longitude": 88.389
+  },
+  {
+    "id": 135,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2025-12-20",
+    "date_end": "2025-12-21",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.229,
+    "longitude": 88.389
+  },
+  {
+    "id": 136,
+    "monastery": "Tekling Dzokchen Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-04-17",
+    "date_end": "2026-04-18",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.229,
+    "longitude": 88.389
+  },
+  {
+    "id": 137,
+    "monastery": "Bumtar Namdroling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-08-21",
+    "date_end": "2027-08-22",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1592,
+    "longitude": 88.356
+  },
+  {
+    "id": 139,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-08-21",
+    "date_end": "2026-08-22",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.231,
+    "longitude": 88.384
+  },
+  {
+    "id": 140,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-05-22",
+    "date_end": "2027-05-23",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.231,
+    "longitude": 88.384
+  },
+  {
+    "id": 141,
+    "monastery": "Sorok Tamang Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-03",
+    "date_end": "2026-05-04",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.231,
+    "longitude": 88.384
+  },
+  {
+    "id": 142,
+    "monastery": "Serdup Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-02-05",
+    "date_end": "2027-02-07",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1617,
+    "longitude": 88.3466
+  },
+  {
+    "id": 143,
+    "monastery": "Serdup Choling Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-06-18",
+    "date_end": "2026-06-19",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.1617,
+    "longitude": 88.3466
+  },
+  {
+    "id": 144,
+    "monastery": "Rabong Kunphenling Tsechu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-07-14",
+    "date_end": "2026-07-15",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2418,
+    "longitude": 88.4112
+  },
+  {
+    "id": 145,
+    "monastery": "Kewzing Tashi Gyephelling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-04-08",
+    "date_end": "2026-04-10",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 146,
+    "monastery": "Kewzing Tashi Gyephelling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-02-15",
+    "date_end": "2026-02-16",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 147,
+    "monastery": "Bon Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-09-10",
+    "date_end": "2026-09-13",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 148,
+    "monastery": "Bon Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-11-22",
+    "date_end": "2025-11-25",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2511,
+    "longitude": 88.3625
+  },
+  {
+    "id": 149,
+    "monastery": "Yangang Changchub Tamu Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-06-14",
+    "date_end": "2026-06-15",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.301,
+    "longitude": 88.4335
+  },
+  {
+    "id": 150,
+    "monastery": "BurmioK Norbugang Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-09-05",
+    "date_end": "2026-09-06",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2022,
+    "longitude": 88.3564
+  },
+  {
+    "id": 151,
+    "monastery": "Ralong Palchen Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-04-05",
+    "date_end": "2027-04-06",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 152,
+    "monastery": "Ralong Palchen Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2027-06-16",
+    "date_end": "2027-06-17",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 156,
+    "monastery": "Namthang Nyima Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-03-04",
+    "date_end": "2026-03-06",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 157,
+    "monastery": "Namthang Nyima Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-12-18",
+    "date_end": "2026-12-20",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": null,
+    "longitude": null
+  },
+  {
+    "id": 158,
+    "monastery": "Gagyong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-10-02",
+    "date_end": "2026-10-03",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.3167,
+    "longitude": 88.4225
+  },
+  {
+    "id": 159,
+    "monastery": "Rabong Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-08-30",
+    "date_end": "2026-09-01",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2418,
+    "longitude": 88.4112
+  },
+  {
+    "id": 160,
+    "monastery": "Rabong Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-11-28",
+    "date_end": "2025-11-29",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2418,
+    "longitude": 88.4112
+  },
+  {
+    "id": 161,
+    "monastery": "Rabong Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2026-01-27",
+    "date_end": "2026-01-29",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.2418,
+    "longitude": 88.4112
+  },
+  {
+    "id": 162,
+    "monastery": "Phensang Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-01-11",
+    "date_end": "2027-01-12",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.42067062,
+    "longitude": 88.61006523
+  },
+  {
+    "id": 167,
+    "monastery": "Tholung Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2025-10-17",
+    "date_end": "2025-10-20",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.63717634,
+    "longitude": 88.46157341
+  },
+  {
+    "id": 168,
+    "monastery": "Tholung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-02-04",
+    "date_end": "2027-02-05",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.63717634,
+    "longitude": 88.46157341
+  },
+  {
+    "id": 169,
+    "monastery": "Tholung Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2025-12-15",
+    "date_end": "2025-12-17",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.63717634,
+    "longitude": 88.46157341
+  },
+  {
+    "id": 175,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-03-15",
+    "date_end": "2027-03-18",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.68887745,
+    "longitude": 88.74879822
+  },
+  {
+    "id": 176,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Guru Rinpoche Day",
+    "date_start": "2026-02-03",
+    "date_end": "2026-02-04",
+    "description": "Guru Rinpoche Day is dedicated to the veneration of Guru Padmasambhava (Guru Rinpoche), revered as the second Buddha and credited with bringing Buddhism to Tibet and the Himalayan region. Observances include prayers, rituals, and cultural programs reflecting his life and teachings.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/guru_rinpoche_day.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.68887745,
+    "longitude": 88.74879822
+  },
+  {
+    "id": 177,
+    "monastery": "Lachung Samten Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-08-07",
+    "date_end": "2026-08-10",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.68887745,
+    "longitude": 88.74879822
+  },
+  {
+    "id": 178,
+    "monastery": "Lingthem Rikzing Chopel Targelling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-09-13",
+    "date_end": "2026-09-16",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.52319193,
+    "longitude": 88.50105156
+  },
+  {
+    "id": 179,
+    "monastery": "Lachen Ngodub Choling Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-06-18",
+    "date_end": "2026-06-19",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.73078109,
+    "longitude": 88.54685801
+  },
+  {
+    "id": 180,
+    "monastery": "Sontam Tensung Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2027-07-28",
+    "date_end": "2027-07-29",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.52330394,
+    "longitude": 88.55635038
+  },
+  {
+    "id": 181,
+    "monastery": "Singchit Ngadag Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2027-07-01",
+    "date_end": "2027-07-02",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.53988368,
+    "longitude": 88.56872373
+  },
+  {
+    "id": 182,
+    "monastery": "Singchit Ngadag Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2026-01-26",
+    "date_end": "2026-01-28",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.53988368,
+    "longitude": 88.56872373
+  },
+  {
+    "id": 183,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2025-10-17",
+    "date_end": "2025-10-19",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.41947634,
+    "longitude": 88.31971889
+  },
+  {
+    "id": 184,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-01-04",
+    "date_end": "2026-01-07",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.41947634,
+    "longitude": 88.31971889
+  },
+  {
+    "id": 185,
+    "monastery": "Ship Kunzang Choling Monastery",
+    "event_name": "Losar (Tibetan New Year)",
+    "date_start": "2026-02-15",
+    "date_end": "2026-02-16",
+    "description": "Losar is the Tibetan New Year celebration, involving prayers for prosperity, masked dances, ritual purification, home monastery cleaning and decoration, and vibrant gatherings for a renewed year.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/losar_(tibetan_new_year).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.41947634,
+    "longitude": 88.31971889
+  },
+  {
+    "id": 186,
+    "monastery": "Kabi Sanga Dargyeling Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2026-05-11",
+    "date_end": "2026-05-12",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.42694694,
+    "longitude": 88.60579831
+  },
+  {
+    "id": 187,
+    "monastery": "Kabi Sanga Dargyeling Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-03-16",
+    "date_end": "2027-03-18",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.42694694,
+    "longitude": 88.60579831
+  },
+  {
+    "id": 188,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Drupchen Rituals",
+    "date_start": "2027-04-22",
+    "date_end": "2027-04-23",
+    "description": "Drupchen is an intensive Buddhist retreat ceremony involving days of collective prayer, creation of mandalas, ritual dances, and offerings to invoke deity blessings and remove obstacles.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/drupchen_rituals.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.47605021,
+    "longitude": 88.50118029
+  },
+  {
+    "id": 189,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2027-07-16",
+    "date_end": "2027-07-18",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.47605021,
+    "longitude": 88.50118029
+  },
+  {
+    "id": 190,
+    "monastery": "Hee Gyathang Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-05-07",
+    "date_end": "2026-05-08",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.47605021,
+    "longitude": 88.50118029
+  },
+  {
+    "id": 191,
+    "monastery": "Malam Monastery",
+    "event_name": "Butter Lamp Festival",
+    "date_start": "2026-10-04",
+    "date_end": "2026-10-06",
+    "description": "The Butter Lamp Festival (Ghee Lamp Festival) involves lighting hundreds of lamps in monasteries to symbolize the dispelling of darkness and ignorance. The event includes prayers, chanting, and collective offerings for peace and prosperity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/butter_lamp_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.4203,
+    "longitude": 88.6103
+  },
+  {
+    "id": 192,
+    "monastery": "Malam Monastery",
+    "event_name": "Saga Dawa (Buddha’s Birth Anniversary)",
+    "date_start": "2027-04-22",
+    "date_end": "2027-04-23",
+    "description": "Saga Dawa commemorates the birth, enlightenment, and death of Lord Buddha. It is marked by prayers, circumambulations, acts of merit like lamp-lighting and animal release, and charitable activities.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/saga_dawa_(buddha’s_birth_anniversary).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.4203,
+    "longitude": 88.6103
+  },
+  {
+    "id": 193,
+    "monastery": "Malam Monastery",
+    "event_name": "Annual Prayer Gathering",
+    "date_start": "2025-11-22",
+    "date_end": "2025-11-24",
+    "description": "The Annual Prayer Gathering sees large groups of monks and devotees conducting extended prayers for world peace, well-being, and prosperity. The gathering features recitations, ritual offerings, and fosters spiritual renewal in the community.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/annual_prayer_gathering.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.4203,
+    "longitude": 88.6103
+  },
+  {
+    "id": 196,
+    "monastery": "Tawang Monastery",
+    "event_name": "Pang Lhabsol (Worship of Mt. Kanchenjunga)",
+    "date_start": "2026-06-22",
+    "date_end": "2026-06-24",
+    "description": "Pang Lhabsol is devoted to the worship of Mount Kanchenjunga, Sikkim’s guardian deity. The festival features rituals and dances seeking the mountain god’s blessings for protection, harmony, and prosperity, with unique masked performances.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/pang_lhabsol_(worship_of_mt._kanchenjunga).jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 28.56979743,
+    "longitude": 91.71532333
+  },
+  {
+    "id": 197,
+    "monastery": "Tawang Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2026-12-14",
+    "date_end": "2026-12-17",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 28.56979743,
+    "longitude": 91.71532333
+  },
+  {
+    "id": 206,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Bumchu Festival",
+    "date_start": "2026-03-09",
+    "date_end": "2026-03-11",
+    "description": "The Bumchu Festival centers on the ritual opening of a sacred vase, whose water level is seen as foretelling Sikkim’s fortunes. The festival features blessings, distribution of holy water, and communal prayers and feasting.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/bumchu_festival.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.7180262,
+    "longitude": 88.55720665
+  },
+  {
+    "id": 207,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-10-15",
+    "date_end": "2025-10-18",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.7180262,
+    "longitude": 88.55720665
+  },
+  {
+    "id": 208,
+    "monastery": "Lachen Thangu Monastery",
+    "event_name": "Cham Mask Dance",
+    "date_start": "2025-12-15",
+    "date_end": "2025-12-17",
+    "description": "Cham Mask Dance is a traditional Tibetan Buddhist ritual dance performed by monks in elaborate masks and costumes. It serves as both a meditative practice and a dramatic re-enactment of Buddhist stories, symbolizing the triumph of good over evil and the purification of negativity.",
+    "language_support": [
+      "en",
+      "hi",
+      "ne",
+      "bo"
+    ],
+    "media_url": "https://example.com/cham_mask_dance.jpg",
+    "booking_link": "https://sikkimtourism.gov.in/events",
+    "latitude": 27.7180262,
+    "longitude": 88.55720665
+  }
+]
