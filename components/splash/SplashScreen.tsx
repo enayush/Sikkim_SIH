@@ -1,14 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { View, Text, Image, StyleSheet, ImageBackground, Animated, Easing } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useAuth } from '@/contexts/AuthContext';
 import { BlurView } from 'expo-blur';
+import * as ExpoSplashScreen from 'expo-splash-screen';
 import LocationPermissionModal from './LocationPermissionModal';
 import { 
   LocationPermissionResult, 
   getLocationPermissionStatus,
   getUserLocationWithCache 
 } from './locationUtils';
+
+// Keep the native splash screen visible while we fetch resources
+ExpoSplashScreen.preventAutoHideAsync();
 
 const FADE_IN_DURATION = 800;
 const SLIDE_UP_DURATION = 700;
@@ -20,6 +24,7 @@ export default function SplashScreen() {
 
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [locationPermissionChecked, setLocationPermissionChecked] = useState(false);
+  const [appIsReady, setAppIsReady] = useState(false);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
@@ -31,6 +36,37 @@ export default function SplashScreen() {
     useRef(new Animated.Value(0.3)).current,
     useRef(new Animated.Value(0.3)).current,
   ];
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await ExpoSplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // Pre-load any resources or make any API calls you need here
+        // Keep splash screen visible while loading
+        
+        // Simulate minimum splash time
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        // Tell the application to render
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
 
   useEffect(() => {
     const entranceAnimation = Animated.stagger(STAGGER_DELAY, [
@@ -91,10 +127,10 @@ export default function SplashScreen() {
 
   // Check location permission after auth loading is complete
   useEffect(() => {
-    if (!loading && !locationPermissionChecked) {
+    if (!loading && !locationPermissionChecked && appIsReady) {
       checkLocationPermission();
     }
-  }, [loading, locationPermissionChecked]);
+  }, [loading, locationPermissionChecked, appIsReady]);
 
   const checkLocationPermission = async () => {
     try {
@@ -130,7 +166,7 @@ export default function SplashScreen() {
   };
 
   useEffect(() => {
-    if (loading || showLocationModal) {
+    if (loading || showLocationModal || !appIsReady) {
       return;
     }
 
@@ -148,11 +184,14 @@ export default function SplashScreen() {
     const timer = setTimeout(handleRedirect, Math.max(0, remaining));
 
     return () => clearTimeout(timer);
-  }, [user, loading, router, showLocationModal]);
+  }, [user, loading, router, showLocationModal, appIsReady]);
 
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onLayout={onLayoutRootView}>
       <ImageBackground
         source={require('@/assets/images/splash.png')}
         style={styles.backgroundImage}

@@ -8,6 +8,11 @@
     "scheme": "sacredsikkim",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ashhhh1535.sacredsikkim",
@@ -22,6 +27,15 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/splash.png",
+          "imageWidth": 200,
+          "resizeMode": "cover",
+          "backgroundColor": "#000000"
+        }
+      ],
       [
         "expo-location",
         {
@@ -44,7 +58,16 @@
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "INTERNET"
-      ]
+      ],
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#000000"
+      },
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#000000"
+      }
     }
   }
 }
