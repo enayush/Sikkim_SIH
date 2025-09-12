@@ -1,27 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Image,
   ActivityIndicator,
   Dimensions,
   ImageBackground,
+  StyleSheet,
 } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
   useAnimatedStyle,
-  interpolate,
-  Extrapolate,
 } from 'react-native-reanimated';
+import MapView, { Marker } from 'react-native-maps';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Grid, List, Bell, Mic, MessageSquare, Calendar } from 'lucide-react-native';
-import { supabase } from '../../lib/supabase';
-import { getAllMonasteries, Monastery, MonasteryWithRating, getMonasteriesWithRatings, getMonasteriesByRegion } from '../../lib/monasteryService';
+import { Calendar, Mic, MessageSquare, Bell } from 'lucide-react-native';
+import { MonasteryWithRating, getMonasteriesByRegion, getMonasteriesByIdsWithRatings } from '../../lib/monasteryService';
 import SafeScreen from '../../components/SafeScreen';
+import indstyle from './map/styles/indstyle';
 
 // Define hardcoded monastery UUIDs
 const CAROUSEL_MONASTERY_IDS = [
@@ -38,7 +37,17 @@ const POPULAR_MONASTERY_IDS = [
   'eaf16139-1c03-4233-993d-885300136665'
 ];
 
-export default function HomeScreen() {
+const { width } = Dimensions.get('window');
+
+// Initial map region for Sikkim
+const initialMapRegion = {
+  latitude: 27.3314,
+  longitude: 88.6138,
+  latitudeDelta: 1,
+  longitudeDelta: 1,
+};
+
+const HomeScreen = React.memo(() => {
   const { t } = useTranslation();
   const router = useRouter();
   const [carouselMonasteries, setCarouselMonasteries] = useState<MonasteryWithRating[]>([]);
@@ -48,69 +57,68 @@ export default function HomeScreen() {
   const [southernMonasteries, setSouthernMonasteries] = useState<MonasteryWithRating[]>([]);
   const [westernMonasteries, setWesternMonasteries] = useState<MonasteryWithRating[]>([]);
   const [loading, setLoading] = useState(true);
+  const [regionalLoading, setRegionalLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Animation states for header using reanimated
-  const lastScrollY = useSharedValue(0);
   const scrollY = useSharedValue(0);
+  const HEADER_MAX_HEIGHT = 60;
 
-const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event, ctx: { prevY?: number }) => {
+      const y = event.contentOffset.y;
+      const diff = y - (ctx.prevY ?? 0);
 
-const scrollHandler = useAnimatedScrollHandler({
-  onScroll: (event) => {
-    const y = event.contentOffset.y;
-    const diff = y - lastScrollY.value;
+      if (diff > 0) {
+        scrollY.value = Math.min(scrollY.value + diff, HEADER_MAX_HEIGHT);
+      } else {
+        scrollY.value = Math.max(scrollY.value + diff, 0);
+      }
+      ctx.prevY = y;
+    },
+  });
 
-    if (diff > 0) {
-      // scrolling down → hide
-      scrollY.value = Math.min(scrollY.value + diff, HEADER_MAX_HEIGHT);
-    } else {
-      // scrolling up → show
-      scrollY.value = Math.max(scrollY.value + diff, 0);
-    }
-
-    lastScrollY.value = y;
-  },
-});
-
-const headerStyle = useAnimatedStyle(() => {
-  return {
+  const headerStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: -scrollY.value }],
-  };
-});
+  }));
 
   useEffect(() => {
-    fetchSelectedMonasteries();
+    fetchPrimaryMonasteries();
+    fetchRegionalMonasteries(); // Start fetching regional data in parallel
   }, []);
 
-  const fetchSelectedMonasteries = async () => {
+  // OPTIMIZED: Fetch only the specific monasteries needed for the carousel and popular sections.
+  const fetchPrimaryMonasteries = async () => {
     try {
       setLoading(true);
-      const allMonasteriesWithRatings = await getMonasteriesWithRatings();
       
-      // Filter carousel monasteries by hardcoded UUIDs
-      const carouselData = allMonasteriesWithRatings.filter(monastery => 
-        CAROUSEL_MONASTERY_IDS.includes(monastery.id)
-      );
+      // Combine IDs and remove duplicates to fetch all required data in one call
+      const uniqueIdsToFetch = [...new Set([...CAROUSEL_MONASTERY_IDS, ...POPULAR_MONASTERY_IDS])];
       
-      // Filter popular monasteries by hardcoded UUIDs
-      const popularData = allMonasteriesWithRatings.filter(monastery => 
-        POPULAR_MONASTERY_IDS.includes(monastery.id)
-      );
-      
-      // If no monasteries found with hardcoded UUIDs, use fallback
-      if (carouselData.length === 0) {
-        carouselData.push(...allMonasteriesWithRatings.slice(0, 4));
-      }
-      
-      if (popularData.length === 0) {
-        popularData.push(...allMonasteriesWithRatings.slice(4, 8));
-      }
-      
+      // Fetch only the monasteries we need
+      const fetchedMonasteries = await getMonasteriesByIdsWithRatings(uniqueIdsToFetch);
+      const monasteryMap = new Map(fetchedMonasteries.map(m => [m.id, m]));
+
+      const carouselData = CAROUSEL_MONASTERY_IDS.map(id => monasteryMap.get(id)).filter(Boolean) as MonasteryWithRating[];
+      const popularData = POPULAR_MONASTERY_IDS.map(id => monasteryMap.get(id)).filter(Boolean) as MonasteryWithRating[];
+
       setCarouselMonasteries(carouselData);
       setPopularMonasteries(popularData);
 
-      // Fetch regional monasteries
+    } catch (error) {
+      console.error('Error fetching primary monasteries:', error);
+      // You might want to set some default or empty state here
+      setCarouselMonasteries([]);
+      setPopularMonasteries([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch regional monasteries in the background
+  const fetchRegionalMonasteries = async () => {
+    try {
+      setRegionalLoading(true);
       const [northern, eastern, southern, western] = await Promise.all([
         getMonasteriesByRegion('northern', 8),
         getMonasteriesByRegion('eastern', 8),
@@ -124,105 +132,109 @@ const headerStyle = useAnimatedStyle(() => {
       setWesternMonasteries(western);
 
     } catch (error) {
-      console.error('Error:', error);
-      setCarouselMonasteries([]);
-      setPopularMonasteries([]);
-      setNorthernMonasteries([]);
-      setEasternMonasteries([]);
-      setSouthernMonasteries([]);
-      setWesternMonasteries([]);
+      console.error('Error fetching regional monasteries:', error);
     } finally {
-      setLoading(false);
+      setRegionalLoading(false);
     }
   };
-
-  const handleScroll = (event: any) => {
+  
+  const handleScroll = useCallback((event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / width);
     setActiveIndex(index);
-  };
+  }, []);
 
-  const renderCarouselItem = (monastery: MonasteryWithRating) => (
+  const renderCarouselItem = useCallback((monastery: MonasteryWithRating) => (
     <TouchableOpacity
       key={monastery.id}
-      style={styles.carouselItem}
-      onPress={() => router.push(`/monastery/${monastery.id}` as any)}
+      style={indstyle.carouselItem}
+      onPress={() => router.push(`/monastery/${monastery.id}`)}
     >
       <ImageBackground
         source={{ uri: monastery.images[0] }}
-        style={styles.carouselImage}
+        style={indstyle.carouselImage}
       >
-        <View style={styles.carouselTextContainer}>
-          <Text style={styles.carouselMonasteryName}>{monastery.name}</Text>
-          <Text style={styles.carouselMonasteryInfo}>
+        <View style={indstyle.carouselTextContainer}>
+          <Text style={indstyle.carouselMonasteryName}>{monastery.name}</Text>
+          <Text style={indstyle.carouselMonasteryInfo}>
             {monastery.location} - {monastery.era}
           </Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
-  );
+  ), [router]);
 
-  const renderPopularMonasteryCard = (monastery: MonasteryWithRating) => (
+  const renderPopularMonasteryCard = useCallback((monastery: MonasteryWithRating) => (
     <TouchableOpacity
       key={monastery.id}
-      style={styles.popularMonasteryCard}
-      onPress={() => router.push(`/monastery/${monastery.id}` as any)}
+      style={indstyle.popularMonasteryCard}
+      onPress={() => router.push(`/monastery/${monastery.id}`)}
     >
       <Image
         source={{ uri: monastery.images[0] }}
-        style={styles.popularMonasteryImage}
+        style={indstyle.popularMonasteryImage}
       />
-      <View style={styles.popularMonasteryInfo}>
-        <Text style={styles.popularMonasteryName} numberOfLines={1}>
+      <View style={indstyle.popularMonasteryInfo}>
+        <Text style={indstyle.popularMonasteryName} numberOfLines={1}>
           {monastery.name}
         </Text>
-        <Text style={styles.popularMonasteryDescription} numberOfLines={1}>
+        <Text style={indstyle.popularMonasteryDescription} numberOfLines={1}>
           {monastery.description}
         </Text>
-        <View style={styles.metaRow}>
-          <Text style={styles.metaText}>
-            {monastery.era} • {monastery.location} • <Text style={styles.goldStar}>★</Text> {monastery.averageRating > 0 ? monastery.averageRating.toFixed(1) : 'N/A'}
+        <View style={indstyle.metaRow}>
+          <Text style={indstyle.metaText}>
+            {monastery.era} • {monastery.location} • <Text style={indstyle.goldStar}>★</Text> {monastery.averageRating > 0 ? monastery.averageRating.toFixed(1) : 'N/A'}
           </Text>
         </View>
       </View>
     </TouchableOpacity>
-  );
+  ), [router]);
 
-  const renderMonasterySection = (title: string, monasteries: MonasteryWithRating[], searchPath: string) => (
-    <View style={styles.popularSection}>
-      <View style={styles.popularHeader}>
-        <Text style={styles.popularTitle}>{title}</Text>
+  const renderMonasterySection = useCallback((title: string, monasteries: MonasteryWithRating[], searchPath: string) => (
+    <View style={indstyle.popularSection}>
+      <View style={indstyle.popularHeader}>
+        <Text style={indstyle.popularTitle}>{title}</Text>
       </View>
       <Animated.ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.popularScrollContainer}
+        contentContainerStyle={indstyle.popularScrollContainer}
       >
-        {monasteries.map(renderPopularMonasteryCard)}
-        <TouchableOpacity
-          style={styles.moreButton}
-          onPress={() => router.push(searchPath as any)}
-        >
-          <Text style={styles.moreButtonText}>More →</Text>
-        </TouchableOpacity>
+        {regionalLoading && monasteries.length === 0 ? (
+          <View style={indstyle.loadingContainer}>
+            <ActivityIndicator size="small" color="#DF8020" />
+            <Text style={indstyle.loadingText}>Loading...</Text>
+          </View>
+        ) : (
+          <>
+            {monasteries.map(renderPopularMonasteryCard)}
+            <TouchableOpacity
+              style={indstyle.moreButton}
+              onPress={() => router.push('./search')}
+            >
+              <Text style={indstyle.moreButtonText}>More →</Text>
+            </TouchableOpacity>
+          </>
+        )}
       </Animated.ScrollView>
     </View>
-  );
+  ), [regionalLoading, renderPopularMonasteryCard, router]);
+
 
   if (loading) {
     return (
-      <View style={styles.centered}>
+      <View style={indstyle.centered}>
         <ActivityIndicator size="large" color="#DF8020" />
       </View>
     );
   }
 
   return (
-    <SafeScreen style={styles.container}>
-      <Animated.View style={[styles.topBar, headerStyle]}>
-        <View style={styles.logoContainer}>
-          <Image source={require('../../assets/images/icon.png')} style={styles.logo} />
-          <Text style={styles.appName}>Sacred Sikkim</Text>
+    <SafeScreen style={indstyle.container}>
+      <Animated.View style={[indstyle.topBar, headerStyle]}>
+        <View style={indstyle.logoContainer}>
+          <Image source={require('../../assets/images/icon.png')} style={indstyle.logo} />
+          <Text style={indstyle.appName}>Sacred Sikkim</Text>
         </View>
         <TouchableOpacity onPress={() => router.push('/notification')}>
           <Bell size={24} color="#1F2937" />
@@ -231,9 +243,9 @@ const headerStyle = useAnimatedStyle(() => {
       <Animated.ScrollView
         onScroll={scrollHandler}
         scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={indstyle.scrollContent}
       >
-        <View style={styles.carouselContainer}>
+        <View style={indstyle.carouselContainer}>
           <Animated.ScrollView
             horizontal
             pagingEnabled
@@ -243,45 +255,67 @@ const headerStyle = useAnimatedStyle(() => {
           >
             {carouselMonasteries.map(renderCarouselItem)}
           </Animated.ScrollView>
-          <View style={styles.pagination}>
+          <View style={indstyle.pagination}>
             {carouselMonasteries.map((_, index) => (
               <View
                 key={index}
                 style={[
-                  styles.dot,
-                  index === activeIndex && styles.activeDot,
+                  indstyle.dot,
+                  index === activeIndex && indstyle.activeDot,
                 ]}
               />
             ))}
           </View>
         </View>
+        
 
-        <View style={styles.smallButtonsContainer}>
-          <TouchableOpacity style={styles.smallButton} onPress={() => router.push('/cultural-calendar')}>
+        <View style={indstyle.smallButtonsContainer}>
+          <TouchableOpacity style={indstyle.smallButton} onPress={() => router.push('/cultural-calendar')}>
             <Calendar size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-            <Text style={styles.actionButtonText}>Cultural Calendar</Text>
+            <Text style={indstyle.actionButtonText}>Cultural Calendar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.smallButton} onPress={() => router.push('/audio-guide')}>
+          <TouchableOpacity style={indstyle.smallButton} onPress={() => router.push('/audio-guide')}>
             <Mic size={20} color="#FFFFFF" style={{ marginRight: 8 }} />
-            <Text style={styles.actionButtonText}>Audio Guide</Text>
+            <Text style={indstyle.actionButtonText}>Audio Guide</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={styles.popularSection}>
-          <View style={styles.popularHeader}>
-            <Text style={styles.popularTitle}>Popular Monasteries</Text>
+        {/* --- NEW MAP FEATURE START --- */}
+        <TouchableOpacity
+          style={indstyle.mapPreviewContainer}
+          onPress={() => router.push('/map')} // Navigate to your map page
+        >
+          <MapView
+            style={indstyle.map}
+            initialRegion={initialMapRegion}
+            pitchEnabled={false}
+            rotateEnabled={false}
+            scrollEnabled={false}
+            zoomEnabled={false}
+          >
+            <Marker coordinate={initialMapRegion} />
+          </MapView>
+          <View style={indstyle.mapOverlay}>
+            <Text style={indstyle.mapOverlayText}>Explore on Map</Text>
+          </View>
+        </TouchableOpacity>
+        {/* --- NEW MAP FEATURE END --- */}
+
+        <View style={indstyle.popularSection}>
+          <View style={indstyle.popularHeader}>
+            <Text style={indstyle.popularTitle}>Popular Monasteries</Text>
           </View>
           <Animated.ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.popularScrollContainer}
+            contentContainerStyle={indstyle.popularScrollContainer}
           >
             {popularMonasteries.map(renderPopularMonasteryCard)}
             <TouchableOpacity
-              style={styles.moreButton}
+              style={indstyle.moreButton}
               onPress={() => router.push('/search')}
             >
-              <Text style={styles.moreButtonText}>More →</Text>
+              <Text style={indstyle.moreButtonText}>More →</Text>
             </TouchableOpacity>
           </Animated.ScrollView>
         </View>
@@ -292,383 +326,13 @@ const headerStyle = useAnimatedStyle(() => {
         {renderMonasterySection('Western Monasteries', westernMonasteries, '/search')}
       </Animated.ScrollView>
       <TouchableOpacity
-        style={styles.chatbotButton}
+        style={indstyle.chatbotButton}
         onPress={() => router.push('/chatbot')}
       >
         <MessageSquare size={30} color="#FFFFFF" />
       </TouchableOpacity>
     </SafeScreen>
   );
-}
-
-const { width } = Dimensions.get('window');
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  scrollContent: {
-    paddingTop: 60, // Height of the topBar
-  },
-  chatbotButton: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    backgroundColor: '#DF8020',
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  topBar: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-    backgroundColor: '#FFFFFF',
-    zIndex: 1000,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-  },
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  logo: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    marginRight: 8,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  appName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F2937',
-  },
-  centered: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  carouselContainer: {
-    height: 220,
-    marginTop: -60, // Pull carousel up to touch the header
-  },
-  carouselItem: {
-    width: width,
-    height: 220,
-  },
-  carouselImage: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    padding: 16,
-  },
-  carouselTextContainer: {
-    padding: 12,
-  },
-  carouselMonasteryName: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  carouselMonasteryInfo: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
-  },
-  pagination: {
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 10,
-    alignSelf: 'center',
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    marginHorizontal: 4,
-  },
-  activeDot: {
-    backgroundColor: '#FFFFFF',
-  },
-  actionButtonsContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  smallButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 10,
-  },
-  largeButton: {
-    flexDirection: 'row',
-    backgroundColor: '#DF8020',
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  largeButtonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  smallButton: {
-    flexDirection: 'row',
-    backgroundColor: '#DF8020',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    flex: 1,
-    marginHorizontal: 6,
-    justifyContent: 'center',
-  },
-  actionButtonText: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  filterBarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingHorizontal: 16,
-    paddingBottom: 20,
-    paddingTop: 10,
-  },
-  filterButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    backgroundColor: '#E5E7EB',
-  },
-  activeFilterButton: {
-    backgroundColor: '#DF8020',
-  },
-  filterButtonText: {
-    color: '#1F2937',
-    fontWeight: '600',
-    fontSize: 14,
-  },
-  activeFilterButtonText: {
-    color: '#FFFFFF',
-  },
-  loadMoreButton: {
-    backgroundColor: '#DF8020',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginHorizontal: 16,
-    marginVertical: 24,
-  },
-  loadMoreButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 8,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1F2937',
-  },
-  toggleButtons: {
-    flexDirection: 'row',
-    backgroundColor: '#E5E7EB',
-    borderRadius: 20,
-  },
-  toggleButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-  },
-  activeToggleButton: {
-    backgroundColor: '#DF8020',
-  },
-  monasteryGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  monasteryList: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  monasteryCard: {
-    width: '48%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginBottom: 16,
-    overflow: 'hidden',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-  },
-  monasteryListItem: {
-    width: '100%',
-    flexDirection: 'row',
-  },
-  monasteryImage: {
-    width: '100%',
-    height: 120,
-  },
-  monasteryListImage: {
-    width: 100,
-    height: '100%',
-  },
-  monasteryInfo: {
-    padding: 12,
-  },
-  monasteryListInfo: {
-    flex: 1,
-    padding: 12,
-  },
-  monasteryName: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#1F2937',
-  },
-  monasteryLocation: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginTop: 4,
-  },
-  popularSection: {
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-  popularHeader: {
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  popularTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F2937',
-  },
-  popularScrollContainer: {
-    paddingHorizontal: 16,
-  },
-  popularMonasteryCard: {
-    width: 300,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginRight: 16,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  popularMonasteryImage: {
-    width: '100%',
-    height: 180,
-    backgroundColor: '#F3F4F6',
-  },
-  popularMonasteryInfo: {
-    padding: 16,
-  },
-  popularMonasteryName: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: '#1F2937',
-    marginBottom: 4,
-  },
-  popularMonasteryDescription: {
-    fontSize: 14,
-    color: '#4B5563',
-    marginBottom: 8,
-  },
-  metaRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  metaText: {
-    fontSize: 12,
-    color: '#6B7280',
-  },
-  goldStar: {
-    color: '#FFD700',
-  },
-  popularMonasteryLocation: {
-    fontSize: 15,
-    color: '#6B7280',
-    marginBottom: 4,
-  },
-  popularMonasteryEra: {
-    fontSize: 14,
-    color: '#9CA3AF',
-    marginBottom: 12,
-  },
-  ratingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  starContainer: {
-    flexDirection: 'row',
-    marginRight: 8,
-  },
-  starIcon: {
-    fontSize: 14,
-    color: '#FFD700',
-    marginRight: 4,
-  },
-  ratingText: {
-    fontSize: 12,
-    color: '#6B7280',
-    fontWeight: '500',
-  },
-  moreButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 260, // Match the new card height (180px image + ~80px info)
-    paddingHorizontal: 20,
-  },
-  moreButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#DF8020',
-  },
 });
+
+export default HomeScreen;
