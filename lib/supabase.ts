@@ -97,6 +97,34 @@ export type Database = {
           status?: 'pending' | 'confirmed' | 'cancelled';
         };
       };
+      events: {
+        Row: {
+          id: string;
+          monastery_id: string;
+          monastery_name: string;
+          event_name: string;
+          date_start: string;
+          date_end: string | null;
+          description: string | null;
+          created_at: string;
+        };
+        Insert: {
+          monastery_id: string;
+          monastery_name: string;
+          event_name: string;
+          date_start: string;
+          date_end?: string | null;
+          description?: string | null;
+        };
+        Update: {
+          monastery_id?: string;
+          monastery_name?: string;
+          event_name?: string;
+          date_start?: string;
+          date_end?: string | null;
+          description?: string | null;
+        };
+      };
     };
   };
 };
