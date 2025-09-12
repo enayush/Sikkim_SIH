@@ -14,6 +14,11 @@ export interface Monastery {
   created_at: string;
 }
 
+export interface MonasteryWithRating extends Monastery {
+  averageRating: number;
+  reviewCount: number;
+}
+
 export interface MonasteryReview {
   id: string;
   monastery_id: string;
@@ -206,4 +211,116 @@ const calculateDistance = (
       Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
+};
+
+/**
+ * Calculate the average rating of a monastery
+ */
+export const calculateMonasteryAverageRating = async (monasteryId: string): Promise<number> => {
+  try {
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('rating')
+      .eq('monastery_id', monasteryId);
+
+    if (error) {
+      console.error('Error fetching reviews for average rating:', error);
+      throw error;
+    }
+
+    const ratings = data?.map(review => review.rating) || [];
+    const total = ratings.reduce((acc, rating) => acc + rating, 0);
+    return ratings.length > 0 ? total / ratings.length : 0;
+  } catch (error) {
+    console.error('Error in calculateMonasteryAverageRating:', error);
+    throw error;
+  }
+};
+
+/**
+ * Calculate average rating for a monastery
+ */
+export const getMonasteryAverageRating = async (monasteryId: string): Promise<{ averageRating: number; reviewCount: number }> => {
+  try {
+    const reviews = await getMonasteryReviews(monasteryId);
+    
+    if (reviews.length === 0) {
+      return { averageRating: 0, reviewCount: 0 };
+    }
+    
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = totalRating / reviews.length;
+    
+    return { 
+      averageRating: Math.round(averageRating * 10) / 10, // Round to 1 decimal place
+      reviewCount: reviews.length 
+    };
+  } catch (error) {
+    console.error('Error calculating average rating:', error);
+    return { averageRating: 0, reviewCount: 0 };
+  }
+};
+
+/**
+ * Get all monasteries with their ratings
+ */
+export const getMonasteriesWithRatings = async (): Promise<MonasteryWithRating[]> => {
+  try {
+    const monasteries = await getAllMonasteries();
+    
+    const monasteriesWithRatings = await Promise.all(
+      monasteries.map(async (monastery) => {
+        const { averageRating, reviewCount } = await getMonasteryAverageRating(monastery.id);
+        return {
+          ...monastery,
+          averageRating,
+          reviewCount,
+        };
+      })
+    );
+    
+    return monasteriesWithRatings;
+  } catch (error) {
+    console.error('Error fetching monasteries with ratings:', error);
+    throw error;
+  }
+};
+
+/**
+ * Fetch monasteries by region based on location keywords
+ */
+export const getMonasteriesByRegion = async (region: string, limit: number = 8): Promise<MonasteryWithRating[]> => {
+  try {
+    const allMonasteriesWithRatings = await getMonasteriesWithRatings();
+    
+    // Map region names to exact location values
+    const regionMapping: Record<string, string> = {
+      northern: 'north',
+      eastern: 'east',
+      southern: 'south',
+      western: 'west'
+    };
+    
+    const locationValue = regionMapping[region.toLowerCase()];
+    
+    if (!locationValue) {
+      throw new Error(`Unknown region: ${region}`);
+    }
+    
+    // Filter monasteries by exact location match
+    const filteredMonasteries = allMonasteriesWithRatings.filter(monastery => {
+      return monastery.location.toLowerCase() === locationValue;
+    });
+    
+    // If no monasteries found, return some from the general pool as fallback
+    if (filteredMonasteries.length === 0) {
+      const startIndex = region === 'northern' ? 0 : region === 'eastern' ? 2 : region === 'southern' ? 4 : 6;
+      return allMonasteriesWithRatings.slice(startIndex, startIndex + limit);
+    }
+    
+    return filteredMonasteries.slice(0, limit);
+  } catch (error) {
+    console.error(`Error fetching ${region} monasteries:`, error);
+    throw error;
+  }
 };

@@ -20,19 +20,35 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Grid, List, Bell, Mic, MessageSquare, Calendar } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
-import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
+import { getAllMonasteries, Monastery, MonasteryWithRating, getMonasteriesWithRatings, getMonasteriesByRegion } from '../../lib/monasteryService';
 import SafeScreen from '../../components/SafeScreen';
+
+// Define hardcoded monastery UUIDs
+const CAROUSEL_MONASTERY_IDS = [
+  'eceb7332-81c1-4888-850f-6a9196e4c71a',
+  'ecbb904c-8103-4847-be38-3c79be529d9c',
+  'ec47a454-ee59-40f5-838d-3a76098a0412',
+  'eaf16139-1c03-4233-993d-885300136665'
+];
+
+const POPULAR_MONASTERY_IDS = [
+  'eceb7332-81c1-4888-850f-6a9196e4c71a',
+  'ecbb904c-8103-4847-be38-3c79be529d9c',
+  'ec47a454-ee59-40f5-838d-3a76098a0412',
+  'eaf16139-1c03-4233-993d-885300136665'
+];
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const [monasteries, setMonasteries] = useState<Monastery[]>([]);
-  const [carouselMonasteries, setCarouselMonasteries] = useState<Monastery[]>([]);
+  const [carouselMonasteries, setCarouselMonasteries] = useState<MonasteryWithRating[]>([]);
+  const [popularMonasteries, setPopularMonasteries] = useState<MonasteryWithRating[]>([]);
+  const [northernMonasteries, setNorthernMonasteries] = useState<MonasteryWithRating[]>([]);
+  const [easternMonasteries, setEasternMonasteries] = useState<MonasteryWithRating[]>([]);
+  const [southernMonasteries, setSouthernMonasteries] = useState<MonasteryWithRating[]>([]);
+  const [westernMonasteries, setWesternMonasteries] = useState<MonasteryWithRating[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<'card' | 'list'>('card');
   const [activeIndex, setActiveIndex] = useState(0);
-  const [displayCount, setDisplayCount] = useState(10);
-  const [activeFilter, setActiveFilter] = useState('All');
 
   // Animation states for header using reanimated
   const lastScrollY = useSharedValue(0);
@@ -64,23 +80,57 @@ const headerStyle = useAnimatedStyle(() => {
 });
 
   useEffect(() => {
-    fetchMonasteries();
+    fetchSelectedMonasteries();
   }, []);
 
-  const fetchMonasteries = async () => {
+  const fetchSelectedMonasteries = async () => {
     try {
       setLoading(true);
-      const monasteryData = await getAllMonasteries();
+      const allMonasteriesWithRatings = await getMonasteriesWithRatings();
       
-      setMonasteries(monasteryData);
+      // Filter carousel monasteries by hardcoded UUIDs
+      const carouselData = allMonasteriesWithRatings.filter(monastery => 
+        CAROUSEL_MONASTERY_IDS.includes(monastery.id)
+      );
+      
+      // Filter popular monasteries by hardcoded UUIDs
+      const popularData = allMonasteriesWithRatings.filter(monastery => 
+        POPULAR_MONASTERY_IDS.includes(monastery.id)
+      );
+      
+      // If no monasteries found with hardcoded UUIDs, use fallback
+      if (carouselData.length === 0) {
+        carouselData.push(...allMonasteriesWithRatings.slice(0, 4));
+      }
+      
+      if (popularData.length === 0) {
+        popularData.push(...allMonasteriesWithRatings.slice(4, 8));
+      }
+      
+      setCarouselMonasteries(carouselData);
+      setPopularMonasteries(popularData);
 
-      const shuffled = [...monasteryData].sort(() => 0.5 - Math.random());
-      setCarouselMonasteries(shuffled.slice(0, 3));
+      // Fetch regional monasteries
+      const [northern, eastern, southern, western] = await Promise.all([
+        getMonasteriesByRegion('northern', 8),
+        getMonasteriesByRegion('eastern', 8),
+        getMonasteriesByRegion('southern', 8),
+        getMonasteriesByRegion('western', 8)
+      ]);
+
+      setNorthernMonasteries(northern);
+      setEasternMonasteries(eastern);
+      setSouthernMonasteries(southern);
+      setWesternMonasteries(western);
 
     } catch (error) {
       console.error('Error:', error);
-      setMonasteries([]);
       setCarouselMonasteries([]);
+      setPopularMonasteries([]);
+      setNorthernMonasteries([]);
+      setEasternMonasteries([]);
+      setSouthernMonasteries([]);
+      setWesternMonasteries([]);
     } finally {
       setLoading(false);
     }
@@ -92,19 +142,7 @@ const headerStyle = useAnimatedStyle(() => {
     setActiveIndex(index);
   };
 
-  const handleLoadMore = () => {
-    setDisplayCount(prevCount => prevCount + 10);
-  };
-
-  const filteredMonasteries = monasteries.filter(monastery => {
-    if (activeFilter === 'All') return true;
-    if (activeFilter === 'Nearby') return true; // Placeholder for nearby logic
-    if (activeFilter === 'Ancient') return parseInt(monastery.era, 10) < 1800; // Example: Ancient if before 1800
-    if (activeFilter === 'Festivals') return true; // Placeholder for festivals logic
-    return true;
-  });
-
-  const renderCarouselItem = (monastery: Monastery) => (
+  const renderCarouselItem = (monastery: MonasteryWithRating) => (
     <TouchableOpacity
       key={monastery.id}
       style={styles.carouselItem}
@@ -124,32 +162,51 @@ const headerStyle = useAnimatedStyle(() => {
     </TouchableOpacity>
   );
 
-  const renderMonasteryCard = (monastery: Monastery) => (
+  const renderPopularMonasteryCard = (monastery: MonasteryWithRating) => (
     <TouchableOpacity
       key={monastery.id}
-      style={[
-        styles.monasteryCard,
-        viewMode === 'list' && styles.monasteryListItem,
-      ]}
+      style={styles.popularMonasteryCard}
       onPress={() => router.push(`/monastery/${monastery.id}` as any)}
     >
       <Image
         source={{ uri: monastery.images[0] }}
-        style={[
-          styles.monasteryImage,
-          viewMode === 'list' && styles.monasteryListImage,
-        ]}
+        style={styles.popularMonasteryImage}
       />
-      <View
-        style={[
-          styles.monasteryInfo,
-          viewMode === 'list' && styles.monasteryListInfo,
-        ]}
-      >
-        <Text style={styles.monasteryName}>{monastery.name}</Text>
-        <Text style={styles.monasteryLocation}>{monastery.location}</Text>
+      <View style={styles.popularMonasteryInfo}>
+        <Text style={styles.popularMonasteryName} numberOfLines={1}>
+          {monastery.name}
+        </Text>
+        <Text style={styles.popularMonasteryDescription} numberOfLines={1}>
+          {monastery.description}
+        </Text>
+        <View style={styles.metaRow}>
+          <Text style={styles.metaText}>
+            {monastery.era} • {monastery.location} • <Text style={styles.goldStar}>★</Text> {monastery.averageRating > 0 ? monastery.averageRating.toFixed(1) : 'N/A'}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
+  );
+
+  const renderMonasterySection = (title: string, monasteries: MonasteryWithRating[], searchPath: string) => (
+    <View style={styles.popularSection}>
+      <View style={styles.popularHeader}>
+        <Text style={styles.popularTitle}>{title}</Text>
+      </View>
+      <Animated.ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.popularScrollContainer}
+      >
+        {monasteries.map(renderPopularMonasteryCard)}
+        <TouchableOpacity
+          style={styles.moreButton}
+          onPress={() => router.push(searchPath as any)}
+        >
+          <Text style={styles.moreButtonText}>More →</Text>
+        </TouchableOpacity>
+      </Animated.ScrollView>
+    </View>
   );
 
   if (loading) {
@@ -210,73 +267,29 @@ const headerStyle = useAnimatedStyle(() => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.filterBarContainer}>
-          {['All', 'Nearby', 'Ancient', 'Festivals'].map((filter) => (
-            <TouchableOpacity
-              key={filter}
-              style={[
-                styles.filterButton,
-                activeFilter === filter && styles.activeFilterButton,
-              ]}
-              onPress={() => setActiveFilter(filter)}
-            >
-              <Text
-                style={[
-                  styles.filterButtonText,
-                  activeFilter === filter && styles.activeFilterButtonText,
-                ]}
-              >
-                {t(filter.toLowerCase())}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <View style={styles.header}>
-          <Text style={styles.title}>{t('monasteries')}</Text>
-          <View style={styles.toggleButtons}>
-            <TouchableOpacity
-              style={[
-                styles.toggleButton,
-                viewMode === 'card' && styles.activeToggleButton,
-              ]}
-              onPress={() => setViewMode('card')}
-            >
-              <Grid
-                size={20}
-                color={viewMode === 'card' ? '#FFFFFF' : '#6B7280'}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.toggleButton,
-                viewMode === 'list' && styles.activeToggleButton,
-              ]}
-              onPress={() => setViewMode('list')}
-            >
-              <List
-                size={20}
-                color={viewMode === 'list' ? '#FFFFFF' : '#6B7280'}
-              />
-            </TouchableOpacity>
+        <View style={styles.popularSection}>
+          <View style={styles.popularHeader}>
+            <Text style={styles.popularTitle}>Popular Monasteries</Text>
           </View>
+          <Animated.ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.popularScrollContainer}
+          >
+            {popularMonasteries.map(renderPopularMonasteryCard)}
+            <TouchableOpacity
+              style={styles.moreButton}
+              onPress={() => router.push('/search')}
+            >
+              <Text style={styles.moreButtonText}>More →</Text>
+            </TouchableOpacity>
+          </Animated.ScrollView>
         </View>
 
-        <View
-          style={
-            viewMode === 'card'
-              ? styles.monasteryGrid
-              : styles.monasteryList
-          }
-        >
-          {filteredMonasteries.slice(0, displayCount).map(renderMonasteryCard)}
-        </View>
-        
-        {displayCount < filteredMonasteries.length && (
-          <TouchableOpacity onPress={handleLoadMore} style={styles.loadMoreButton}>
-            <Text style={styles.loadMoreButtonText}>{t('loadMore', 'Load More')}</Text>
-          </TouchableOpacity>
-        )}
+        {renderMonasterySection('Northern Monasteries', northernMonasteries, '/search')}
+        {renderMonasterySection('Eastern Monasteries', easternMonasteries, '/search')}
+        {renderMonasterySection('Southern Monasteries', southernMonasteries, '/search')}
+        {renderMonasterySection('Western Monasteries', westernMonasteries, '/search')}
       </Animated.ScrollView>
       <TouchableOpacity
         style={styles.chatbotButton}
@@ -563,5 +576,99 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6B7280',
     marginTop: 4,
+  },
+  popularSection: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+  popularHeader: {
+    paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  popularTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#1F2937',
+  },
+  popularScrollContainer: {
+    paddingHorizontal: 16,
+  },
+  popularMonasteryCard: {
+    width: 300,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 12,
+    marginRight: 16,
+    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  popularMonasteryImage: {
+    width: '100%',
+    height: 180,
+    backgroundColor: '#F3F4F6',
+  },
+  popularMonasteryInfo: {
+    padding: 16,
+  },
+  popularMonasteryName: {
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#1F2937',
+    marginBottom: 4,
+  },
+  popularMonasteryDescription: {
+    fontSize: 14,
+    color: '#4B5563',
+    marginBottom: 8,
+  },
+  metaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  metaText: {
+    fontSize: 12,
+    color: '#6B7280',
+  },
+  goldStar: {
+    color: '#FFD700',
+  },
+  popularMonasteryLocation: {
+    fontSize: 15,
+    color: '#6B7280',
+    marginBottom: 4,
+  },
+  popularMonasteryEra: {
+    fontSize: 14,
+    color: '#9CA3AF',
+    marginBottom: 12,
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  starContainer: {
+    flexDirection: 'row',
+    marginRight: 8,
+  },
+  starIcon: {
+    fontSize: 14,
+    color: '#FFD700',
+    marginRight: 4,
+  },
+  ratingText: {
+    fontSize: 12,
+    color: '#6B7280',
+    fontWeight: '500',
+  },
+  moreButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 260, // Match the new card height (180px image + ~80px info)
+    paddingHorizontal: 20,
+  },
+  moreButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#DF8020',
   },
 });

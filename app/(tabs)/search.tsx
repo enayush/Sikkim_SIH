@@ -216,27 +216,22 @@ const styles = StyleSheet.create({
   },
   monasteryCard: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    borderRadius: 12,
     marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 10,
-    elevation: 5,
-    flexDirection: 'row',
-    padding: 16,
     borderWidth: 1,
-    borderColor: '#F3F4F6',
+    borderColor: '#E5E7EB',
+    flexDirection: 'row',
+    overflow: 'hidden',
+    minHeight: 140,
   },
   monasteryImage: { 
-    width: 100, 
-    height: 100, 
-    borderRadius: 16, 
-    marginRight: 16 
+    width: 120, 
+    height: '100%',
   },
   monasteryInfo: { 
     flex: 1, 
-    justifyContent: 'center' 
+    justifyContent: 'center',
+    padding: 16,
   },
   monasteryName: { 
     fontSize: 18, 
