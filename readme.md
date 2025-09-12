@@ -37,7 +37,7 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
    npx expo start
    ```
 
-## How to build APK 
+## How to build APK
 
 ### Method 1: Using EAS Build (Recommended)
 ```bash
@@ -73,4 +73,4 @@ cd android
 3. Create an API key and add it to your `.env` file
 4. **Important:** Set up API restrictions and quotas to control costs
 
-That's it! Your monastery app is ready to go. 
+That's it! Your monastery app is ready to go.
