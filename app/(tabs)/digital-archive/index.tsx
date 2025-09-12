@@ -13,6 +13,7 @@ import { Share2, Eye } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SafeScreen from '../../../components/SafeScreen';
+import { useSystemUI } from '../../../hooks/useSystemUI';
 
 const dummyArchives = [
   {

@@ -18,6 +18,7 @@ import { getAllMonasteries, Monastery } from '@/lib/monasteryService';
 import MapView, { Marker } from 'react-native-maps';
 import Mapstyle from './styles/Mapstyle';
 import { MapErrorBoundary } from '@/components/MapErrorBoundary';
+import SafeScreen from '@/components/SafeScreen';
 import { MAP_CONFIG, mapHelpers } from '@/lib/mapConfig';
 
 export default function Map() {
@@ -246,8 +247,9 @@ export default function Map() {
   }, [mapReady]);
 
   return (
-    <MapErrorBoundary>
-      <View style={Mapstyle.container}>
+    <SafeScreen backgroundColor="#F9FAFB">
+      <MapErrorBoundary>
+        <View style={Mapstyle.container}>
       {/* Search Bar */}
       <View style={Mapstyle.searchContainer}>
         <View style={Mapstyle.searchInputContainer}>
@@ -476,7 +478,8 @@ export default function Map() {
           </View>
         </TouchableWithoutFeedback>
       </Modal>
-    </View>
-    </MapErrorBoundary>
+        </View>
+      </MapErrorBoundary>
+    </SafeScreen>
   );
 }

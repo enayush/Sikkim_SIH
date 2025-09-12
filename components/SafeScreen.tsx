@@ -6,21 +6,25 @@ interface SafeScreenProps {
   style?: ViewStyle;
   backgroundColor?: string;
   statusBarStyle?: 'default' | 'light-content' | 'dark-content';
+  hideStatusBar?: boolean;
 }
 
 export default function SafeScreen({ 
   children, 
   style, 
   backgroundColor = '#F9FAFB',
-  statusBarStyle = 'dark-content'
+  statusBarStyle = 'dark-content',
+  hideStatusBar = false
 }: SafeScreenProps) {
   return (
     <>
-      <StatusBar 
-        barStyle={statusBarStyle}
-        backgroundColor={Platform.OS === 'android' ? backgroundColor : undefined}
-        translucent={false}
-      />
+      {!hideStatusBar && (
+        <StatusBar 
+          barStyle={statusBarStyle}
+          backgroundColor={Platform.OS === 'android' ? backgroundColor : undefined}
+          translucent={false}
+        />
+      )}
       <SafeAreaView style={[styles.container, { backgroundColor }, style]}>
         {children}
       </SafeAreaView>

@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { Platform } from 'react-native';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { LocationProvider } from '@/contexts/LocationContext';
 import '@/lib/i18n';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
+import { useSystemUI } from '@/hooks/useSystemUI';
 
 export default function RootLayout() {
   useFrameworkReady();
+  useSystemUI();
 
   return (
     <AuthProvider>
@@ -21,7 +24,7 @@ export default function RootLayout() {
             <Stack.Screen name="booking" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
-          <StatusBar style="light" />
+          {/* Removed global StatusBar to let individual screens handle it */}
         </>
       </LocationProvider>
     </AuthProvider>
