@@ -69,8 +69,11 @@ export default function Chatbot() {
     setMessages(prev => [...prev, typingMessage]);
 
     try {
-      // Call our RAG + Gemini service
-      const response = await processChatMessage(userMessage.text);
+      // Get the last two messages for context
+      const lastMessages = messages.slice(-2);
+
+      // Call our RAG + Gemini service with conversation history
+      const response = await processChatMessage(userMessage.text, lastMessages);
 
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),

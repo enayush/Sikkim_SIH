@@ -1,6 +1,14 @@
 import { getAllMonasteries, Monastery } from './monasteryService';
 import { ENV_CONFIG } from './envConfig';
 
+interface Message {
+  id: string;
+  text: string;
+  isUser: boolean;
+  timestamp: Date;
+  isTyping?: boolean;
+}
+
 // Simple text similarity function for local RAG
 const cosineSimilarity = (a: number[], b: number[]): number => {
   const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
@@ -268,18 +276,18 @@ Respond in a helpful, conversational manner. Keep your response under 300 words.
 };
 
 // Main chat service function
-export const processChatMessage = async (message: string): Promise<string> => {
+export const processChatMessage = async (message: string, conversationHistory: Message[] = []): Promise<string> => {
   try {
     // Initialize RAG database if not already done
     if (monasteryDatabase.length === 0) {
       await initializeRAG();
     }
 
-    // Search for relevant monasteries
+    // Search for relevant monasteries based on the new message
     const monasteryResults = searchMonasteries(message, 3);
 
-    // Build context for Gemini
-    const context = buildContext(monasteryResults, message);
+    // Build the intelligent context for Gemini
+    const context = buildIntelligentContext(message, conversationHistory, monasteryResults);
 
     // Get response from Gemini
     const response = await callGeminiAPI(context);
@@ -290,6 +298,60 @@ export const processChatMessage = async (message: string): Promise<string> => {
     console.error('Error processing chat message:', error);
     return "I apologize for the technical difficulty. Let me know what you'd like to learn about Sikkim's monasteries, and I'll do my best to help!";
   }
+};
+
+// New function to build the intelligent, context-aware prompt
+const buildIntelligentContext = (
+  currentQuery: string,
+  conversationHistory: Message[],
+  ragResults: MonasterySearchData[]
+): string => {
+  console.log('🧠 Building intelligent context...');
+
+  // Get the last user message and bot response from history
+  const lastUserMessage = conversationHistory.find(m => m.isUser)?.text || 'N/A';
+  const lastBotResponse = conversationHistory.find(m => !m.isUser && !m.isTyping)?.text || 'N/A';
+
+  const ragContext = ragResults.length > 0
+    ? `
+Monastery Database Search Results (for the current question):
+${ragResults.map((result, index) => `
+  Result ${index + 1}: ${result.monastery.name} (Similarity: ${cosineSimilarity(textToVector(currentQuery), result.searchVector).toFixed(2)})
+  Location: ${result.monastery.location}
+  Description: ${result.monastery.description.substring(0, 100)}...
+`).join('\n')}
+`
+    : 'Monastery Database Search Results: No relevant monasteries found for the current query.';
+
+  const prompt = `
+You are Sacred Sikkim Assistant, a conversational AI expert on Sikkim's monasteries. Your task is to analyze a user's query and decide how to respond based on conversation history and database search results.
+
+**Previous Conversation Turn:**
+- Last User Question: "${lastUserMessage}"
+- Your Last Response: "${lastBotResponse}"
+
+---
+
+**Current User Question:** "${currentQuery}"
+
+---
+
+${ragContext}
+
+---
+
+**Your Task (Instructions):**
+
+1.  **Analyze the Current Question:** Is it a follow-up to the previous conversation (e.g., asking for more details, directions, or nearby places)?
+2.  **Evaluate the Search Results:** Are the search results relevant to the *current user question*? Consider the similarity scores. A score > 0.2 is likely relevant.
+3.  **Decide and Respond:**
+    *   **IF** the question is a clear follow-up (e.g., "what's near there?") AND the search results are **NOT relevant** (low similarity), then **IGNORE the new search results**. Answer the follow-up question using the context from the **previous conversation** and your own knowledge.
+    *   **ELSE (if the question is new OR the search results are relevant)**, then **USE the provided search results** to construct your answer. Refer to the monastery names and details from the search results.
+
+Provide your helpful, concise, and friendly response below.
+  `;
+
+  return prompt;
 };
 
 // Export the initialization function for manual setup
