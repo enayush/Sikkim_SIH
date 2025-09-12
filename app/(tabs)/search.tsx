@@ -11,6 +11,7 @@ import {
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Search as SearchIcon } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { getAllMonasteries, Monastery } from '../../lib/monasteryService';
 import SafeScreen from '../../components/SafeScreen';
 import Animated, {
@@ -22,6 +23,7 @@ import Animated, {
 export default function SearchScreen() {
   const { t } = useTranslation();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [monasteries, setMonasteries] = useState<Monastery[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,7 +31,7 @@ export default function SearchScreen() {
   // 🔹 Header animation values
   const lastScrollY = useSharedValue(0);
   const scrollY = useSharedValue(0);
-  const HEADER_HEIGHT = 55; // Increased slightly to ensure complete hiding
+  const HEADER_HEIGHT = 55 + insets.top; // Increased slightly to ensure complete hiding + safe area
 
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -91,7 +93,7 @@ export default function SearchScreen() {
   return (
     <SafeScreen style={styles.container}>
       {/* Search Bar as Top Bar - Clean like archive */}
-      <Animated.View style={[styles.searchHeader, headerStyle]}>
+      <Animated.View style={[styles.searchHeader, headerStyle, { paddingTop: insets.top }]}>
         <View style={styles.searchContainer}>
           <SearchIcon size={18} color="#6B7280" style={styles.searchIcon} />
           <TextInput
@@ -107,7 +109,7 @@ export default function SearchScreen() {
       {/* Content */}
       <Animated.ScrollView
         style={styles.scrollView}
-        contentContainerStyle={[styles.scrollContent, { paddingTop: 75 }]}
+        contentContainerStyle={[styles.scrollContent, { paddingTop: 75 + insets.top }]}
         onScroll={scrollHandler}
         scrollEventThrottle={16}
         showsVerticalScrollIndicator={false}

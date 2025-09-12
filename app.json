@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/icon.png",
       "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
@@ -23,19 +23,10 @@
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/icon.png"
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash.png",
-          "imageWidth": 200,
-          "resizeMode": "cover",
-          "backgroundColor": "#000000"
-        }
-      ],
       [
         "expo-location",
         {
@@ -60,7 +51,7 @@
         "INTERNET"
       ],
       "splash": {
-        "image": "./assets/images/splash.png",
+        "image": "./assets/images/icon.png",
         "resizeMode": "cover",
         "backgroundColor": "#000000"
       },

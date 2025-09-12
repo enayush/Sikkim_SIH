@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Share2, Eye } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import SafeScreen from '../../../components/SafeScreen';
 
 const dummyArchives = [
@@ -100,6 +101,7 @@ const archiveTypes = ['All', 'Image', 'Audio', 'Document'];
 
 export default function DigitalArchivePage() {
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const [selectedType, setSelectedType] = useState('All');
   const [search, setSearch] = useState('');
 
@@ -107,7 +109,7 @@ export default function DigitalArchivePage() {
   const lastScrollY = useSharedValue(0);
   const scrollY = useSharedValue(0);
   
-  const HEADER_HEIGHT = 60; // Filter header height
+  const HEADER_HEIGHT = 60 + insets.top; // Filter header height + safe area
   
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
@@ -145,7 +147,7 @@ export default function DigitalArchivePage() {
     <SafeScreen>
       <View style={styles.container}>
         {/* Filter Bar as Top Bar - Clean without logo */}
-        <Animated.View style={[styles.filterHeader, headerStyle]}>
+        <Animated.View style={[styles.filterHeader, headerStyle, { paddingTop: insets.top }]}>
           <View style={styles.segmentedControl}>
             {archiveTypes.map((type) => (
               <TouchableOpacity
@@ -161,7 +163,7 @@ export default function DigitalArchivePage() {
 
         <Animated.ScrollView 
           style={styles.scrollView}
-          contentContainerStyle={[styles.scrollContent, { paddingTop: 60 }]} 
+          contentContainerStyle={[styles.scrollContent, { paddingTop: 60 + insets.top }]} 
           showsVerticalScrollIndicator={false}
           onScroll={scrollHandler}
           scrollEventThrottle={16}
