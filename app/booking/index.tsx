@@ -466,7 +466,7 @@ export default function BookingPage() {
 
   return (
     <SafeAreaView style={Bookstyle.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView 
         style={Bookstyle.container} 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -6,68 +6,58 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  TextInput,
   Alert,
   ActivityIndicator,
   FlatList,
   Dimensions,
   Modal,
   StatusBar,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Star, MessageCircle, Send, X, ChevronLeft, ChevronRight, Volume2 } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ArrowLeft, Star, ChevronLeft, ChevronRight, Volume2, X } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
-import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReview } from '../../lib/monasteryService';
+import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReviewWithUser } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
 import Monstyles from './styles/style';
 import SafeScreen from '../../components/SafeScreen';
+import ReviewsSection from './ReviewsSection';
 
 export default function MonasteryDetailScreen() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const { t } = useTranslation();
   const { user } = useAuth();
+  const insets = useSafeAreaInsets();
   
   // State management
   const [monastery, setMonastery] = useState<Monastery | null>(null);
-  const [reviews, setReviews] = useState<MonasteryReview[]>([]);
+  const [reviews, setReviews] = useState<MonasteryReviewWithUser[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showReviewForm, setShowReviewForm] = useState(false);
-  const [newRating, setNewRating] = useState(5);
-  const [newComment, setNewComment] = useState('');
-  const [submittingReview, setSubmittingReview] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
   // Screen dimensions
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+  
+  // Ref for horizontal scroll view
+  const tabScrollViewRef = useRef<ScrollView>(null);
+  
+  // Tab configuration
+  const tabs = [
+    { key: 'overview', title: 'Overview' },
+    { key: 'images', title: 'Images' },
+    { key: 'reviews', title: 'Reviews' }
+  ];
 
   useEffect(() => {
     fetchMonasteryDetails();
     fetchReviews();
   }, [id]);
-
-  // Keyboard listeners for better UX
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
-      setKeyboardVisible(true);
-    });
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      setKeyboardVisible(false);
-    });
-
-    return () => {
-      keyboardDidShowListener?.remove();
-      keyboardDidHideListener?.remove();
-    };
-  }, []);
 
   // Data fetching
   const fetchMonasteryDetails = async () => {
@@ -88,48 +78,30 @@ export default function MonasteryDetailScreen() {
     if (!id) return;
     
     try {
-      const data = await getMonasteryReviews(id as string);
-      setReviews(data || []);
+      const reviewsData = await getMonasteryReviews(id as string);
+      setReviews(reviewsData);
     } catch (error) {
       console.error('Error fetching reviews:', error);
-      setReviews([]);
     }
   };
 
-  // Review submission
-  const submitReview = async () => {
-    if (!user) {
-      Alert.alert('Error', 'Please login to submit a review');
-      return;
+  // Calculate average rating
+  const getAverageRating = () => {
+    if (reviews.length === 0) return 0;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    return Math.round((totalRating / reviews.length) * 10) / 10; // Round to 1 decimal place
+  };
+
+  // Format rating text
+  const getRatingText = () => {
+    const avgRating = getAverageRating();
+    const reviewCount = reviews.length;
+    
+    if (reviewCount === 0) {
+      return 'No reviews yet';
     }
-
-    if (!newComment.trim()) {
-      Alert.alert('Error', 'Please enter a comment');
-      return;
-    }
-
-    setSubmittingReview(true);
-    try {
-      const { error } = await supabase.from('reviews').insert({
-        monastery_id: id as string,
-        user_id: user.id,
-        rating: newRating,
-        comment: newComment.trim(),
-      });
-
-      if (error) throw error;
-
-      Alert.alert('Success', 'Review submitted successfully!');
-      setNewComment('');
-      setNewRating(5);
-      setShowReviewForm(false);
-      await fetchReviews();
-    } catch (error) {
-      console.error('Error submitting review:', error);
-      Alert.alert('Error', 'Failed to submit review');
-    } finally {
-      setSubmittingReview(false);
-    }
+    
+    return `${avgRating} (${reviewCount} review${reviewCount !== 1 ? 's' : ''})`;
   };
 
   // Image modal handlers
@@ -223,12 +195,6 @@ export default function MonasteryDetailScreen() {
   };
 
   // Utility functions
-  const calculateAverageRating = () => {
-    if (!reviews || reviews.length === 0) return 0;
-    const sum = reviews.reduce((acc, review) => acc + review.rating, 0);
-    return sum / reviews.length;
-  };
-
   const navigateToBooking = () => {
     if (!monastery) return;
     
@@ -252,23 +218,27 @@ export default function MonasteryDetailScreen() {
     ));
   };
 
-  const renderRatingSelector = () => {
-    return (
-      <View style={Monstyles.ratingSelector}>
-        {Array.from({ length: 5 }, (_, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => setNewRating(index + 1)}
-          >
-            <Star
-              size={32}
-              color={index < newRating ? '#F59E0B' : '#E5E7EB'}
-              fill={index < newRating ? '#F59E0B' : 'transparent'}
-            />
-          </TouchableOpacity>
-        ))}
-      </View>
-    );
+  // Handle tab scrolling
+  const handleTabScroll = (event: any) => {
+    const scrollX = event.nativeEvent.contentOffset.x;
+    const tabIndex = Math.round(scrollX / screenWidth);
+    
+    if (tabIndex !== activeTabIndex && tabIndex >= 0 && tabIndex < tabs.length) {
+      setActiveTabIndex(tabIndex);
+      setActiveTab(tabs[tabIndex].key);
+    }
+  };
+
+  const scrollToTab = (tabKey: string) => {
+    const tabIndex = tabs.findIndex(tab => tab.key === tabKey);
+    if (tabIndex !== -1) {
+      setActiveTab(tabKey);
+      setActiveTabIndex(tabIndex);
+      tabScrollViewRef.current?.scrollTo({
+        x: tabIndex * screenWidth,
+        animated: true
+      });
+    }
   };
 
   const renderTabButton = (tabKey: string, title: string) => {
@@ -277,60 +247,12 @@ export default function MonasteryDetailScreen() {
       <TouchableOpacity
         key={tabKey}
         style={[Monstyles.tabButton, isActive && Monstyles.activeTabButton]}
-        onPress={() => setActiveTab(tabKey)}
+        onPress={() => scrollToTab(tabKey)}
       >
         <Text style={[Monstyles.tabButtonText, isActive && Monstyles.activeTabButtonText]}>
           {title}
         </Text>
       </TouchableOpacity>
-    );
-  };
-
-  const renderStarRating = (rating: number, size = 20) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    for (let i = 0; i < 5; i++) {
-      if (i < fullStars) {
-        stars.push(
-          <Star
-            key={i}
-            size={size}
-            fill="#FFD700"
-            color="#FFD700"
-          />
-        );
-      } else if (i === fullStars && hasHalfStar) {
-        stars.push(
-          <View key={i} style={{ position: 'relative' }}>
-            <Star size={size} color="#E0E0E0" fill="#E0E0E0" />
-            <View style={{ position: 'absolute', top: 0, left: 0, width: '50%', overflow: 'hidden' }}>
-              <Star size={size} color="#FFD700" fill="#FFD700" />
-            </View>
-          </View>
-        );
-      } else {
-        stars.push(
-          <Star
-            key={i}
-            size={size}
-            color="#E0E0E0"
-            fill="#E0E0E0"
-          />
-        );
-      }
-    }
-
-    return (
-      <View style={Monstyles.starRatingContainer}>
-        <View style={Monstyles.starsContainer}>
-          {stars}
-        </View>
-        <Text style={Monstyles.ratingText}>
-          {rating.toFixed(1)} ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
-        </Text>
-      </View>
     );
   };
 
@@ -343,7 +265,10 @@ export default function MonasteryDetailScreen() {
         data={monastery?.images || []}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={Monstyles.imageGridContainer}
+        contentContainerStyle={[
+          Monstyles.imageGridContainer, 
+          { paddingBottom: 120 + insets.bottom }
+        ]}
         columnWrapperStyle={Monstyles.imageGridRow}
         renderItem={({ item, index }) => (
           <TouchableOpacity
@@ -363,24 +288,49 @@ export default function MonasteryDetailScreen() {
   };
 
   const renderOverviewContent = () => (
-    <ScrollView style={Monstyles.tabContent} showsVerticalScrollIndicator={false}>
-      <Text style={Monstyles.monasteryLocation}>{monastery?.location}</Text>
-      <Text style={Monstyles.monasteryEra}>{monastery?.era}</Text>
-      <Text style={Monstyles.monasteryDescription}>{monastery?.description}</Text>
+    <View style={Monstyles.tabContent}>
+      <View style={{ flex: 1 }}>
+        <ScrollView 
+          contentContainerStyle={{ paddingBottom: 120 + insets.bottom }}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={Monstyles.monasteryLocation}>{monastery?.location}</Text>
+          <Text style={Monstyles.monasteryEra}>{monastery?.era}</Text>
+          <Text style={Monstyles.monasteryDescription}>{monastery?.description}</Text>
 
-      <View style={Monstyles.section}>
-        <Text style={Monstyles.sectionTitle}>{t('history')}</Text>
-        <Text style={Monstyles.sectionContent}>{monastery?.history}</Text>
+          <View style={Monstyles.section}>
+            <Text style={Monstyles.sectionTitle}>{t('history')}</Text>
+            <Text style={Monstyles.sectionContent}>{monastery?.history}</Text>
+          </View>
+
+          <View style={Monstyles.section}>
+            <Text style={Monstyles.sectionTitle}>{t('culturalSignificance')}</Text>
+            <Text style={Monstyles.sectionContent}>
+              {monastery?.cultural_significance}
+            </Text>
+          </View>
+        </ScrollView>
       </View>
 
-      <View style={Monstyles.section}>
-        <Text style={Monstyles.sectionTitle}>{t('culturalSignificance')}</Text>
-        <Text style={Monstyles.sectionContent}>
-          {monastery?.cultural_significance}
-        </Text>
+      {/* Fixed Bottom Section for Overview */}
+      <View style={[Monstyles.fixedBottomSection, { paddingBottom: 20 + insets.bottom }]}>
+        <View style={Monstyles.buttonRow}>
+          <TouchableOpacity
+            style={Monstyles.audioGuideButton}
+            onPress={() => router.push('/audio-guide')}
+          >
+            <Volume2 size={16} color="#DF8020" style={{ marginRight: 8 }} />
+            <Text style={Monstyles.audioGuideButtonText}>Audio Guide</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={Monstyles.bookVisitButton}
+            onPress={navigateToBooking}
+          >
+            <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <View style={{ height: 150 }} />
-    </ScrollView>
+    </View>
   );
 
   const renderImagesContent = () => (
@@ -392,32 +342,10 @@ export default function MonasteryDetailScreen() {
 
   const renderReviewsContent = () => (
     <View style={Monstyles.tabContent}>
-      <Text style={Monstyles.sectionTitle}>{t('reviews')}</Text>
-      
-      <ScrollView style={Monstyles.reviewsList} showsVerticalScrollIndicator={false}>
-        {reviews.length > 0 ? (
-          reviews.map((review) => (
-            <View key={review.id} style={Monstyles.reviewCard}>
-              <View style={Monstyles.reviewHeader}>
-                <View style={Monstyles.reviewRating}>
-                  {renderStars(review.rating)}
-                </View>
-                <Text style={Monstyles.reviewDate}>
-                  {new Date(review.created_at).toLocaleDateString()}
-                </Text>
-              </View>
-              <Text style={Monstyles.reviewComment}>{review.comment}</Text>
-            </View>
-          ))
-        ) : (
-          <View style={Monstyles.noReviews}>
-            <Text style={Monstyles.noReviewsText}>
-              No reviews yet. Be the first to share your experience!
-            </Text>
-          </View>
-        )}
-        <View style={{ height: 150 }} />
-      </ScrollView>
+      <ReviewsSection 
+        monasteryId={id as string} 
+        onReviewsUpdated={fetchReviews}
+      />
     </View>
   );
 
@@ -456,22 +384,23 @@ export default function MonasteryDetailScreen() {
         {/* Hero Image with Text Overlay */}
         <View style={Monstyles.heroContainer}>
           <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
+          
+          {/* 360° Button - Fixed top right */}
+          <TouchableOpacity 
+            style={Monstyles.hero360Button}
+            onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
+          >
+            <Text style={Monstyles.hero360ButtonText}>360°</Text>
+          </TouchableOpacity>
+          
           <View style={Monstyles.heroTextOverlay}>
-            <View style={Monstyles.monasteryNameRow}>
-              <Text style={Monstyles.heroMonasteryName}>{monastery?.name}</Text>
-              <TouchableOpacity 
-                style={Monstyles.hero360Button}
-                onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
-              >
-                <Text style={Monstyles.hero360ButtonText}>360°</Text>
-              </TouchableOpacity>
-            </View>
+            <Text style={Monstyles.heroMonasteryName}>{monastery?.name}</Text>
             <View style={Monstyles.starRatingContainer}>
               <View style={Monstyles.starsContainer}>
-                {renderStars(calculateAverageRating(), 18)}
+                {renderStars(Math.round(getAverageRating()), 18)}
               </View>
               <Text style={Monstyles.heroRatingText}>
-                {calculateAverageRating().toFixed(1)} ({reviews.length} {reviews.length === 1 ? 'review' : 'reviews'})
+                {getRatingText()}
               </Text>
             </View>
           </View>
@@ -486,104 +415,25 @@ export default function MonasteryDetailScreen() {
           </View>
         </View>
 
-        {/* Tab Content */}
-        {activeTab === 'overview' && renderOverviewContent()}
-        {activeTab === 'images' && renderImagesContent()}
-        {activeTab === 'reviews' && renderReviewsContent()}
-
-        {/* Fixed Bottom Section */}
-        {activeTab === 'overview' && (
-          <View style={Monstyles.fixedBottomSection}>
-            <View style={Monstyles.buttonRow}>
-              <TouchableOpacity
-                style={Monstyles.audioGuideButton}
-                onPress={() => router.push('/audio-guide')}
-              >
-                <Volume2 size={16} color="#DF8020" style={{ marginRight: 8 }} />
-                <Text style={Monstyles.audioGuideButtonText}>Audio Guide</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={Monstyles.bookVisitButton}
-                onPress={navigateToBooking}
-              >
-                <Text style={Monstyles.bookVisitButtonText}>Book a Visit</Text>
-              </TouchableOpacity>
-            </View>
+        {/* Tab Content - Horizontal ScrollView */}
+        <ScrollView
+          ref={tabScrollViewRef}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onMomentumScrollEnd={handleTabScroll}
+          style={Monstyles.tabScrollContainer}
+        >
+          <View style={[Monstyles.tabContentContainer, { width: screenWidth }]}>
+            {renderOverviewContent()}
           </View>
-        )}
-
-        {/* Write Review Section - Fixed at bottom for Reviews tab */}
-        {activeTab === 'reviews' && (
-          <View style={[
-            Monstyles.fixedBottomSection,
-            keyboardVisible && Monstyles.fixedBottomSectionKeyboard
-          ]}>
-            {!showReviewForm ? (
-              <TouchableOpacity
-                style={Monstyles.bookVisitButton}
-                onPress={() => {
-                  if (!user) {
-                    Alert.alert('Error', 'Please login to write a review');
-                    return;
-                  }
-                  setShowReviewForm(true);
-                }}
-              >
-                <MessageCircle size={16} color="#FFFFFF" style={{ marginRight: 8 }} />
-                <Text style={Monstyles.bookVisitButtonText}>Write a Review</Text>
-              </TouchableOpacity>
-            ) : (
-              <KeyboardAvoidingView 
-                behavior={Platform.OS === 'ios' ? 'position' : 'height'}
-                keyboardVerticalOffset={Platform.OS === 'ios' ? -50 : -100}
-                style={Monstyles.keyboardAvoidingContainer}
-              >
-                <View style={Monstyles.reviewForm}>
-                  <Text style={Monstyles.formLabel}>{t('rating')}</Text>
-                  {renderRatingSelector()}
-                  
-                  <Text style={Monstyles.formLabel}>{t('comment')}</Text>
-                  <TextInput
-                    style={Monstyles.commentInput}
-                    placeholder="Share your experience..."
-                    value={newComment}
-                    onChangeText={setNewComment}
-                    multiline
-                    numberOfLines={3}
-                    textAlignVertical="top"
-                    returnKeyType="done"
-                    blurOnSubmit={true}
-                  />
-                  
-                  <View style={Monstyles.formButtons}>
-                    <TouchableOpacity
-                      style={Monstyles.cancelButton}
-                      onPress={() => {
-                        setShowReviewForm(false);
-                        Keyboard.dismiss();
-                      }}
-                    >
-                      <Text style={Monstyles.cancelButtonText}>{t('cancel')}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[
-                        Monstyles.submitButton,
-                        submittingReview && Monstyles.submitButtonDisabled,
-                      ]}
-                      onPress={submitReview}
-                      disabled={submittingReview}
-                    >
-                      <Send size={16} color="#FFFFFF" />
-                      <Text style={Monstyles.submitButtonText}>
-                        {submittingReview ? t('loading') : t('submit')}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              </KeyboardAvoidingView>
-            )}
+          <View style={[Monstyles.tabContentContainer, { width: screenWidth }]}>
+            {renderImagesContent()}
           </View>
-        )}
+          <View style={[Monstyles.tabContentContainer, { width: screenWidth }]}>
+            {renderReviewsContent()}
+          </View>
+        </ScrollView>
 
         {renderImageModal()}
       </View>

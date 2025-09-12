@@ -30,7 +30,7 @@ export default function DonationsBookings() {
 
   return (
     <SafeScreen>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
+      <StatusBar barStyle="dark-content" />
       <View style={styles.container}>
         {/* Header */}
         <View style={styles.header}>

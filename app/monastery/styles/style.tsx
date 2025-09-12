@@ -49,17 +49,6 @@ const Monstyles = StyleSheet.create({
     alignItems: 'flex-start',
     marginLeft: 16,
   },
-  headerBtnWrapperRight: {
-    flex: 1,
-    alignItems: 'flex-end',
-    marginRight: 16,
-  },
-  header: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    zIndex: 10,
-  },
   backButton: {
     width: 40,
     height: 40,
@@ -74,74 +63,19 @@ const Monstyles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
   },
-  
-  circleButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  footer: {
-    padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    backgroundColor: '#FFFFFF',
-  },
-  bookVisitButton: {
-    backgroundColor: '#DF8020',
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  bookVisitButtonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  // Button row for two buttons
-  buttonRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  audioGuideButton: {
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flex: 1,
-    borderWidth: 2,
-    borderColor: '#DF8020',
-  },
-  audioGuideButtonText: {
-    color: '#DF8020',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
   backButtonText: {
     fontSize: 16,
     color: '#DF8020',
     fontWeight: '600',
   },
-  heroImage: {
+
+  // Hero section
+  heroContainer: {
+    position: 'relative',
     width: '100%',
     height: 300,
   },
-  // Hero container and text overlay styles
-  heroContainer: {
-    position: 'relative',
+  heroImage: {
     width: '100%',
     height: 300,
   },
@@ -151,6 +85,12 @@ const Monstyles = StyleSheet.create({
     left: 20,
     right: 20,
   },
+  monasteryNameRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
   heroMonasteryName: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -158,200 +98,55 @@ const Monstyles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
-  },
-  // Row container for monastery name and 360 button
-  monasteryNameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 8,
   },
-  // 360 button in hero overlay
   hero360Button: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
     width: 48,
     height: 48,
     borderRadius: 24,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 3,
+    zIndex: 10,
   },
   hero360ButtonText: {
     color: '#DF8020',
     fontWeight: 'bold',
     fontSize: 14,
   },
-  content: {
-    padding: 20,
-  },
-  monasteryName: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#1F2937',
-    marginBottom: 8,
-  },
-  monasteryLocation: {
-    fontSize: 18,
-    color: '#6B7280',
-    marginBottom: 4,
-  },
-  monasteryEra: {
-    fontSize: 16,
-    color: '#9CA3AF',
-    fontWeight: '600',
-    marginBottom: 16,
-  },
-  monasteryDescription: {
-    fontSize: 16,
-    color: '#4B5563',
-    lineHeight: 24,
-    marginBottom: 24,
-  },
-  section: {
-    marginBottom: 24,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F2937',
+  starRatingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
     marginBottom: 12,
   },
-  sectionContent: {
-    fontSize: 16,
-    color: '#4B5563',
-    lineHeight: 24,
-  },
-  reviewsHeader: {
+  starsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
+    marginRight: 8,
   },
-  writeReviewButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    backgroundColor: '#EBF4FF',
-    borderRadius: 8,
-    gap: 6,
-  },
-  writeReviewText: {
+  heroRatingText: {
     fontSize: 14,
-    color: '#DF8020',
-    fontWeight: '600',
-  },
-  reviewForm: {
-    backgroundColor: '#FFFFFF',
-    padding: 12,
-    borderRadius: 12,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  formLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#1F2937',
-    marginBottom: 6,
-  },
-  ratingSelector: {
-    flexDirection: 'row',
-    gap: 6,
-    marginBottom: 12,
-  },
-  commentInput: {
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    color: '#1F2937',
-    minHeight: 80,
-    maxHeight: 120,
-    marginBottom: 12,
-  },
-  formButtons: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  cancelButton: {
-    flex: 1,
-    paddingVertical: 12,
-    borderRadius: 8,
-    backgroundColor: '#F3F4F6',
-    alignItems: 'center',
-  },
-  cancelButtonText: {
-    fontSize: 16,
-    color: '#6B7280',
-    fontWeight: '600',
-  },
-  submitButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 8,
-    backgroundColor: '#DF8020',
-    gap: 8,
-  },
-  submitButtonDisabled: {
-    backgroundColor: '#9CA3AF',
-  },
-  submitButtonText: {
-    fontSize: 16,
     color: '#FFFFFF',
-    fontWeight: '600',
+    fontWeight: '500',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
-  reviewCard: {
-    backgroundColor: '#FFFFFF',
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  reviewHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  reviewRating: {
-    flexDirection: 'row',
-    gap: 2,
-  },
-  reviewDate: {
-    fontSize: 12,
-    color: '#9CA3AF',
-  },
-  reviewComment: {
-    fontSize: 14,
-    color: '#4B5563',
-    lineHeight: 20,
-  },
-  noReviews: {
-    alignItems: 'center',
-    paddingVertical: 40,
-  },
-  noReviewsText: {
-    fontSize: 16,
-    color: '#6B7280',
-    textAlign: 'center',
-  },
+
   // Tab styles
   tabContainerWithRounding: {
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    marginTop: -24, // Overlap with hero image slightly
+    marginTop: -24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -2 },
     shadowOpacity: 0.1,
@@ -388,11 +183,53 @@ const Monstyles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: '#FFFFFF',
-    marginBottom: 120, // Space for fixed bottom buttons
   },
+  tabScrollContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  tabContentContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+
+  // Content styles
+  monasteryLocation: {
+    fontSize: 18,
+    color: '#6B7280',
+    marginBottom: 4,
+  },
+  monasteryEra: {
+    fontSize: 16,
+    color: '#9CA3AF',
+    fontWeight: '600',
+    marginBottom: 16,
+  },
+  monasteryDescription: {
+    fontSize: 16,
+    color: '#4B5563',
+    lineHeight: 24,
+    marginBottom: 24,
+  },
+  section: {
+    marginBottom: 24,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#1F2937',
+    marginBottom: 12,
+  },
+  sectionContent: {
+    fontSize: 16,
+    color: '#4B5563',
+    lineHeight: 24,
+  },
+
   // Image grid styles
   imageGridContainer: {
     paddingTop: 10,
+    paddingHorizontal: 0,
   },
   imageGridRow: {
     justifyContent: 'space-between',
@@ -407,77 +244,7 @@ const Monstyles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  // Reviews list
-  reviewsList: {
-    flex: 1,
-    marginTop: 10,
-  },
-  // Fixed bottom sections
-  fixedBottomSection: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    padding: 20,
-    paddingBottom: 30, // Extra padding for safe area
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  // Keyboard-aware styles
-  keyboardAvoidingContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  fixedBottomSectionKeyboard: {
-    position: 'absolute',
-    bottom: 280, // Move up above keyboard
-    left: 0,
-    right: 0,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    padding: 16,
-    paddingBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 5,
-    maxHeight: 250,
-  },
-  reviewFormScroll: {
-    maxHeight: 250,
-  },
-  starRatingContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 8,
-    marginBottom: 12,
-  },
-  starsContainer: {
-    flexDirection: 'row',
-    marginRight: 8,
-  },
-  ratingText: {
-    fontSize: 14,
-    color: '#666',
-    fontWeight: '500',
-  },
-  // Special styling for hero overlay rating text
-  heroRatingText: {
-    fontSize: 14,
-    color: '#FFFFFF',
-    fontWeight: '500',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
-  },
+
   // Image Modal styles
   imageModalContainer: {
     position: 'absolute',
@@ -544,6 +311,205 @@ const Monstyles = StyleSheet.create({
     fontWeight: '600',
   },
 
+  // Fixed bottom sections and buttons
+  fixedBottomSection: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    padding: 20,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  audioGuideButton: {
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flex: 1,
+    borderWidth: 2,
+    borderColor: '#DF8020',
+  },
+  audioGuideButtonText: {
+    color: '#DF8020',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  bookVisitButton: {
+    backgroundColor: '#DF8020',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  bookVisitButtonText: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+
+  // Reviews styles
+  reviewsContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  reviewCard: {
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    borderRadius: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+  reviewHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 8,
+  },
+  reviewUserInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  profileIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#DF8020',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  profileIconText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  reviewUserDetails: {
+    flex: 1,
+  },
+  reviewUserEmail: {
+    fontSize: 14,
+    color: '#1F2937',
+    fontWeight: '500',
+    marginBottom: 4,
+  },
+  reviewRating: {
+    flexDirection: 'row',
+    gap: 2,
+  },
+  reviewDate: {
+    fontSize: 12,
+    color: '#9CA3AF',
+  },
+  reviewComment: {
+    fontSize: 14,
+    color: '#4B5563',
+    lineHeight: 20,
+  },
+  noReviews: {
+    alignItems: 'center',
+    paddingVertical: 40,
+  },
+  noReviewsText: {
+    fontSize: 16,
+    color: '#6B7280',
+    textAlign: 'center',
+  },
+  // Review form styles - improved
+  reviewForm: {
+    backgroundColor: '#FFFFFF',
+    padding: 18,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    alignSelf: 'stretch',   // take available width
+    marginHorizontal: 0,    // reduced side margins
+    marginTop: 0,           // reduced top margin
+  },
+
+  formLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: '#111827',
+    marginBottom: 10,
+  },
+
+  ratingSelector: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+
+  commentInput: {
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    borderRadius: 12,
+    padding: 14,
+    fontSize: 15,
+    color: '#1F2937',
+    minHeight: 70,
+    maxHeight: 120,
+    marginBottom: 20,
+    backgroundColor: '#F9FAFB',
+  },
+
+  formButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+
+  cancelButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 10,
+    backgroundColor: '#F3F4F6',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+  },
+
+  cancelButtonText: {
+    fontSize: 15,
+    color: '#6B7280',
+    fontWeight: '600',
+  },
+
+  submitButton: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    borderRadius: 10,
+    backgroundColor: '#DF8020',
+    gap: 8,
+    shadowColor: '#DF8020',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+
+  submitButtonDisabled: {
+    backgroundColor: '#D1D5DB',
+  },
+
+  submitButtonText: {
+    fontSize: 15,
+    color: '#FFFFFF',
+    fontWeight: '700',
+  },
 });
 
 export default Monstyles;

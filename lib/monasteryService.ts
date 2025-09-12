@@ -25,7 +25,12 @@ export interface MonasteryReview {
   user_id: string;
   rating: number;
   comment: string;
+  user_email: string;
   created_at: string;
+}
+
+export interface MonasteryReviewWithUser extends MonasteryReview {
+  // This interface can now be the same as MonasteryReview since user_email is included
 }
 
 // Helper function to process monasteries with nested reviews
@@ -188,9 +193,9 @@ export const getMonasteryById = async (id: string): Promise<Monastery | null> =>
 };
 
 /**
- * Fetch reviews for a monastery
+ * Fetch reviews for a monastery with user information
  */
-export const getMonasteryReviews = async (monasteryId: string): Promise<MonasteryReview[]> => {
+export const getMonasteryReviews = async (monasteryId: string): Promise<MonasteryReviewWithUser[]> => {
   try {
     const { data, error } = await supabase
       .from('reviews')
@@ -232,6 +237,7 @@ export const addMonasteryReview = async (
         user_id: user.id,
         rating,
         comment,
+        user_email: user.email || 'Anonymous User',
       })
       .select()
       .single();

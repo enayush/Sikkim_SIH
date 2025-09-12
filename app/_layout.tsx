@@ -21,7 +21,7 @@ export default function RootLayout() {
             <Stack.Screen name="booking" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
-          <StatusBar style="light" backgroundColor="#000000" />
+          <StatusBar style="light" />
         </>
       </LocationProvider>
     </AuthProvider>
