@@ -107,21 +107,21 @@ export default function DigitalArchivePage() {
   const lastScrollY = useSharedValue(0);
   const scrollY = useSharedValue(0);
   
-  const HEADER_HEIGHT = 60; // Same as home page
+  const HEADER_HEIGHT = 60; // Filter header height
   
   const scrollHandler = useAnimatedScrollHandler({
     onScroll: (event) => {
       const y = event.contentOffset.y;
       const diff = y - lastScrollY.value;
-  
-      if (diff > 0) {
-        // scrolling down → hide
-        scrollY.value = Math.min(scrollY.value + diff, HEADER_HEIGHT);
-      } else {
-        // scrolling up → show
+
+      if (diff > 0 && y > 10) {
+        // scrolling down → hide header (only after scrolling past 10px)
+        scrollY.value = Math.min(scrollY.value + diff, HEADER_HEIGHT + 5);
+      } else if (diff < 0) {
+        // scrolling up → show header
         scrollY.value = Math.max(scrollY.value + diff, 0);
       }
-  
+
       lastScrollY.value = y;
     },
   });

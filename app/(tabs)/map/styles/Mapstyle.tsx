@@ -156,15 +156,18 @@ const Mapstyle = StyleSheet.create({
   searchInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 25,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 12, // Reduced for shorter height
+    backgroundColor: '#F9FAFB',
+    borderRadius: 25, // Much more rounded like Google search
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    flex: 1, // Takes full width now that there's no filter button
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
   searchIcon: {
     marginRight: 8,
@@ -173,6 +176,8 @@ const Mapstyle = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: '#1F2937',
+    height: 18, // Reduced height for more compact appearance
+    paddingVertical: 0, // Remove any default padding
   },
   clearButton: {
     marginLeft: 8,
@@ -181,13 +186,15 @@ const Mapstyle = StyleSheet.create({
   searchResults: {
     marginTop: 8,
     backgroundColor: '#FFFFFF',
-    borderRadius: 12,
+    borderRadius: 16, // More rounded corners for consistency
     maxHeight: 200,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.12,
     shadowRadius: 8,
     elevation: 4,
+    borderWidth: 1,
+    borderColor: '#F0F0F0', // Subtle border
   },
   searchResultItem: {
     flexDirection: 'row',

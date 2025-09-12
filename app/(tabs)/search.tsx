@@ -97,6 +97,7 @@ export default function SearchScreen() {
           <TextInput
             style={styles.searchInput}
             placeholder={t('searchPlaceholder')}
+            placeholderTextColor="#9CA3AF"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
@@ -167,7 +168,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingVertical: 8, // Reduced from 12 to 8
+    paddingVertical: 12, // Slightly increased for better proportions
     borderBottomWidth: 1,
     borderBottomColor: '#E5E7EB',
     backgroundColor: '#FFFFFF',
@@ -181,21 +182,28 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 4, // Reduced from 6 to 4
+    paddingHorizontal: 16,
+    paddingVertical: 12, // Reduced for shorter height
     backgroundColor: '#F9FAFB',
-    borderRadius: 12,
+    borderRadius: 25, // Much more rounded like Google search
     borderWidth: 1,
     borderColor: '#E5E7EB',
     flex: 1, // Takes full width now that there's no filter button
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
   searchIcon: { 
     marginRight: 8 
   },
   searchInput: { 
     flex: 1, 
-    fontSize: 14, 
-    color: '#1F2937' 
+    fontSize: 16, // Slightly larger for better readability
+    color: '#1F2937',
+    height: 18, // Reduced height for more compact appearance
+    paddingVertical: 0, // Remove any default padding
   },
 
   // Content
