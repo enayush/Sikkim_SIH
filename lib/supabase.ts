@@ -125,6 +125,52 @@ export type Database = {
           description?: string | null;
         };
       };
+      archives: {
+        Row: {
+          id: number;
+          archive_name: string;
+          creation_date: string | null;
+          languages: string | null;
+          scripts: string | null;
+          content_type: string | null;
+          place_of_origin: string | null;
+          originals_information: string | null;
+          related_people: string | null;
+          reference: string | null;
+          digitisation_date: string | null;
+          archive_url: string | null;
+          image_urls: string[] | null;
+          created_at: string;
+        };
+        Insert: {
+          archive_name: string;
+          creation_date?: string | null;
+          languages?: string | null;
+          scripts?: string | null;
+          content_type?: string | null;
+          place_of_origin?: string | null;
+          originals_information?: string | null;
+          related_people?: string | null;
+          reference?: string | null;
+          digitisation_date?: string | null;
+          archive_url?: string | null;
+          image_urls?: string[] | null;
+        };
+        Update: {
+          archive_name?: string;
+          creation_date?: string | null;
+          languages?: string | null;
+          scripts?: string | null;
+          content_type?: string | null;
+          place_of_origin?: string | null;
+          originals_information?: string | null;
+          related_people?: string | null;
+          reference?: string | null;
+          digitisation_date?: string | null;
+          archive_url?: string | null;
+          image_urls?: string[] | null;
+        };
+      };
     };
   };
 };

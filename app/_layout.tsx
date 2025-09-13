@@ -22,6 +22,7 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="monastery/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="booking" options={{ headerShown: false }} />
+            <Stack.Screen name="archive-detail/[id]" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" />
           </Stack>
           {/* Removed global StatusBar to let individual screens handle it */}
