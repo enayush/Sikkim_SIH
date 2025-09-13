@@ -42,7 +42,14 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "EXPO_PUBLIC_SUPABASE_URL": "https://mltokacjlighkvmjfpfr.supabase.co",
+      "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sdG9rYWNqbGlnaGt2bWpmcGZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MjA1MzgsImV4cCI6MjA3Mjk5NjUzOH0.00v8ERToiwEPd7gkkI7SYSkpXXuqOqqGA9qyMzliyBE",
+      "EXPO_PUBLIC_GOOGLE_MAPS_API_KEY": "AIzaSyCLuiGi9HKkr6U4-cXCjCPJa53ASTPvbSI",
+      "EXPO_PUBLIC_GEMINI_API_KEY": "AIzaSyARU8GzcNq1VDWRCgJCj_cjlLsAKRLTem0",
+      "eas": {
+        "projectId": "7b6ec0c0-5180-45b2-aa88-6d7739695713"
+      }
     },
     "android": {
       "package": "com.ashhhh1535.sacredsikkim",

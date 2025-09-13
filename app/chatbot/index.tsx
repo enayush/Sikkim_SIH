@@ -1,3 +1,12 @@
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
+
+// Polyfill for crypto.randomUUID
+if (typeof crypto.randomUUID !== 'function') {
+  // @ts-ignore - The types are slightly different but functionally compatible
+  crypto.randomUUID = uuidv4;
+}
+
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -6,16 +15,21 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
-  KeyboardAvoidingView,
   Platform,
   SafeAreaView,
   ActivityIndicator,
+  Modal,
+  Dimensions,
+  ScrollView,
+  Keyboard,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
-import { ArrowLeft, Send, MessageSquare, Sparkles } from 'lucide-react-native';
+import { ArrowLeft, Send, MessageSquare, Sparkles, History } from 'lucide-react-native';
 import SafeScreen from '@/components/SafeScreen';
-import { processChatMessage } from '@/lib/chatService';
+import { processChatMessage, getChatHistory, getOrCreateConversation, saveMessage, getAllConversations } from '@/lib/chatService';
+import { useAuth } from '@/contexts/AuthContext';
+import ChatHistorySidebar from '@/components/ChatHistorySidebar';
 
 interface Message {
   id: string;
@@ -27,6 +41,8 @@ interface Message {
 
 export default function Chatbot() {
   const router = useRouter();
+  const { user } = useAuth();
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
@@ -37,7 +53,91 @@ export default function Chatbot() {
   ]);
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+  const [conversations, setConversations] = useState<any[]>([]);
+  const [isLoadingConversations, setIsLoadingConversations] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const flatListRef = useRef<FlatList>(null);
+
+  useEffect(() => {
+    const loadHistory = async () => {
+      if (user) {
+        // This will get the latest conversation or create a new one
+        const convId = await getOrCreateConversation();
+        if (convId) {
+          setConversationId(convId);
+          const history = await getChatHistory(convId);
+          if (history.length > 0) {
+            setMessages(history);
+          }
+        }
+      }
+    };
+    loadHistory();
+  }, [user]);
+
+  // Keyboard listeners
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      (e) => setKeyboardHeight(e.endCoordinates.height)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setKeyboardHeight(0)
+    );
+
+    return () => {
+      keyboardDidShowListener?.remove();
+      keyboardDidHideListener?.remove();
+    };
+  }, []);
+
+  const loadConversations = async () => {
+    if (!user) return;
+    setIsLoadingConversations(true);
+    try {
+      const allConversations = await getAllConversations();
+      setConversations(allConversations);
+    } catch (error) {
+      console.error('Error loading conversations:', error);
+    } finally {
+      setIsLoadingConversations(false);
+    }
+  };
+
+  const handleSelectConversation = async (selectedConversationId: string) => {
+    setConversationId(selectedConversationId);
+    const history = await getChatHistory(selectedConversationId);
+    setMessages(history.length > 0 ? history : [
+      {
+        id: '1',
+        text: "🙏 Welcome back! How can I help you explore Sikkim's monasteries today?",
+        isUser: false,
+        timestamp: new Date(),
+      }
+    ]);
+    setIsSidebarVisible(false);
+  };
+
+  const handleNewChat = async () => {
+    const newConvId = await getOrCreateConversation();
+    setConversationId(newConvId);
+    setMessages([
+      {
+        id: '1',
+        text: "🙏 Namaste! I'm your Sacred Sikkim guide. I can help you learn about monasteries, plan visits, and explore our beautiful Buddhist heritage. What would you like to know?",
+        isUser: false,
+        timestamp: new Date(),
+      }
+    ]);
+    setIsSidebarVisible(false);
+  };
+
+  const handleOpenSidebar = () => {
+    loadConversations();
+    setIsSidebarVisible(true);
+  };
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -57,6 +157,11 @@ export default function Chatbot() {
     setMessages(prev => [...prev, userMessage]);
     setInputText('');
     setIsLoading(true);
+
+    // Save user message to DB
+    if (conversationId) {
+      await saveMessage(conversationId, userMessage);
+    }
 
     // Add typing indicator
     const typingMessage: Message = {
@@ -84,6 +189,11 @@ export default function Chatbot() {
 
       // Remove typing indicator and add response
       setMessages(prev => prev.filter(msg => msg.id !== 'typing').concat(botResponse));
+
+      // Save bot response to DB
+      if (conversationId) {
+        await saveMessage(conversationId, botResponse);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       const errorResponse: Message = {
@@ -140,13 +250,53 @@ export default function Chatbot() {
     setInputText(text);
   };
 
+  const handleOpenHistory = async () => {
+    await loadConversations();
+    setIsSidebarVisible(true);
+  };  const handleCloseHistory = () => {
+    setIsSidebarVisible(false);
+  };
+
+  // Group conversations by date
+  const groupConversationsByDate = (convs: { id: string; summary: string | null; updated_at: string; }[]) => {
+    const grouped: { [key: string]: { id: string; summary: string | null; updated_at: string; }[] } = {};
+
+    convs.forEach((conv: { id: string; summary: string | null; updated_at: string; }) => {
+      const date = new Date(conv.updated_at);
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      let dateKey: string;
+
+      if (date.toDateString() === today.toDateString()) {
+        dateKey = 'Today';
+      } else if (date.toDateString() === yesterday.toDateString()) {
+        dateKey = 'Yesterday';
+      } else {
+        dateKey = date.toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+
+      if (!grouped[dateKey]) {
+        grouped[dateKey] = [];
+      }
+      grouped[dateKey].push(conv);
+    });
+
+    return grouped;
+  };
+
+  const groupedConversations = groupConversationsByDate(conversations);
+
   return (
     <SafeScreen>
       <StatusBar style="dark" />
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
+      <View style={[styles.container, { paddingBottom: keyboardHeight }]}>
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -161,7 +311,9 @@ export default function Chatbot() {
               <Text style={styles.headerSubtitle}>Monastery Expert Assistant</Text>
             </View>
           </View>
-          <View style={styles.headerSpacer} />
+          <TouchableOpacity onPress={handleOpenHistory} style={styles.historyButton}>
+            <History size={24} color="#333" />
+          </TouchableOpacity>
         </View>
 
         {/* Messages */}
@@ -171,7 +323,7 @@ export default function Chatbot() {
           renderItem={renderMessage}
           keyExtractor={(item) => item.id}
           style={styles.messagesList}
-          contentContainerStyle={styles.messagesContent}
+          contentContainerStyle={[styles.messagesContent, { paddingBottom: keyboardHeight > 0 ? 120 : 80 }]}
           showsVerticalScrollIndicator={false}
         />
 
@@ -221,7 +373,53 @@ export default function Chatbot() {
             </TouchableOpacity>
           </View>
         </View>
-      </KeyboardAvoidingView>
+
+        {/* Chat History Sidebar */}
+        <Modal
+          visible={isSidebarVisible}
+          animationType="slide"
+          transparent
+        >
+          <View style={styles.sidebarContainer}>
+            <View style={styles.sidebarContent}>
+              <TouchableOpacity onPress={handleCloseHistory} style={styles.closeButton}>
+                <Text style={styles.closeButtonText}>✖️</Text>
+              </TouchableOpacity>
+              <Text style={styles.sidebarTitle}>Chat History</Text>
+              <ScrollView style={styles.historyList} showsVerticalScrollIndicator={false}>
+                {Object.entries(groupedConversations).map(([date, dateConversations]) => (
+                  <View key={date} style={styles.dateSection}>
+                    <Text style={styles.dateHeader}>{date}</Text>
+                    {dateConversations.map((conv) => (
+                      <TouchableOpacity
+                        key={conv.id}
+                        onPress={() => handleSelectConversation(conv.id)}
+                        style={styles.historyItem}
+                      >
+                        <Text style={styles.historyText}>
+                          {conv.summary || 'New Conversation'}
+                        </Text>
+                        <Text style={styles.historyTime}>
+                          {new Date(conv.updated_at).toLocaleTimeString('en-US', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                          })}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                ))}
+                {conversations.length === 0 && (
+                  <View style={styles.emptyState}>
+                    <Text style={styles.emptyText}>No chat history yet</Text>
+                    <Text style={styles.emptySubtext}>Start a conversation to see it here</Text>
+                  </View>
+                )}
+              </ScrollView>
+            </View>
+          </View>
+        </Modal>
+      </View>
     </SafeScreen>
   );
 }
@@ -267,8 +465,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#6B7280',
   },
-  headerSpacer: {
-    width: 32,
+  historyButton: {
+    padding: 8,
   },
   messagesList: {
     flex: 1,
@@ -402,5 +600,75 @@ const styles = StyleSheet.create({
   },
   sendButtonDisabled: {
     backgroundColor: '#D1D5DB',
+  },
+  sidebarContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginTop: 50,
+  },
+  sidebarContent: {
+    backgroundColor: '#FFFFFF',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 16,
+    height: Dimensions.get('window').height * 0.7,
+  },
+  closeButton: {
+    alignSelf: 'flex-end',
+    padding: 8,
+  },
+  closeButtonText: {
+    fontSize: 18,
+    color: '#6B7280',
+  },
+  sidebarTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1F2937',
+    marginBottom: 16,
+  },
+  historyList: {
+    flex: 1,
+  },
+  historyContent: {
+    paddingBottom: 16,
+  },
+  historyItem: {
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  historyText: {
+    fontSize: 16,
+    color: '#1F2937',
+  },
+  dateSection: {
+    marginBottom: 20,
+  },
+  dateHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#DF8020',
+    marginBottom: 8,
+    paddingHorizontal: 4,
+  },
+  historyTime: {
+    fontSize: 12,
+    color: '#6B7280',
+    marginTop: 4,
+  },
+  emptyState: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 40,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#6B7280',
+    marginBottom: 4,
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: '#9CA3AF',
   },
 });
