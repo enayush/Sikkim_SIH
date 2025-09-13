@@ -23,27 +23,52 @@ interface Developer {
 const developers: Developer[] = [
   {
     id: '1',
-    name: 'John Doe',
+    name: 'Ayush Sharma',
     role: 'Lead Developer',
-    github: 'johndoe',
-    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=JD',
+    github: 'enayush',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=AS',
     description: 'Full-stack developer passionate about cultural preservation and technology.'
   },
   {
     id: '2',
-    name: 'Jane Smith',
-    role: 'UI/UX Designer',
-    github: 'janesmith',
-    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=JS',
-    description: 'Creative designer focused on creating intuitive and beautiful user experiences.'
+    name: 'Shubham Singh',
+    role: 'DevOps Engineer',
+    github: 'shibs-01',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=SS',
+    description: 'DevOps expert ensuring reliable deployment and monitoring of our monastery exploration platform.'
+    
   },
   {
     id: '3',
-    name: 'Mike Johnson',
+    name: 'Kushagra Anand',
     role: 'Backend Developer',
-    github: 'mikejohnson',
-    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=MJ',
+    github: 'Kusha008',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=KA',
     description: 'Backend specialist with expertise in scalable architecture and database design.'
+  },
+  {
+    id: '4',
+    name: 'Laksh Sachdeva',
+    role: 'Database Expert',
+    github: 'Laksh-01',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=LS',
+    description: 'Database architect specializing in PostgreSQL optimization and data modeling for cultural heritage applications.'
+  },
+  {
+    id: '5',
+    name: 'Piyush',
+    role: 'AI Engineer',
+    github: 'Piyush-Sharma79',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=PS',
+    description: 'AI specialist developing intelligent features for monastery discovery and personalized cultural experiences.'
+  },
+  {
+    id: '6',
+    name: 'Bhavya Tiwari',
+    role: 'UI/UX Designer',
+    github: 'bhavya-tiwari',
+    avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=BT',
+    description: 'Creative designer focused on creating intuitive and beautiful user experiences.'
   }
 ];
 
@@ -163,7 +188,7 @@ export default function AboutScreen() {
 
         {/* Contact & Links */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Get in Touch</Text>
+          <Text style={styles.sectionTitle}>Get in Touch ( Working on it )</Text>
           
           <TouchableOpacity style={styles.contactItem} onPress={handleEmailPress}>
             <Mail size={20} color="#FF9933" />
@@ -180,7 +205,7 @@ export default function AboutScreen() {
         <View style={styles.versionSection}>
           <Text style={styles.versionText}>Version 1.0.0</Text>
           <Text style={styles.copyrightText}>
-            © 2024 Sacred Sikkim. All rights reserved.
+            © 2025 Sacred Sikkim. All rights reserved.
           </Text>
         </View>
       </ScrollView>

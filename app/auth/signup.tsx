@@ -23,23 +23,60 @@ export default function SignupScreen() {
   const router = useRouter();
 
   const handleSignup = async () => {
+    // Clear any previous errors
+    setLoading(false);
+
+    // Validate all fields
     if (!email || !username || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address');
+      return;
+    }
+
+    // Validate username
     if (username.length < 3) {
       Alert.alert('Error', 'Username must be at least 3 characters long');
       return;
     }
 
+    if (username.length > 20) {
+      Alert.alert('Error', 'Username must be less than 20 characters long');
+      return;
+    }
+
+    // Check for valid username characters (alphanumeric and underscore only)
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      Alert.alert('Error', 'Username can only contain letters, numbers, and underscores');
+      return;
+    }
+
+    // Validate password
+    if (password.length < 6) {
+      Alert.alert('Error', 'Password must be at least 6 characters long');
+      return;
+    }
+
+    if (password.length > 128) {
+      Alert.alert('Error', 'Password must be less than 128 characters long');
+      return;
+    }
+
+    // Validate password confirmation
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match');
       return;
     }
 
-    if (password.length < 6) {
-      Alert.alert('Error', 'Password must be at least 6 characters long');
+    // Check for common weak passwords
+    const weakPasswords = ['password', '123456', '123456789', 'qwerty', 'abc123', 'password123'];
+    if (weakPasswords.includes(password.toLowerCase())) {
+      Alert.alert('Error', 'Please choose a stronger password');
       return;
     }
 
@@ -47,7 +84,25 @@ export default function SignupScreen() {
     try {
       const { data, error } = await signUp(email, password, username);
       if (error) {
-        Alert.alert('Error', error.message);
+        console.error('Signup error details:', error);
+        let errorMessage = error.message;
+        
+        // Provide more user-friendly error messages
+        if (error.message.includes('User already registered') || error.message.includes('already registered')) {
+          errorMessage = 'An account with this email already exists. Please try signing in instead.';
+        } else if (error.message.includes('Invalid email') || error.message.includes('invalid email')) {
+          errorMessage = 'Please enter a valid email address.';
+        } else if (error.message.includes('Password should be at least') || error.message.includes('password')) {
+          errorMessage = 'Password must be at least 6 characters long.';
+        } else if (error.message.includes('username') || error.message.includes('Username')) {
+          errorMessage = 'Username is already taken. Please choose a different username.';
+        } else if (error.message.includes('Database error') || error.message.includes('database')) {
+          errorMessage = 'Unable to create account. Please try again later.';
+        } else if (error.message.includes('JWT') || error.message.includes('token')) {
+          errorMessage = 'Authentication error. Please try again.';
+        }
+        
+        Alert.alert('Signup Error', errorMessage);
       } else {
         // Check if user was created and can be automatically signed in
         if (data.user && data.session) {
