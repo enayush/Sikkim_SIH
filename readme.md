@@ -4,7 +4,7 @@
 Interactive map with monastery markers, GPS tracking, 360° Street View integration, and location-based search functionality.
 
 2. **Comprehensive Monastery Database**
-Detailed information about 50+ monasteries with photo galleries, historical context, regional organization, and advanced search filters.
+Detailed information about 100+ monasteries with photo galleries, historical context, regional organization, and advanced search filters.
 
 3. **Smart Booking & Visit Planning**
 Complete visit scheduling system with date selection, group management, booking history, email confirmations, and cancellation features.
