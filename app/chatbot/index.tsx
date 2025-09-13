@@ -26,6 +26,7 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Send, MessageSquare, Sparkles, History } from 'lucide-react-native';
+import Markdown from 'react-native-markdown-display';
 import SafeScreen from '@/components/SafeScreen';
 import { processChatMessage, getChatHistory, getOrCreateConversation, saveMessage, getAllConversations } from '@/lib/chatService';
 import { getAllMonasteries } from '@/lib/monasteryService';
@@ -48,7 +49,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "🙏 Namaste! I'm your Sacred Sikkim guide. I can help you learn about monasteries, plan visits, and explore our beautiful Buddhist heritage. What would you like to know?",
+      text: "**Welcome to Sacred Sikkim!** 🙏\n\nI'm your guide to Sikkim's Buddhist monasteries. I can help you:\n\n• Learn about monastery history and significance\n• Plan visits and get practical information\n• Explore Buddhist culture and traditions\n• Book monastery visits\n\nWhat would you like to know about Sikkim's sacred heritage?",
       isUser: false,
       timestamp: new Date(),
     }
@@ -59,7 +60,6 @@ export default function Chatbot() {
   const [conversations, setConversations] = useState<any[]>([]);
   const [isLoadingConversations, setIsLoadingConversations] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
-  const [showActionButtons, setShowActionButtons] = useState(true);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Booking flow state
@@ -183,6 +183,17 @@ export default function Chatbot() {
       return;
     }
 
+    // Check for booking intent keywords
+    const bookingKeywords = ['book', 'booking', 'reserve', 'reservation', 'visit', 'schedule', 'appointment'];
+    const containsBookingKeyword = bookingKeywords.some(keyword =>
+      currentInput.toLowerCase().includes(keyword)
+    );
+
+    if (containsBookingKeyword && !isInBookingFlow) {
+      await initiateBookingFlow(userMessage);
+      return;
+    }
+
     // Save user message to DB
     if (conversationId) {
       await saveMessage(conversationId, userMessage);
@@ -252,66 +263,103 @@ export default function Chatbot() {
             <ActivityIndicator size="small" color="#6B7280" />
             <Text style={styles.typingText}>Sacred Sikkim is typing...</Text>
           </View>
-        ) : (
-          <Text style={[
-            styles.messageText,
-            item.isUser ? styles.userText : styles.botText
-          ]}>
+        ) : item.isUser ? (
+          <Text style={[styles.messageText, styles.userText]}>
             {item.text}
           </Text>
+        ) : (
+          <Markdown style={{
+            body: {
+              color: '#374151',
+              fontSize: 14,
+              lineHeight: 20,
+            },
+            heading1: {
+              fontSize: 18,
+              fontWeight: '600',
+              marginBottom: 8,
+              color: '#1F2937',
+            },
+            heading2: {
+              fontSize: 16,
+              fontWeight: '600',
+              marginBottom: 6,
+              color: '#1F2937',
+            },
+            paragraph: {
+              marginBottom: 8,
+              color: '#374151',
+            },
+            strong: {
+              fontWeight: '600',
+            },
+            em: {
+              fontStyle: 'italic',
+            },
+            list_item: {
+              marginBottom: 4,
+            },
+            bullet_list: {
+              marginBottom: 8,
+            },
+            code_inline: {
+              backgroundColor: '#F3F4F6',
+              paddingHorizontal: 4,
+              borderRadius: 3,
+              fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+            },
+          }}>
+            {item.text}
+          </Markdown>
         )}
       </View>
     </View>
   );
 
-  const quickReplies = [
-    "Tell me about Rumtek Monastery",
-    "What monasteries are in Gangtok?",
-    "Help me plan a visit",
-    "Buddhist festivals in Sikkim"
-  ];
+  const initiateBookingFlow = async (userMessage: Message) => {
+    setIsInBookingFlow(true);
+    setBookingStep('single_response');
 
-  const actionButtons = [
-    {
-      icon: "🎫",
-      label: "Book Visit",
-      type: "booking",
-      action: "start_booking"
-    },
-    {
-      icon: "🗺️",
-      label: "View Map",
-      type: "navigate",
-      route: "/(tabs)/map"
-    },
-    {
-      icon: "🏛️",
-      label: "Cultural Info",
-      type: "message",
-      message: "Tell me about Buddhist culture and traditions in Sikkim monasteries."
+    // Save user message to DB
+    if (conversationId) {
+      await saveMessage(conversationId, userMessage);
     }
-  ];
 
-  const handleQuickReply = (text: string) => {
-    setInputText(text);
-  };
+    const bookingPrompt = `🎫 **Great! I'll help you book a monastery visit.**
 
-  const handleActionButton = (action: any) => {
-    if (action.type === "navigate" && action.route) {
-      // Navigate to the specified route
-      router.push(action.route);
-    } else if (action.type === "booking" && action.action === "start_booking") {
-      // Start booking flow
-      startBookingFlow();
-    } else if (action.type === "message" && action.message) {
-      // Send message to chatbot
-      setInputText(action.message);
-      setTimeout(() => {
-        if (action.message.trim()) {
-          sendMessageWithText(action.message);
-        }
-      }, 100);
+Please provide all details in **one message** using this exact format:
+
+**📝 Format:** Monastery Name, Email, Date (DD/MM/YYYY), Number of People, Special Requirements
+
+**📋 Example:**
+\`Rumtek Monastery, john@email.com, 25/12/2024, 2, Photography permission\`
+
+**🏛️ Popular Monasteries:**
+Rumtek, Enchey, Pemayangtse, Tashiding, Dubdi, Labrang, Phensang
+
+**⚠️ Requirements:**
+• Valid email address
+• Future date only
+• 1-50 people maximum
+• Special requirements are optional
+
+Please send your booking details:`;
+
+    const botMessage: Message = {
+      id: Date.now().toString(),
+      text: bookingPrompt,
+      isUser: false,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => prev.filter(msg => msg.id !== 'typing').concat(botMessage));
+
+    // Save bot message to DB
+    if (conversationId) {
+      await saveMessage(conversationId, botMessage);
     }
+
+    setIsLoading(false);
   };
 
   const startBookingFlow = async () => {
@@ -339,11 +387,125 @@ Please reply with the number (1-${Math.min(8, monasteries.length)}) of the monas
     setMessages(prev => [...prev, botMessage]);
   };
 
+  const handleSingleResponseBooking = async (userInput: string, userMessage: Message) => {
+    try {
+      // Parse the comma-separated response
+      const parts = userInput.split(',').map(part => part.trim());
+
+      if (parts.length < 4) {
+        const errorMessage = `❌ **Incomplete booking details.**
+
+Please provide all required information in this format:
+**Monastery Name, Your Email, Preferred Date (DD/MM/YYYY), Number of Visitors, Special Requirements (optional)**
+
+Example: Rumtek Monastery, john@email.com, 25/12/2024, 2, Photography permission`;
+
+        addBotMessage(errorMessage);
+        return;
+      }
+
+      const [monasteryName, email, preferredDate, visitorsStr, specialRequirements = ''] = parts;
+
+      // Validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        addBotMessage("❌ **Invalid email address.** Please provide a valid email format (e.g., user@email.com)");
+        return;
+      }
+
+      // Validate date format
+      const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+      if (!dateRegex.test(preferredDate)) {
+        addBotMessage("❌ **Invalid date format.** Please use DD/MM/YYYY format (e.g., 25/12/2024)");
+        return;
+      }
+
+      // Validate number of visitors
+      const visitors = parseInt(visitorsStr);
+      if (isNaN(visitors) || visitors < 1 || visitors > 50) {
+        addBotMessage("❌ **Invalid number of visitors.** Please enter a number between 1 and 50");
+        return;
+      }
+
+      // Find monastery by name
+      const monasteries = await getAllMonasteries();
+      const monastery = monasteries.find(m =>
+        m.name.toLowerCase().includes(monasteryName.toLowerCase()) ||
+        monasteryName.toLowerCase().includes(m.name.toLowerCase())
+      );
+
+      if (!monastery) {
+        const availableMonasteries = monasteries.slice(0, 10).map(m => m.name).join(', ');
+        addBotMessage(`❌ **Monastery not found.**
+
+Available monasteries include: ${availableMonasteries}
+
+Please try again with a valid monastery name.`);
+        return;
+      }
+
+      // Parse the date
+      const [day, month, year] = preferredDate.split('/');
+      const visitDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+
+      // Check if date is in the future
+      if (visitDate <= new Date()) {
+        addBotMessage("❌ **Invalid date.** Please select a future date for your visit.");
+        return;
+      }
+
+      // Create booking data
+      const bookingData: BookingInsert = {
+        user_id: user?.id || '',
+        monastery_id: monastery.id,
+        email: email,
+        phone: '', // We don't collect phone in this flow
+        number_of_people: visitors,
+        visit_date: visitDate.toISOString(),
+        special_requests: specialRequirements || null,
+        status: 'pending'
+      };
+
+      // Save to database
+      const booking = await createBooking(bookingData);
+
+      if (booking) {
+        const successMessage = `✅ **Booking Confirmed!**
+
+**Monastery:** ${monastery.name}
+**Email:** ${email}
+**Date:** ${preferredDate}
+**Number of People:** ${visitors}
+**Special Requirements:** ${specialRequirements || 'None'}
+
+Your booking has been submitted and is pending confirmation. You'll receive an email update soon.
+
+**Booking ID:** ${booking.id}`;
+
+        addBotMessage(successMessage);
+
+        // Reset booking flow
+        setIsInBookingFlow(false);
+        setBookingStep('');
+      } else {
+        addBotMessage("❌ **Booking failed.** Please try again or contact support.");
+      }
+
+    } catch (error) {
+      console.error('Booking error:', error);
+      addBotMessage("❌ **An error occurred while processing your booking.** Please try again.");
+    }
+  };
+
   const handleBookingResponse = async (userInput: string, userMessage: Message) => {
     try {
       const monasteries = await getAllMonasteries();
 
       switch (bookingStep) {
+        case 'single_response':
+          await handleSingleResponseBooking(userInput, userMessage);
+          break;
+
         case 'monastery_selection':
           const selectedIndex = parseInt(userInput) - 1;
           if (selectedIndex >= 0 && selectedIndex < Math.min(8, monasteries.length)) {
@@ -893,51 +1055,6 @@ You will receive a confirmation email shortly. The monastery staff will contact 
           showsVerticalScrollIndicator={false}
         />
 
-        {/* Quick Replies */}
-        {messages.length === 1 && (
-          <View style={styles.quickRepliesContainer}>
-            <Text style={styles.quickRepliesTitle}>Try asking:</Text>
-            <View style={styles.quickRepliesGrid}>
-              {quickReplies.map((reply, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.quickReplyButton}
-                  onPress={() => handleQuickReply(reply)}
-                >
-                  <Text style={styles.quickReplyText}>{reply}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
-        )}
-
-        {/* Quick Action Buttons */}
-        {messages.length > 1 && showActionButtons && (
-          <View style={styles.actionButtonsContainer}>
-            <View style={styles.actionButtonsHeader}>
-              <Text style={styles.actionButtonsTitle}>Quick Actions:</Text>
-              <TouchableOpacity
-                style={styles.actionCloseButton}
-                onPress={() => setShowActionButtons(false)}
-              >
-                <Text style={styles.actionCloseButtonText}>✕</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.actionButtonsGrid}>
-              {actionButtons.map((action, index) => (
-                <TouchableOpacity
-                  key={index}
-                  style={styles.actionButton}
-                  onPress={() => handleActionButton(action)}
-                >
-                  <Text style={styles.actionButtonIcon}>{action.icon}</Text>
-                  <Text style={styles.actionButtonText}>{action.label}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </View>
-        )}
-
         {/* Input */}
         <View style={styles.inputContainer}>
           <View style={styles.inputWrapper}>
@@ -1128,36 +1245,6 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     fontStyle: 'italic',
   },
-  quickRepliesContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#FFFFFF',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-  },
-  quickRepliesTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#6B7280',
-    marginBottom: 8,
-  },
-  quickRepliesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  quickReplyButton: {
-    backgroundColor: '#F3F4F6',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-  quickReplyText: {
-    fontSize: 14,
-    color: '#4B5563',
-  },
   inputContainer: {
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
@@ -1263,67 +1350,5 @@ const styles = StyleSheet.create({
   emptySubtext: {
     fontSize: 14,
     color: '#9CA3AF',
-  },
-  actionButtonsContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#F9FAFB',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-  },
-  actionButtonsTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#4B5563',
-    marginBottom: 8,
-  },
-  actionButtonsGrid: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    gap: 8,
-  },
-  actionButton: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  actionButtonIcon: {
-    fontSize: 20,
-    marginBottom: 4,
-  },
-  actionButtonText: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: '#374151',
-    textAlign: 'center',
-  },
-  actionButtonsHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  actionCloseButton: {
-    padding: 4,
-    borderRadius: 12,
-    backgroundColor: '#F3F4F6',
-  },
-  actionCloseButtonText: {
-    fontSize: 16,
-    color: '#6B7280',
-    fontWeight: 'bold',
   },
 });

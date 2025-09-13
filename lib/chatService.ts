@@ -248,7 +248,15 @@ const callGeminiAPI = async (context: string): Promise<string> => {
 
 ${context}
 
-Respond in a helpful, conversational manner. Keep your response under 300 words.`
+RESPONSE GUIDELINES:
+- Format your response using markdown (use **bold**, *italic*, bullet points, etc.)
+- Use minimal emojis (1-2 maximum per response, only when truly relevant)
+- Structure information clearly with headers and lists when appropriate
+- Be conversational but informative
+- Keep responses under 300 words
+- Use proper markdown formatting for better readability
+
+Respond in a helpful, conversational manner with markdown formatting.`
         }]
       }],
       generationConfig: {
