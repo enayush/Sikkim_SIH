@@ -1,7 +1,7 @@
 
 
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator, Alert } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -12,99 +12,25 @@ import Animated, {
 import { Share2, Eye } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useRouter } from 'expo-router';
 import SafeScreen from '../../../components/SafeScreen';
 import { useSystemUI } from '../../../hooks/useSystemUI';
+import { archiveService, Archive } from '../../../lib/archiveService';
 
-const dummyArchives = [
-  {
-    id: '1',
-    title: 'Thangka Art Collection',
-    description: 'A vibrant collection of traditional Buddhist thangka paintings from Sikkim monasteries.',
-    image: 'https://images.pexels.com/photos/2050718/pexels-photo-2050718.jpeg',
-    culture: 'Buddhist',
-    date: '2022-03-15',
-    type: 'Image',
-    tags: ['Art', 'Thangka'],
-  },
-  {
-    id: '2',
-    title: 'Monastic Manuscripts',
-    description: 'Ancient scriptures and handwritten texts preserved in Sikkimese monasteries.',
-    image: 'https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg',
-    culture: 'Buddhist',
-    date: '2021-11-02',
-    type: 'Document',
-    tags: ['Scripture', 'Manuscript'],
-  },
-  {
-    id: '3',
-    title: 'Festivals of Sikkim',
-    description: 'Photo archive of vibrant festivals celebrated across Sikkim monasteries.',
-    image: 'https://images.pexels.com/photos/2832382/pexels-photo-2832382.jpeg',
-    culture: 'Multi-cultural',
-    date: '2023-01-10',
-    type: 'Image',
-    tags: ['Festival', 'Culture'],
-  },
-  {
-    id: '4',
-    title: 'Oral Traditions',
-    description: 'Audio recordings and transcripts of folk stories and chants from Sikkim.',
-    image: 'https://images.pexels.com/photos/3225531/pexels-photo-3225531.jpeg',
-    culture: 'Folk',
-    date: '2022-07-22',
-    type: 'Audio',
-    tags: ['Oral', 'Folk'],
-  },
-  {
-    id: '5',
-    title: 'Monastery Architecture',
-    description: 'Archive of architectural drawings and photos of Sikkimese monasteries.',
-    image: 'https://images.pexels.com/photos/1770808/pexels-photo-1770808.jpeg',
-    culture: 'Buddhist',
-    date: '2020-09-18',
-    type: 'Image',
-    tags: ['Architecture'],
-  },
-  {
-    id: '6',
-    title: 'Royal Sikkim',
-    description: 'Artifacts and documents from the royal history of Sikkim.',
-    image: 'https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg',
-    culture: 'Royal',
-    date: '2021-05-30',
-    type: 'Document',
-    tags: ['Royal', 'History'],
-  },
-  {
-    id: '7',
-    title: 'Sacred Music',
-    description: 'Audio archive of sacred music and chants from Sikkim monasteries.',
-    image: 'https://images.pexels.com/photos/2832381/pexels-photo-2832381.jpeg',
-    culture: 'Buddhist',
-    date: '2023-04-12',
-    type: 'Audio',
-    tags: ['Music', 'Chant'],
-  },
-  {
-    id: '8',
-    title: 'Traditional Attire',
-    description: 'Photos and descriptions of traditional clothing worn during monastery festivals.',
-    image: 'https://images.pexels.com/photos/1770810/pexels-photo-1770810.jpeg',
-    culture: 'Multi-cultural',
-    date: '2022-12-05',
-    type: 'Image',
-    tags: ['Attire', 'Festival'],
-  },
-];
-
-const archiveTypes = ['All', 'Image', 'Audio', 'Document'];
+const archiveTypes = ['All', 'Document', 'Correspondence'];
 
 export default function DigitalArchivePage() {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const [selectedType, setSelectedType] = useState('All');
   const [search, setSearch] = useState('');
+  const [archives, setArchives] = useState<Archive[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [offset, setOffset] = useState(0);
 
   // Animation states for header using reanimated
   const lastScrollY = useSharedValue(0);
@@ -135,14 +61,68 @@ export default function DigitalArchivePage() {
     };
   });
 
-  const filteredArchives = dummyArchives.filter((archive) => {
-    const matchesType = selectedType === 'All' || archive.type === selectedType;
-    const matchesSearch =
-      archive.title.toLowerCase().includes(search.toLowerCase()) ||
-      archive.description.toLowerCase().includes(search.toLowerCase()) ||
-      archive.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase()));
-    return matchesType && matchesSearch;
+  // Load archives on component mount
+  useEffect(() => {
+    loadArchives(true);
+  }, []);
+
+  // Reset and reload when filter changes
+  useEffect(() => {
+    loadArchives(true);
+  }, [selectedType]);
+
+  const loadArchives = async (reset = false) => {
+    try {
+      if (reset) {
+        setLoading(true);
+        setOffset(0);
+        setArchives([]);
+      } else {
+        setLoadingMore(true);
+      }
+      setError(null);
+      
+      const currentOffset = reset ? 0 : offset;
+      const result = await archiveService.getAllArchives(10, currentOffset, selectedType);
+      
+      if (reset) {
+        setArchives(result.data);
+      } else {
+        setArchives(prev => [...prev, ...result.data]);
+      }
+      
+      setHasMore(result.hasMore);
+      setOffset(currentOffset + 10);
+    } catch (err) {
+      setError('Failed to load archives');
+      console.error('Error loading archives:', err);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const loadMoreArchives = () => {
+    if (!loadingMore && hasMore) {
+      loadArchives(false);
+    }
+  };
+
+  const filteredArchives = archives.filter((archive) => {
+    const matchesSearch = search === '' || 
+      archive.archive_name.toLowerCase().includes(search.toLowerCase()) ||
+      (archive.place_of_origin && archive.place_of_origin.toLowerCase().includes(search.toLowerCase())) ||
+      (archive.languages && archive.languages.toLowerCase().includes(search.toLowerCase()));
+    return matchesSearch;
   });
+
+  const handleArchivePress = (archiveId: number) => {
+    router.push(`/archive-detail/${archiveId}`);
+  };
+
+  const handleShare = async (archive: Archive) => {
+    Alert.alert('Coming Soon', 'Share functionality will be available soon!');
+  };
 
   return (
     <SafeScreen>
@@ -169,40 +149,100 @@ export default function DigitalArchivePage() {
           onScroll={scrollHandler}
           scrollEventThrottle={16}
         >
-        {filteredArchives.map((archive) => (
-          <View key={archive.id} style={styles.card}>
-            <Image source={{ uri: archive.image }} style={styles.cardImage} />
-            <View style={styles.cardContentStack}>
-              <Text style={styles.cardTitle}>{archive.title}</Text>
-              <Text style={styles.cardDesc}>{archive.description}</Text>
-              <View style={styles.metaRowStack}>
-                <Text style={styles.metaText}>{archive.date}</Text>
-                <Text style={styles.metaType}>{archive.type}</Text>
-                <View style={styles.tagsRow}>
-                  {archive.tags.map((tag) => (
-                    <View key={tag} style={styles.tagChip}>
-                      <Text style={styles.tagText}>{tag}</Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-              <View style={styles.actionRowStack}>
-                <TouchableOpacity style={styles.actionBtnStack}>
-                  <Eye size={18} color="#1F2937" />
-                  <Text style={styles.actionText}>View</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.actionBtnStack}>
-                  <Share2 size={18} color="#1F2937" />
-                  <Text style={styles.actionText}>Share</Text>
-                </TouchableOpacity>
-              </View>
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#DF8020" />
+              <Text style={styles.loadingText}>Loading archives...</Text>
             </View>
-          </View>
-        ))}
-        {filteredArchives.length === 0 && (
-          <Text style={styles.noResults}>No archives found.</Text>
-        )}
-      </Animated.ScrollView>
+          ) : error ? (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>{error}</Text>
+              <TouchableOpacity style={styles.retryButton} onPress={() => loadArchives(true)}>
+                <Text style={styles.retryButtonText}>Retry</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <>
+              {filteredArchives.map((archive) => (
+                <TouchableOpacity 
+                  key={archive.id} 
+                  style={styles.card}
+                  onPress={() => handleArchivePress(archive.id)}
+                  activeOpacity={0.7}
+                >
+                  <Image 
+                    source={{ 
+                      uri: archive.image_urls && archive.image_urls.length > 0 
+                        ? archive.image_urls[0] 
+                        : 'https://via.placeholder.com/300x200?text=No+Image' 
+                    }} 
+                    style={styles.cardImage} 
+                  />
+                  <View style={styles.cardContentStack}>
+                    <Text style={styles.cardTitle}>{archive.archive_name}</Text>
+                    <Text style={styles.cardDesc} numberOfLines={2}>
+                      {archive.place_of_origin || 'No description available'}
+                    </Text>
+                    <View style={styles.metaRowStack}>
+                      <Text style={styles.metaText}>
+                        {archive.creation_date || archive.digitisation_date || 'Unknown date'}
+                      </Text>
+                      <Text style={styles.metaType}>{archive.content_type || 'Unknown'}</Text>
+                      {archive.languages && (
+                        <View style={styles.tagsRow}>
+                          <View style={styles.tagChip}>
+                            <Text style={styles.tagText}>{archive.languages}</Text>
+                          </View>
+                        </View>
+                      )}
+                    </View>
+                    <View style={styles.actionRowStack}>
+                      <TouchableOpacity 
+                        style={styles.actionBtnStack}
+                        onPress={(e) => {
+                          e.stopPropagation();
+                          handleArchivePress(archive.id);
+                        }}
+                      >
+                        <Eye size={18} color="#1F2937" />
+                        <Text style={styles.actionText}>View</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity 
+                        style={styles.actionBtnStack}
+                        onPress={(e) => {
+                          e.stopPropagation();
+                          handleShare(archive);
+                        }}
+                      >
+                        <Share2 size={18} color="#1F2937" />
+                        <Text style={styles.actionText}>Share</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              ))}
+              
+              {/* Load More Button */}
+              {hasMore && filteredArchives.length > 0 && (
+                <TouchableOpacity 
+                  style={styles.loadMoreButton}
+                  onPress={loadMoreArchives}
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? (
+                    <ActivityIndicator size="small" color="#FFFFFF" />
+                  ) : (
+                    <Text style={styles.loadMoreButtonText}>Load More</Text>
+                  )}
+                </TouchableOpacity>
+              )}
+              
+              {filteredArchives.length === 0 && !loading && (
+                <Text style={styles.noResults}>No archives found.</Text>
+              )}
+            </>
+          )}
+        </Animated.ScrollView>
 
     
       </View>
@@ -374,6 +414,55 @@ const styles = StyleSheet.create({
     color: '#6B7280',
     fontSize: 16,
     marginTop: 40,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#6B7280',
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#EF4444',
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  retryButton: {
+    backgroundColor: '#DF8020',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  loadMoreButton: {
+    backgroundColor: '#DF8020',
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  loadMoreButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
   fab: {
     position: 'absolute',
