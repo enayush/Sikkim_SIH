@@ -12,6 +12,7 @@ export interface Monastery {
   latitude: number;
   longitude: number;
   created_at: string;
+  audio_guide?: string; // Optional for now, we'll generate from description
 }
 
 export interface MonasteryWithRating extends Monastery {
@@ -170,6 +171,30 @@ export const getAllMonasteries = async (): Promise<Monastery[]> => {
 };
 
 /**
+ * Fetch monasteries that have audio guide content
+ */
+export const getMonasteriesWithAudioGuide = async (): Promise<Monastery[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('monasteries')
+      .select('*')
+      .not('audio_guide', 'is', null)
+      .neq('audio_guide', '')
+      .order('created_at', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching monasteries with audio guide:', error);
+      throw error;
+    }
+
+    return data || [];
+  } catch (error) {
+    console.error('Error in getMonasteriesWithAudioGuide:', error);
+    throw error;
+  }
+};
+
+/**
  * Fetch a single monastery by ID
  */
 export const getMonasteryById = async (id: string): Promise<Monastery | null> => {
@@ -225,7 +250,7 @@ export const addMonasteryReview = async (
 ): Promise<MonasteryReview> => {
   try {
     const { data: { user } } = await supabase.auth.getUser();
-    
+
     if (!user) {
       throw new Error('User must be authenticated to add a review');
     }
@@ -274,7 +299,7 @@ const calculateDistance = (
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   };
-  
+
 export const getNearbyMonasteries = async (
     latitude: number,
     longitude: number,
@@ -286,14 +311,14 @@ export const getNearbyMonasteries = async (
         .select('*')
         .not('latitude', 'is', null)
         .not('longitude', 'is', null);
-  
+
       if (error) {
         console.error('Error fetching nearby monasteries:', error);
         throw error;
       }
-  
+
       if (!data) return [];
-  
+
       // Calculate distance and filter
       const nearbyMonasteries = data.filter((monastery) => {
         const distance = calculateDistance(
@@ -304,7 +329,7 @@ export const getNearbyMonasteries = async (
         );
         return distance <= radiusKm;
       });
-  
+
       // Sort by distance
       return nearbyMonasteries.sort((a, b) => {
         const distanceA = calculateDistance(

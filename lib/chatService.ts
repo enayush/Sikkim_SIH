@@ -10,6 +10,16 @@ interface Message {
   isTyping?: boolean;
 }
 
+// Simple response cache to avoid repeated API calls
+const responseCache = new Map<string, { response: string; timestamp: number }>();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// Helper function to get cache key from message and context
+const getCacheKey = (message: string, lastMessages: Message[]): string => {
+  const contextText = lastMessages.slice(-3).map(m => m.text).join(' ');
+  return `${message.toLowerCase().trim()}_${contextText.slice(0, 100)}`;
+};
+
 // Simple text similarity function for local RAG
 const cosineSimilarity = (a: number[], b: number[]): number => {
   const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
@@ -406,6 +416,15 @@ export const saveMessage = async (conversationId: string, message: Message): Pro
 // Main chat service function
 export const processChatMessage = async (message: string, conversationHistory: Message[] = []): Promise<string> => {
   try {
+    // Check cache first
+    const cacheKey = getCacheKey(message, conversationHistory);
+    const cachedResponse = responseCache.get(cacheKey);
+
+    if (cachedResponse && (Date.now() - cachedResponse.timestamp) < CACHE_DURATION) {
+      console.log('🎯 Returning cached response for:', message.slice(0, 50));
+      return cachedResponse.response;
+    }
+
     // Initialize RAG database if not already done
     if (monasteryDatabase.length === 0) {
       await initializeRAG();
@@ -438,6 +457,20 @@ export const processChatMessage = async (message: string, conversationHistory: M
         isUser: false,
         timestamp: new Date(),
       });
+    }
+
+    // Cache the response for future identical queries
+    responseCache.set(cacheKey, {
+      response: response,
+      timestamp: Date.now()
+    });
+
+    // Clean up old cache entries (simple cleanup)
+    if (responseCache.size > 50) {
+      const oldestKey = responseCache.keys().next().value;
+      if (oldestKey) {
+        responseCache.delete(oldestKey);
+      }
     }
 
     return response;

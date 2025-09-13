@@ -28,6 +28,8 @@ import { useRouter } from 'expo-router';
 import { ArrowLeft, Send, MessageSquare, Sparkles, History } from 'lucide-react-native';
 import SafeScreen from '@/components/SafeScreen';
 import { processChatMessage, getChatHistory, getOrCreateConversation, saveMessage, getAllConversations } from '@/lib/chatService';
+import { getAllMonasteries } from '@/lib/monasteryService';
+import { createBooking, BookingInsert } from '@/lib/bookingService';
 import { useAuth } from '@/contexts/AuthContext';
 import ChatHistorySidebar from '@/components/ChatHistorySidebar';
 
@@ -57,6 +59,22 @@ export default function Chatbot() {
   const [conversations, setConversations] = useState<any[]>([]);
   const [isLoadingConversations, setIsLoadingConversations] = useState(false);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [showActionButtons, setShowActionButtons] = useState(true);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
+  // Booking flow state
+  const [isInBookingFlow, setIsInBookingFlow] = useState(false);
+  const [bookingStep, setBookingStep] = useState('');
+  const [bookingData, setBookingData] = useState({
+    monasteryId: '',
+    monasteryName: '',
+    email: '',
+    phone: '',
+    numberOfPeople: '',
+    visitDate: '',
+    specialRequests: ''
+  });
+
   const flatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
@@ -155,8 +173,15 @@ export default function Chatbot() {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputText.trim();
     setInputText('');
     setIsLoading(true);
+
+    // Check if we're in booking flow
+    if (isInBookingFlow) {
+      await handleBookingResponse(currentInput, userMessage);
+      return;
+    }
 
     // Save user message to DB
     if (conversationId) {
@@ -246,8 +271,549 @@ export default function Chatbot() {
     "Buddhist festivals in Sikkim"
   ];
 
+  const actionButtons = [
+    {
+      icon: "🎫",
+      label: "Book Visit",
+      type: "booking",
+      action: "start_booking"
+    },
+    {
+      icon: "🗺️",
+      label: "View Map",
+      type: "navigate",
+      route: "/(tabs)/map"
+    },
+    {
+      icon: "🏛️",
+      label: "Cultural Info",
+      type: "message",
+      message: "Tell me about Buddhist culture and traditions in Sikkim monasteries."
+    }
+  ];
+
   const handleQuickReply = (text: string) => {
     setInputText(text);
+  };
+
+  const handleActionButton = (action: any) => {
+    if (action.type === "navigate" && action.route) {
+      // Navigate to the specified route
+      router.push(action.route);
+    } else if (action.type === "booking" && action.action === "start_booking") {
+      // Start booking flow
+      startBookingFlow();
+    } else if (action.type === "message" && action.message) {
+      // Send message to chatbot
+      setInputText(action.message);
+      setTimeout(() => {
+        if (action.message.trim()) {
+          sendMessageWithText(action.message);
+        }
+      }, 100);
+    }
+  };
+
+  const startBookingFlow = async () => {
+    setIsInBookingFlow(true);
+    setBookingStep('monastery_selection');
+
+    // Get monasteries and show them as options
+    const monasteries = await getAllMonasteries();
+
+    const monasteryListMessage = `🏛️ **Select a Monastery for Your Visit:**
+
+${monasteries.slice(0, 8).map((monastery, index) =>
+  `${index + 1}. **${monastery.name}**\n   📍 ${monastery.location}\n   🏛️ ${monastery.era} era\n`
+).join('\n')}
+
+Please reply with the number (1-${Math.min(8, monasteries.length)}) of the monastery you'd like to visit.`;
+
+    const botMessage: Message = {
+      id: Date.now().toString(),
+      text: monasteryListMessage,
+      isUser: false,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, botMessage]);
+  };
+
+  const handleBookingResponse = async (userInput: string, userMessage: Message) => {
+    try {
+      const monasteries = await getAllMonasteries();
+
+      switch (bookingStep) {
+        case 'monastery_selection':
+          const selectedIndex = parseInt(userInput) - 1;
+          if (selectedIndex >= 0 && selectedIndex < Math.min(8, monasteries.length)) {
+            const selectedMonastery = monasteries[selectedIndex];
+            setBookingData(prev => ({
+              ...prev,
+              monasteryId: selectedMonastery.id,
+              monasteryName: selectedMonastery.name
+            }));
+            setBookingStep('email');
+
+            const emailPrompt = `✅ Great! You've selected **${selectedMonastery.name}**.
+
+📧 Please provide your email address for booking confirmation:`;
+
+            addBotMessage(emailPrompt);
+          } else {
+            addBotMessage("❌ Please select a valid monastery number from the list above.");
+          }
+          break;
+
+        case 'email':
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (emailRegex.test(userInput)) {
+            setBookingData(prev => ({ ...prev, email: userInput }));
+            setBookingStep('phone');
+            addBotMessage("📱 Please provide your phone number:");
+          } else {
+            addBotMessage("❌ Please provide a valid email address.");
+          }
+          break;
+
+        case 'phone':
+          const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+          if (phoneRegex.test(userInput)) {
+            setBookingData(prev => ({ ...prev, phone: userInput }));
+            setBookingStep('people');
+            addBotMessage("👥 How many people will be visiting? (1-20)");
+          } else {
+            addBotMessage("❌ Please provide a valid phone number.");
+          }
+          break;
+
+        case 'people':
+          const numberOfPeople = parseInt(userInput);
+          if (numberOfPeople >= 1 && numberOfPeople <= 20) {
+            setBookingData(prev => ({ ...prev, numberOfPeople: userInput }));
+            setBookingStep('date');
+            addBotMessage("📅 Please provide your preferred visit date (YYYY-MM-DD format):");
+          } else {
+            addBotMessage("❌ Please provide a valid number of people (1-20).");
+          }
+          break;
+
+        case 'date':
+          const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+          const visitDate = new Date(userInput);
+          const today = new Date();
+          if (dateRegex.test(userInput) && visitDate > today) {
+            setBookingData(prev => ({ ...prev, visitDate: userInput }));
+            setBookingStep('requests');
+            addBotMessage("📝 Any special requests? (Optional - type 'none' if no special requests):");
+          } else {
+            addBotMessage("❌ Please provide a valid future date in YYYY-MM-DD format.");
+          }
+          break;
+
+        case 'requests':
+          setBookingData(prev => ({ ...prev, specialRequests: userInput === 'none' ? '' : userInput }));
+          setBookingStep('confirm');
+
+          const confirmationMessage = `🎫 **Booking Summary:**
+
+🏛️ **Monastery:** ${bookingData.monasteryName}
+📧 **Email:** ${bookingData.email}
+📱 **Phone:** ${bookingData.phone}
+👥 **People:** ${bookingData.numberOfPeople}
+📅 **Date:** ${bookingData.visitDate}
+📝 **Special Requests:** ${userInput === 'none' ? 'None' : userInput}
+
+Type **'confirm'** to book or **'cancel'** to abort:`;
+
+          addBotMessage(confirmationMessage);
+          break;
+
+        case 'confirm':
+          if (userInput.toLowerCase() === 'confirm') {
+            await finalizeBooking();
+          } else if (userInput.toLowerCase() === 'cancel') {
+            cancelBooking();
+          } else {
+            addBotMessage("Please type 'confirm' to complete booking or 'cancel' to abort.");
+          }
+          break;
+      }
+    } catch (error) {
+      console.error('Booking flow error:', error);
+      addBotMessage("❌ Sorry, there was an error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const addBotMessage = (text: string) => {
+    const botMessage: Message = {
+      id: Date.now().toString(),
+      text: text,
+      isUser: false,
+      timestamp: new Date(),
+    };
+    setMessages(prev => [...prev, botMessage]);
+  };
+
+  const finalizeBooking = async () => {
+    try {
+      if (!user?.id) {
+        addBotMessage("❌ Please log in to complete your booking.");
+        return;
+      }
+
+      const bookingRequest = {
+        monastery_id: bookingData.monasteryId,
+        user_id: user.id,
+        email: bookingData.email,
+        phone: bookingData.phone,
+        number_of_people: parseInt(bookingData.numberOfPeople),
+        visit_date: bookingData.visitDate,
+        special_requests: bookingData.specialRequests,
+        status: 'pending' as const
+      };
+
+      const result = await createBooking(bookingRequest);
+
+      addBotMessage(`✅ **Booking Confirmed!**
+
+Your visit to **${bookingData.monasteryName}** has been booked successfully!
+
+📧 A confirmation email will be sent to ${bookingData.email}
+📱 You'll receive SMS updates on ${bookingData.phone}
+🎫 Booking ID: ${result.id}
+📅 Visit Date: ${bookingData.visitDate}
+🎫 Status: Pending approval
+
+Thank you for choosing Sacred Sikkim! 🙏`);
+
+      // Reset booking flow
+      setIsInBookingFlow(false);
+      setBookingStep('');
+      setBookingData({
+        monasteryId: '',
+        monasteryName: '',
+        email: '',
+        phone: '',
+        numberOfPeople: '',
+        visitDate: '',
+        specialRequests: ''
+      });
+    } catch (error) {
+      console.error('Booking creation error:', error);
+      addBotMessage("❌ Failed to create booking. Please try again later.");
+    }
+  };
+
+  const cancelBooking = () => {
+    setIsInBookingFlow(false);
+    setBookingStep('');
+    setBookingData({
+      monasteryId: '',
+      monasteryName: '',
+      email: '',
+      phone: '',
+      numberOfPeople: '',
+      visitDate: '',
+      specialRequests: ''
+    });
+    addBotMessage("❌ Booking cancelled. Feel free to start again anytime! 🙏");
+  };
+
+  const handleBookingFlowMessage = async (userInput: string) => {
+    const monasteries = await getAllMonasteries();
+
+    switch (bookingStep) {
+      case 'monastery_selection':
+        const selectedIndex = parseInt(userInput.trim()) - 1;
+        if (selectedIndex >= 0 && selectedIndex < Math.min(8, monasteries.length)) {
+          const selectedMonastery = monasteries[selectedIndex];
+          setBookingData(prev => ({
+            ...prev,
+            monasteryId: selectedMonastery.id,
+            monasteryName: selectedMonastery.name
+          }));
+          setBookingStep('email');
+
+          const emailMessage: Message = {
+            id: Date.now().toString(),
+            text: `✅ Great choice! You selected **${selectedMonastery.name}**.
+
+📧 **Please provide your email address for the booking confirmation:**`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, emailMessage]);
+        } else {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            text: `❌ Please select a valid number (1-${Math.min(8, monasteries.length)}).`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
+        break;
+
+      case 'email':
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailRegex.test(userInput.trim())) {
+          setBookingData(prev => ({ ...prev, email: userInput.trim() }));
+          setBookingStep('phone');
+
+          const phoneMessage: Message = {
+            id: Date.now().toString(),
+            text: `📧 Email saved: ${userInput.trim()}
+
+📱 **Please provide your phone number:**`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, phoneMessage]);
+        } else {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            text: `❌ Please provide a valid email address.`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
+        break;
+
+      case 'phone':
+        const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+        if (phoneRegex.test(userInput.trim())) {
+          setBookingData(prev => ({ ...prev, phone: userInput.trim() }));
+          setBookingStep('people');
+
+          const peopleMessage: Message = {
+            id: Date.now().toString(),
+            text: `📱 Phone saved: ${userInput.trim()}
+
+👥 **How many people will be visiting? (1-20)**`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, peopleMessage]);
+        } else {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            text: `❌ Please provide a valid phone number.`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
+        break;
+
+      case 'people':
+        const people = parseInt(userInput.trim());
+        if (people >= 1 && people <= 20) {
+          setBookingData(prev => ({ ...prev, numberOfPeople: userInput.trim() }));
+          setBookingStep('date');
+
+          const dateMessage: Message = {
+            id: Date.now().toString(),
+            text: `👥 Number of visitors: ${people}
+
+📅 **When would you like to visit? Please provide the date (YYYY-MM-DD format):**
+
+Example: 2025-09-20`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, dateMessage]);
+        } else {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            text: `❌ Please provide a valid number of people (1-20).`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
+        break;
+
+      case 'date':
+        const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+        if (dateRegex.test(userInput.trim())) {
+          const visitDate = new Date(userInput.trim());
+          if (visitDate > new Date()) {
+            setBookingData(prev => ({ ...prev, visitDate: userInput.trim() }));
+            setBookingStep('requests');
+
+            const requestsMessage: Message = {
+              id: Date.now().toString(),
+              text: `📅 Visit date: ${userInput.trim()}
+
+📝 **Any special requests or requirements? (or type "none" if no special requests)**`,
+              isUser: false,
+              timestamp: new Date(),
+            };
+            setMessages(prev => [...prev, requestsMessage]);
+          } else {
+            const errorMessage: Message = {
+              id: Date.now().toString(),
+              text: `❌ Please provide a future date.`,
+              isUser: false,
+              timestamp: new Date(),
+            };
+            setMessages(prev => [...prev, errorMessage]);
+          }
+        } else {
+          const errorMessage: Message = {
+            id: Date.now().toString(),
+            text: `❌ Please provide date in YYYY-MM-DD format (e.g., 2025-09-20).`,
+            isUser: false,
+            timestamp: new Date(),
+          };
+          setMessages(prev => [...prev, errorMessage]);
+        }
+        break;
+
+      case 'requests':
+        const requests = userInput.trim().toLowerCase() === 'none' ? '' : userInput.trim();
+        setBookingData(prev => ({ ...prev, specialRequests: requests }));
+
+        // Complete the booking
+        await completeBooking(requests);
+        break;
+    }
+  };
+
+  const completeBooking = async (specialRequests: string) => {
+    try {
+      const bookingDetails: BookingInsert = {
+        monastery_id: bookingData.monasteryId,
+        user_id: user?.id || 'anonymous',
+        email: bookingData.email,
+        phone: bookingData.phone,
+        number_of_people: parseInt(bookingData.numberOfPeople),
+        visit_date: bookingData.visitDate,
+        special_requests: specialRequests || null,
+        status: 'pending' as const
+      };
+
+      const result = await createBooking(bookingDetails);
+
+      const confirmationMessage: Message = {
+        id: Date.now().toString(),
+        text: `✅ **Booking Confirmed!**
+
+🏛️ **Monastery:** ${bookingData.monasteryName}
+📧 **Email:** ${bookingData.email}
+📱 **Phone:** ${bookingData.phone}
+👥 **Visitors:** ${bookingData.numberOfPeople}
+📅 **Date:** ${bookingData.visitDate}
+📝 **Requests:** ${specialRequests || 'None'}
+
+📋 **Booking ID:** ${result.id}
+
+You will receive a confirmation email shortly. The monastery staff will contact you if needed.
+
+🙏 Thank you for choosing to explore Sikkim's sacred heritage!`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, confirmationMessage]);
+
+    } catch (error) {
+      console.error('Booking error:', error);
+      const errorMessage: Message = {
+        id: Date.now().toString(),
+        text: `❌ Sorry, there was an error processing your booking. Please try again or contact support.`,
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      // Reset booking flow
+      setIsInBookingFlow(false);
+      setBookingStep('');
+      setBookingData({
+        monasteryId: '',
+        monasteryName: '',
+        email: '',
+        phone: '',
+        numberOfPeople: '',
+        visitDate: '',
+        specialRequests: ''
+      });
+    }
+  };
+
+  const sendMessageWithText = async (text: string) => {
+    if (!text.trim() || isLoading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: text,
+      isUser: true,
+      timestamp: new Date(),
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setInputText('');
+    setIsLoading(true);
+
+    // Add typing indicator
+    const typingIndicator: Message = {
+      id: 'typing',
+      text: '',
+      isUser: false,
+      timestamp: new Date(),
+      isTyping: true,
+    };
+    setMessages(prev => [...prev, typingIndicator]);
+
+    try {
+      // Ensure we have a conversation
+      let convId = conversationId;
+      if (!convId) {
+        convId = await getOrCreateConversation();
+        setConversationId(convId);
+      }
+
+      // Save user message to DB
+      if (convId) {
+        await saveMessage(convId, userMessage);
+      }
+
+      // Get last few messages for context
+      const lastMessages = messages.slice(-5).concat(userMessage);
+
+      // Call our RAG + Gemini service with conversation history
+      const response = await processChatMessage(userMessage.text, lastMessages);
+
+      const botResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: response,
+        isUser: false,
+        timestamp: new Date(),
+      };
+
+      // Remove typing indicator and add response
+      setMessages(prev => prev.filter(msg => msg.id !== 'typing').concat(botResponse));
+
+      // Save bot response to DB
+      if (convId) {
+        await saveMessage(convId, botResponse);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      const errorResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I apologize, but I'm having trouble processing your request right now. Please try asking about specific monasteries or Buddhist culture in Sikkim!",
+        isUser: false,
+        timestamp: new Date(),
+      };
+      setMessages(prev => prev.filter(msg => msg.id !== 'typing').concat(errorResponse));
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleOpenHistory = async () => {
@@ -339,6 +905,33 @@ export default function Chatbot() {
                   onPress={() => handleQuickReply(reply)}
                 >
                   <Text style={styles.quickReplyText}>{reply}</Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        )}
+
+        {/* Quick Action Buttons */}
+        {messages.length > 1 && showActionButtons && (
+          <View style={styles.actionButtonsContainer}>
+            <View style={styles.actionButtonsHeader}>
+              <Text style={styles.actionButtonsTitle}>Quick Actions:</Text>
+              <TouchableOpacity
+                style={styles.actionCloseButton}
+                onPress={() => setShowActionButtons(false)}
+              >
+                <Text style={styles.actionCloseButtonText}>✕</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.actionButtonsGrid}>
+              {actionButtons.map((action, index) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.actionButton}
+                  onPress={() => handleActionButton(action)}
+                >
+                  <Text style={styles.actionButtonIcon}>{action.icon}</Text>
+                  <Text style={styles.actionButtonText}>{action.label}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -670,5 +1263,67 @@ const styles = StyleSheet.create({
   emptySubtext: {
     fontSize: 14,
     color: '#9CA3AF',
+  },
+  actionButtonsContainer: {
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#F9FAFB',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+  },
+  actionButtonsTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#4B5563',
+    marginBottom: 8,
+  },
+  actionButtonsGrid: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    gap: 8,
+  },
+  actionButton: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+    borderRadius: 12,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    marginBottom: 4,
+  },
+  actionButtonText: {
+    fontSize: 12,
+    fontWeight: '500',
+    color: '#374151',
+    textAlign: 'center',
+  },
+  actionButtonsHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  actionCloseButton: {
+    padding: 4,
+    borderRadius: 12,
+    backgroundColor: '#F3F4F6',
+  },
+  actionCloseButtonText: {
+    fontSize: 16,
+    color: '#6B7280',
+    fontWeight: 'bold',
   },
 });
