@@ -171,6 +171,20 @@ export type Database = {
           image_urls?: string[] | null;
         };
       };
+      proflies : {
+        Row: {
+          id: string;
+          username: string;
+          updated_at: string;
+        };
+        Insert: {
+          id: string;
+          username: string;
+        };
+        Update: {
+          username?: string;
+        };
+      };
     };
   };
 };
