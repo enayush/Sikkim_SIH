@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -17,6 +17,7 @@ import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import SafeScreen from '../../../components/SafeScreen';
 import { useSharedValue, useAnimatedScrollHandler, useAnimatedStyle } from 'react-native-reanimated';
+import { profileService, Profile } from '../../../lib/profileService';
 
 const { width } = Dimensions.get('window');
 
@@ -26,6 +27,33 @@ export default function ProfileScreen() {
   const router = useRouter();
   const lastScrollY = useSharedValue(0);
   const scrollY = useSharedValue(0);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch user profile
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!user?.id) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const { profile: userProfile, error } = await profileService.getProfile(user.id);
+        if (error) {
+          console.error('Error fetching profile:', error);
+        } else {
+          setProfile(userProfile);
+        }
+      } catch (error) {
+        console.error('Profile fetch error:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [user?.id]);
 
 const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
 
@@ -111,7 +139,7 @@ const headerStyle = useAnimatedStyle(() => {
                 </View>
               </View>
             </View>
-            <Text style={styles.profileName}>{user?.email?.split('@')[0] || 'User'}</Text>
+            <Text style={styles.profileName}>{profile?.username || user?.email?.split('@')[0] || 'User'}</Text>
             <Text style={styles.profileRole}>Monastery Explorer</Text>
           </View>
         </View>
@@ -171,10 +199,7 @@ const headerStyle = useAnimatedStyle(() => {
           <View style={styles.optionsContainer}>
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to manage profile screen
-                Alert.alert('Coming Soon', 'Profile management will be available soon!');
-              }}
+              onPress={() => router.push('/profile/manage-profile')}
             >
               <View style={styles.optionIconContainer}>
                 <User size={24} color="#3B82F6" />
@@ -267,10 +292,7 @@ const headerStyle = useAnimatedStyle(() => {
           <View style={styles.optionsContainer}>
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to FAQ screen
-                Alert.alert('Coming Soon', 'FAQ section will be available soon!');
-              }}
+              onPress={() => router.push('/profile/faq')}
             >
               <View style={styles.optionIconContainer}>
                 <BookOpen size={24} color="#8B5CF6" />
@@ -284,10 +306,7 @@ const headerStyle = useAnimatedStyle(() => {
 
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to updates screen
-                Alert.alert('Coming Soon', 'Updates section will be available soon!');
-              }}
+              onPress={() => router.push('/profile/updates')}
             >
               <View style={styles.optionIconContainer}>
                 <Calendar size={24} color="#10B981" />
@@ -301,10 +320,7 @@ const headerStyle = useAnimatedStyle(() => {
 
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to about screen
-                Alert.alert('Coming Soon', 'About section will be available soon!');
-              }}
+              onPress={() => router.push('/profile/about')}
             >
               <View style={styles.optionIconContainer}>
                 <Globe size={24} color="#F59E0B" />
@@ -319,14 +335,6 @@ const headerStyle = useAnimatedStyle(() => {
         </View>
 
 
-        {user && (
-          <View style={styles.signOutSection}>
-            <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
-              <LogOut size={20} color="#EF4444" />
-              <Text style={styles.signOutButtonText}>Sign Out</Text>
-            </TouchableOpacity>
-          </View>
-        )}
       </Animated.ScrollView>
     </SafeScreen>
   );

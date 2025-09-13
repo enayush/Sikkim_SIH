@@ -15,6 +15,7 @@ import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignupScreen() {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,8 +23,13 @@ export default function SignupScreen() {
   const router = useRouter();
 
   const handleSignup = async () => {
-    if (!email || !password || !confirmPassword) {
+    if (!email || !username || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields');
+      return;
+    }
+
+    if (username.length < 3) {
+      Alert.alert('Error', 'Username must be at least 3 characters long');
       return;
     }
 
@@ -39,7 +45,7 @@ export default function SignupScreen() {
 
     setLoading(true);
     try {
-      const { data, error } = await signUp(email, password);
+      const { data, error } = await signUp(email, password, username);
       if (error) {
         Alert.alert('Error', error.message);
       } else {
@@ -105,6 +111,19 @@ export default function SignupScreen() {
         </View>
 
         <View style={styles.form}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Username</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Choose a unique username"
+              placeholderTextColor="#6B7280"
+              value={username}
+              onChangeText={setUsername}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+          </View>
+
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Email</Text>
             <TextInput
