@@ -7,6 +7,8 @@ import {
   Alert,
   Image,
   Dimensions,
+  ScrollView,
+  Animated,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +16,7 @@ import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar, Settings, Bo
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import SafeScreen from '../../../components/SafeScreen';
+import { useSharedValue, useAnimatedScrollHandler, useAnimatedStyle } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
 
@@ -27,7 +30,7 @@ export default function ProfileScreen() {
 const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
 
 const scrollHandler = useAnimatedScrollHandler({
-  onScroll: (event) => {
+  onScroll: (event: any) => {
     const y = event.contentOffset.y;
     const diff = y - lastScrollY.value;
 
@@ -81,7 +84,7 @@ const headerStyle = useAnimatedStyle(() => {
 
   return (
     <SafeScreen style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <Animated.ScrollView showsVerticalScrollIndicator={false}>
         {/* Header with curved background */}
         <View style={styles.header}>
           <LinearGradient
@@ -114,7 +117,7 @@ const headerStyle = useAnimatedStyle(() => {
         </View>
 
         {/* Language Selection */}
-        <View style={styles.section}>
+        <View style={[styles.section, styles.languageSection]}>
           <View style={styles.sectionHeader}>
             <Globe size={20} color="#FF9933" />
             <Text style={styles.sectionTitle}>Language Preferences</Text>
@@ -166,6 +169,22 @@ const headerStyle = useAnimatedStyle(() => {
             <Text style={styles.sectionTitle}>Manage</Text>
           </View>
           <View style={styles.optionsContainer}>
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to manage profile screen
+                Alert.alert('Coming Soon', 'Profile management will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <User size={24} color="#3B82F6" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>Edit Profile</Text>
+                <Text style={styles.optionSubtitle}>Update your personal information and preferences</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
             <TouchableOpacity 
               style={styles.optionCard} 
               onPress={() => router.push('/profile/user-bookings')}
@@ -238,6 +257,67 @@ const headerStyle = useAnimatedStyle(() => {
             </TouchableOpacity>
           </View>
         </View>
+
+        {/* Support & Information Section */}
+        <View style={styles.section}>
+          <View style={styles.sectionHeader}>
+            <BookOpen size={20} color="#FF9933" />
+            <Text style={styles.sectionTitle}>Support & Information</Text>
+          </View>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to FAQ screen
+                Alert.alert('Coming Soon', 'FAQ section will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <BookOpen size={24} color="#8B5CF6" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>FAQ</Text>
+                <Text style={styles.optionSubtitle}>Frequently asked questions and help</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to updates screen
+                Alert.alert('Coming Soon', 'Updates section will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <Calendar size={24} color="#10B981" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>Updates</Text>
+                <Text style={styles.optionSubtitle}>Latest app updates and new features</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to about screen
+                Alert.alert('Coming Soon', 'About section will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <Globe size={24} color="#F59E0B" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>About</Text>
+                <Text style={styles.optionSubtitle}>Learn more about our monastery exploration app</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
 
         {user && (
           <View style={styles.signOutSection}>
@@ -353,6 +433,9 @@ const styles = StyleSheet.create({
   section: {
     marginHorizontal: 20,
     marginBottom: 24,
+  },
+  languageSection: {
+    marginTop: 20,
   },
   sectionHeader: {
     flexDirection: 'row',
