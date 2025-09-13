@@ -6,19 +6,20 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  SafeAreaView,
   Dimensions,
   ActivityIndicator,
   Alert,
+  PanResponder,
+  Linking,
 } from 'react-native';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, PinchGestureHandler, PanGestureHandler, State } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   useAnimatedGestureHandler,
   withSpring,
   withTiming,
-  interpolate,
-  Extrapolate,
   runOnJS,
 } from 'react-native-reanimated';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -39,12 +40,17 @@ export default function ArchiveDetailPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
-  // Animation values
-  const modalTranslateY = useSharedValue(screenHeight);
-  const modalOpacity = useSharedValue(0);
+  // Animation values for image
   const imageScale = useSharedValue(1);
   const imageTranslateX = useSharedValue(0);
   const imageTranslateY = useSharedValue(0);
+  const baseScale = useSharedValue(1);
+  const lastScale = useSharedValue(1);
+
+  // Animation values for modal
+  const modalTranslateY = useSharedValue(screenHeight * 0.5);
+  const modalOpacity = useSharedValue(0);
+  const modalPanY = useSharedValue(0);
 
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -69,7 +75,7 @@ export default function ArchiveDetailPage() {
 
   const showModal = () => {
     setModalVisible(true);
-    modalTranslateY.value = withSpring(screenHeight * 0.5, {
+    modalTranslateY.value = withSpring(0, {
       damping: 20,
       stiffness: 300,
     });
@@ -77,21 +83,42 @@ export default function ArchiveDetailPage() {
   };
 
   const hideModal = () => {
-    modalTranslateY.value = withTiming(screenHeight, { duration: 300 });
+    modalTranslateY.value = withTiming(screenHeight * 0.5, { duration: 300 });
     modalOpacity.value = withTiming(0, { duration: 300 }, () => {
       runOnJS(setModalVisible)(false);
     });
   };
 
+  const handleLinkPress = async (url: string) => {
+    try {
+      // Check if the device can handle the URL
+      const supported = await Linking.canOpenURL(url);
+
+      if (supported) {
+        // Open the URL
+        await Linking.openURL(url);
+      } else {
+        // Show an alert if the URL can't be opened
+        Alert.alert('Error', `Don't know how to open this URL: ${url}`);
+      }
+    } catch (error) {
+      // Show an alert if there's an error opening the URL
+      Alert.alert('Error', 'Failed to open the link. Please try again.');
+      console.error('Error opening URL:', error);
+    }
+  };
+
   const nextImage = () => {
     if (archive?.image_urls && currentImageIndex < archive.image_urls.length - 1) {
       setCurrentImageIndex(currentImageIndex + 1);
+      resetImageTransform();
     }
   };
 
   const prevImage = () => {
     if (currentImageIndex > 0) {
       setCurrentImageIndex(currentImageIndex - 1);
+      resetImageTransform();
     }
   };
 
@@ -99,18 +126,81 @@ export default function ArchiveDetailPage() {
     imageScale.value = withSpring(1);
     imageTranslateX.value = withSpring(0);
     imageTranslateY.value = withSpring(0);
+    baseScale.value = 1;
+    lastScale.value = 1;
   };
 
-  const handleScroll = (event: any) => {
-    const scrollY = event.nativeEvent.contentOffset.y;
-    if (scrollY > 50 && !modalVisible) {
-      showModal();
-    }
-  };
+  // Pinch gesture handler for zoom
+  const pinchGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, context: any) => {
+      context.startScale = imageScale.value;
+    },
+    onActive: (event: any, context: any) => {
+      const scale = Math.max(0.5, Math.min(3, context.startScale * event.scale));
+      imageScale.value = scale;
+    },
+    onEnd: () => {
+      if (imageScale.value < 1) {
+        imageScale.value = withSpring(1);
+        imageTranslateX.value = withSpring(0);
+        imageTranslateY.value = withSpring(0);
+      }
+    },
+  });
+
+  // Pan gesture handler for image panning when zoomed
+  const panGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, context: any) => {
+      context.startX = imageTranslateX.value;
+      context.startY = imageTranslateY.value;
+    },
+    onActive: (event: any, context: any) => {
+      if (imageScale.value > 1) {
+        imageTranslateX.value = context.startX + event.translationX;
+        imageTranslateY.value = context.startY + event.translationY;
+      }
+    },
+    onEnd: () => {
+      // Keep image within bounds when zoomed
+      const maxTranslateX = (screenWidth * (imageScale.value - 1)) / 2;
+      const maxTranslateY = (screenHeight * 0.7 * (imageScale.value - 1)) / 2;
+      
+      imageTranslateX.value = withSpring(
+        Math.max(-maxTranslateX, Math.min(maxTranslateX, imageTranslateX.value))
+      );
+      imageTranslateY.value = withSpring(
+        Math.max(-maxTranslateY, Math.min(maxTranslateY, imageTranslateY.value))
+      );
+    },
+  });
+
+  // Modal pan gesture handler for swipe down to close
+  const modalPanGestureHandler = useAnimatedGestureHandler({
+    onStart: (_, context: any) => {
+      context.startY = modalPanY.value;
+    },
+    onActive: (event: any, context: any) => {
+      if (event.translationY > 0) {
+        modalPanY.value = event.translationY;
+      }
+    },
+    onEnd: (event: any) => {
+      if (event.translationY > 100 || event.velocityY > 500) {
+        // Close modal if swiped down enough
+        runOnJS(hideModal)();
+      } else {
+        // Snap back to half height
+        modalPanY.value = withSpring(0);
+      }
+    },
+  });
+
 
   const modalStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateY: modalTranslateY.value }],
+      transform: [
+        { translateY: modalTranslateY.value + modalPanY.value }
+      ],
       opacity: modalOpacity.value,
     };
   });
@@ -123,33 +213,6 @@ export default function ArchiveDetailPage() {
         { translateY: imageTranslateY.value },
       ],
     };
-  });
-
-  const panGestureHandler = useAnimatedGestureHandler({
-    onStart: (_, context: any) => {
-      context.startScale = imageScale.value;
-      context.startTranslateX = imageTranslateX.value;
-      context.startTranslateY = imageTranslateY.value;
-    },
-    onActive: (event, context) => {
-      if (event.numberOfPointers === 1) {
-        // Single finger - pan
-        imageTranslateX.value = context.startTranslateX + event.translationX;
-        imageTranslateY.value = context.startTranslateY + event.translationY;
-      } else if (event.numberOfPointers === 2) {
-        // Two fingers - zoom
-        const scale = Math.max(0.5, Math.min(3, context.startScale * event.scale));
-        imageScale.value = scale;
-      }
-    },
-    onEnd: () => {
-      // Snap back if scale is too small
-      if (imageScale.value < 1) {
-        imageScale.value = withSpring(1);
-        imageTranslateX.value = withSpring(0);
-        imageTranslateY.value = withSpring(0);
-      }
-    },
   });
 
   if (loading) {
@@ -180,32 +243,38 @@ export default function ArchiveDetailPage() {
   const currentImage = images[currentImageIndex];
 
   return (
-    <SafeScreen backgroundColor="#000000" statusBarStyle="light-content">
-      <View style={styles.container}>
-        {/* Header */}
-        <View style={[styles.header, { paddingTop: insets.top }]}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => router.back()}
-          >
-            <ArrowLeft size={24} color="#FFFFFF" />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle} numberOfLines={1}>
-            {archive.archive_name}
-          </Text>
-          <View style={styles.headerSpacer} />
-        </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeScreen backgroundColor="#000000" statusBarStyle="light-content">
+        <View style={styles.container}>
+          {/* Header */}
+          <View style={[styles.header, { paddingTop: insets.top }]}>
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={() => router.back()}
+            >
+              <ArrowLeft size={24} color="#FFFFFF" />
+            </TouchableOpacity>
+            <Text style={styles.headerTitle} numberOfLines={1}>
+              {archive.archive_name}
+            </Text>
+            <View style={styles.headerSpacer} />
+          </View>
 
-        {/* Image Gallery */}
-        <View style={styles.imageContainer}>
-          {images.length > 0 ? (
-            <PanGestureHandler onGestureEvent={panGestureHandler}>
-              <Animated.View style={styles.imageWrapper}>
-                <Animated.Image
-                  source={{ uri: currentImage }}
-                  style={[styles.image, imageStyle]}
-                  resizeMode="contain"
-                />
+          {/* Image Gallery */}
+          <View style={styles.imageContainer}>
+            {images.length > 0 ? (
+              <View style={styles.imageWrapper}>
+                <PanGestureHandler onGestureEvent={panGestureHandler}>
+                  <Animated.View style={styles.gestureContainer}>
+                    <PinchGestureHandler onGestureEvent={pinchGestureHandler}>
+                      <Animated.Image
+                        source={{ uri: currentImage }}
+                        style={[styles.image, imageStyle]}
+                        resizeMode="contain"
+                      />
+                    </PinchGestureHandler>
+                  </Animated.View>
+                </PanGestureHandler>
                 
                 {/* Image Navigation */}
                 {images.length > 1 && (
@@ -245,117 +314,146 @@ export default function ArchiveDetailPage() {
                 >
                   <Text style={styles.resetButtonText}>Reset</Text>
                 </TouchableOpacity>
-              </Animated.View>
-            </PanGestureHandler>
-          ) : (
-            <View style={styles.noImageContainer}>
-              <Text style={styles.noImageText}>No images available</Text>
-            </View>
+              </View>
+            ) : (
+              <View style={styles.noImageContainer}>
+                <Text style={styles.noImageText}>No images available</Text>
+              </View>
+            )}
+          </View>
+          {modalVisible && <View style={styles.bounceCatcher} />}
+
+          {/* Metadata Modal */}
+          {modalVisible && (
+            <Animated.View style={[styles.modal, modalStyle]}>
+              {/* Drag Handle with Pan Gesture */}
+              <PanGestureHandler onGestureEvent={modalPanGestureHandler}>
+                <Animated.View style={styles.modalDragArea}>
+                  <View style={styles.modalHandle} />
+                </Animated.View>
+              </PanGestureHandler>
+              
+              {/* Scrollable Content */}
+              <ScrollView
+                style={styles.modalContent}
+                contentContainerStyle={[styles.modalScrollContent, { paddingBottom: 40 }]}
+                showsVerticalScrollIndicator={true}
+                scrollEventThrottle={16}
+                bounces={true}
+                alwaysBounceVertical={false}
+                nestedScrollEnabled={true}
+              >
+                <View style={styles.modalHeader}>
+                  <Text style={styles.modalTitle}>{archive.archive_name}</Text>
+                  <TouchableOpacity onPress={hideModal} style={styles.closeButton}>
+                    <X size={24} color="#1F2937" />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={styles.metadataContainer}>
+                      {archive.creation_date && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Creation Date:</Text>
+                          <Text style={styles.metadataValue}>{archive.creation_date}</Text>
+                        </View>
+                      )}
+
+                      {archive.digitisation_date && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Digitisation Date:</Text>
+                          <Text style={styles.metadataValue}>{archive.digitisation_date}</Text>
+                        </View>
+                      )}
+
+                      {archive.content_type && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Content Type:</Text>
+                          <Text style={styles.metadataValue}>{archive.content_type}</Text>
+                        </View>
+                      )}
+
+                      {archive.languages && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Languages:</Text>
+                          <Text style={styles.metadataValue}>{archive.languages}</Text>
+                        </View>
+                      )}
+
+                      {archive.scripts && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Scripts:</Text>
+                          <Text style={styles.metadataValue}>{archive.scripts}</Text>
+                        </View>
+                      )}
+
+                      {archive.place_of_origin && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Place of Origin:</Text>
+                          <Text style={styles.metadataValue}>{archive.place_of_origin}</Text>
+                        </View>
+                      )}
+
+                      {archive.originals_information && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Originals Information:</Text>
+                          <Text style={styles.metadataValue}>{archive.originals_information}</Text>
+                        </View>
+                      )}
+
+                      {archive.related_people && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Related People:</Text>
+                          <Text style={styles.metadataValue}>{archive.related_people}</Text>
+                        </View>
+                      )}
+
+                      {archive.reference && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Reference:</Text>
+                          <Text style={styles.metadataValue}>{archive.reference}</Text>
+                        </View>
+                      )}
+
+                      {archive.archive_url && (
+                        <View style={styles.metadataRow}>
+                          <Text style={styles.metadataLabel}>Archive URL:</Text>
+                          <TouchableOpacity 
+                            onPress={() => handleLinkPress(archive.archive_url!)}
+                            style={styles.linkContainer}
+                            activeOpacity={0.7}
+                          >
+                            <Text style={[styles.metadataValue, styles.linkText]}>
+                              {archive.archive_url}
+                            </Text>
+                          </TouchableOpacity>
+                        </View>
+                      )}
+                    </View>
+              </ScrollView>
+            </Animated.View>
+          )}
+
+          {/* Tap to show metadata hint */}
+          {!modalVisible && (
+            <TouchableOpacity 
+              style={styles.hintContainer}
+              onPress={showModal}
+            >
+              <Text style={styles.hintText}>Tap to view details</Text>
+            </TouchableOpacity>
+          )}
+
+          {/* Click outside modal to close */}
+          {modalVisible && (
+            <TouchableOpacity 
+              style={styles.modalOverlay}
+              onPress={hideModal}
+              activeOpacity={1}
+            />
           )}
         </View>
-
-        {/* Metadata Modal */}
-        {modalVisible && (
-          <Animated.View style={[styles.modal, modalStyle]}>
-            <View style={styles.modalHandle} />
-            <ScrollView
-              style={styles.modalContent}
-              showsVerticalScrollIndicator={false}
-              onScroll={handleScroll}
-              scrollEventThrottle={16}
-            >
-              <View style={styles.modalHeader}>
-                <Text style={styles.modalTitle}>{archive.archive_name}</Text>
-                <TouchableOpacity onPress={hideModal} style={styles.closeButton}>
-                  <X size={24} color="#1F2937" />
-                </TouchableOpacity>
-              </View>
-
-              <View style={styles.metadataContainer}>
-                {archive.creation_date && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Creation Date:</Text>
-                    <Text style={styles.metadataValue}>{archive.creation_date}</Text>
-                  </View>
-                )}
-
-                {archive.digitisation_date && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Digitisation Date:</Text>
-                    <Text style={styles.metadataValue}>{archive.digitisation_date}</Text>
-                  </View>
-                )}
-
-                {archive.content_type && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Content Type:</Text>
-                    <Text style={styles.metadataValue}>{archive.content_type}</Text>
-                  </View>
-                )}
-
-                {archive.languages && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Languages:</Text>
-                    <Text style={styles.metadataValue}>{archive.languages}</Text>
-                  </View>
-                )}
-
-                {archive.scripts && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Scripts:</Text>
-                    <Text style={styles.metadataValue}>{archive.scripts}</Text>
-                  </View>
-                )}
-
-                {archive.place_of_origin && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Place of Origin:</Text>
-                    <Text style={styles.metadataValue}>{archive.place_of_origin}</Text>
-                  </View>
-                )}
-
-                {archive.originals_information && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Originals Information:</Text>
-                    <Text style={styles.metadataValue}>{archive.originals_information}</Text>
-                  </View>
-                )}
-
-                {archive.related_people && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Related People:</Text>
-                    <Text style={styles.metadataValue}>{archive.related_people}</Text>
-                  </View>
-                )}
-
-                {archive.reference && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Reference:</Text>
-                    <Text style={styles.metadataValue}>{archive.reference}</Text>
-                  </View>
-                )}
-
-                {archive.archive_url && (
-                  <View style={styles.metadataRow}>
-                    <Text style={styles.metadataLabel}>Archive URL:</Text>
-                    <Text style={[styles.metadataValue, styles.linkText]}>
-                      {archive.archive_url}
-                    </Text>
-                  </View>
-                )}
-              </View>
-            </ScrollView>
-          </Animated.View>
-        )}
-
-        {/* Tap to show metadata hint */}
-        {!modalVisible && (
-          <View style={styles.hintContainer}>
-            <Text style={styles.hintText}>Scroll up to view details</Text>
-          </View>
-        )}
-      </View>
-    </SafeScreen>
+      </SafeScreen>
+    </GestureHandlerRootView>
   );
 }
 
@@ -433,6 +531,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  gestureContainer: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
     width: screenWidth,
     height: '100%',
@@ -496,24 +600,30 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: screenHeight * 0.6,
+    height: screenHeight * 0.5,
     backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     zIndex: 2000,
+  },
+  modalDragArea: {
+    paddingVertical: 12,
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
   },
   modalHandle: {
     width: 40,
     height: 4,
     backgroundColor: '#D1D5DB',
     borderRadius: 2,
-    alignSelf: 'center',
-    marginTop: 12,
-    marginBottom: 8,
   },
   modalContent: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  modalScrollContent: {
     paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   modalHeader: {
     flexDirection: 'row',
@@ -531,7 +641,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   metadataContainer: {
-    paddingBottom: 40,
+    paddingTop: 10,
   },
   metadataRow: {
     marginBottom: 16,
@@ -547,9 +657,15 @@ const styles = StyleSheet.create({
     color: '#1F2937',
     lineHeight: 22,
   },
+  linkContainer: {
+    alignSelf: 'flex-start',
+    paddingVertical: 4,
+    paddingHorizontal: 2,
+  },
   linkText: {
     color: '#DF8020',
     textDecorationLine: 'underline',
+    fontWeight: '500',
   },
   hintContainer: {
     position: 'absolute',
@@ -565,5 +681,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    zIndex: 1500,
+  },
+  bounceCatcher: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 50, // A small height, enough to cover the bounce
+    backgroundColor: '#FFFFFF', // Must be the same color as the modal
+    zIndex: 1999, // Just below the modal's zIndex of 2000
   },
 });

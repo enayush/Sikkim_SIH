@@ -1,7 +1,7 @@
 
 
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ActivityIndicator, Alert, Share } from 'react-native';
 import Animated, {
   useAnimatedScrollHandler,
   useSharedValue,
@@ -121,7 +121,27 @@ export default function DigitalArchivePage() {
   };
 
   const handleShare = async (archive: Archive) => {
-    Alert.alert('Coming Soon', 'Share functionality will be available soon!');
+    if (!archive.archive_url) {
+      Alert.alert('Not Shareable', 'This archive does not have an associated link to share.');
+      return;
+    }
+
+    try {
+      const result = await Share.share({
+        message: `Check out this archive: ${archive.archive_name}\n\n${archive.archive_url}`,
+        
+        url: archive.archive_url, 
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+        } else {
+        }
+      } else if (result.action === Share.dismissedAction) {
+      }
+    } catch (error: any) {
+      Alert.alert('Error', 'An error occurred while trying to share.');
+    }
   };
 
   return (
