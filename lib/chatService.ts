@@ -1,3 +1,4 @@
+import { supabase } from './supabase';
 import { getAllMonasteries, Monastery } from './monasteryService';
 import { ENV_CONFIG } from './envConfig';
 
@@ -8,6 +9,16 @@ interface Message {
   timestamp: Date;
   isTyping?: boolean;
 }
+
+// Simple response cache to avoid repeated API calls
+const responseCache = new Map<string, { response: string; timestamp: number }>();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// Helper function to get cache key from message and context
+const getCacheKey = (message: string, lastMessages: Message[]): string => {
+  const contextText = lastMessages.slice(-3).map(m => m.text).join(' ');
+  return `${message.toLowerCase().trim()}_${contextText.slice(0, 100)}`;
+};
 
 // Simple text similarity function for local RAG
 const cosineSimilarity = (a: number[], b: number[]): number => {
@@ -219,8 +230,13 @@ const callGeminiAPI = async (context: string): Promise<string> => {
   try {
     // Check if Gemini API key is configured
     const apiKey = ENV_CONFIG.GEMINI?.API_KEY;
+
+    // --- DEBUGGING: Log the API Key ---
+    console.log('🔑 Using Gemini API Key:', apiKey ? `...${apiKey.slice(-4)}` : 'Not Found!');
+
     if (!apiKey || apiKey === 'your_gemini_api_key_here') {
-      return "I'm still setting up my connection to provide detailed responses. For now, I can see you're asking about our monasteries. Please add your GEMINI_API_KEY to the environment configuration to enable full AI responses!";
+      console.error('❌ Gemini API Key is missing or is still the placeholder value.');
+      return "I'm still setting up my connection. The Gemini API Key is missing. Please add it to your .env file to enable full AI responses!";
     }
 
     console.log('Making Gemini API request...');
@@ -232,7 +248,15 @@ const callGeminiAPI = async (context: string): Promise<string> => {
 
 ${context}
 
-Respond in a helpful, conversational manner. Keep your response under 300 words.`
+RESPONSE GUIDELINES:
+- Format your response using markdown (use **bold**, *italic*, bullet points, etc.)
+- Use minimal emojis (1-2 maximum per response, only when truly relevant)
+- Structure information clearly with headers and lists when appropriate
+- Be conversational but informative
+- Keep responses under 300 words
+- Use proper markdown formatting for better readability
+
+Respond in a helpful, conversational manner with markdown formatting.`
         }]
       }],
       generationConfig: {
@@ -240,8 +264,6 @@ Respond in a helpful, conversational manner. Keep your response under 300 words.
         maxOutputTokens: 512,
       }
     };
-
-    console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
       method: 'POST',
@@ -251,16 +273,24 @@ Respond in a helpful, conversational manner. Keep your response under 300 words.
       body: JSON.stringify(requestBody)
     });
 
-    console.log('Response status:', response.status);
-
     if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Gemini API error response:', errorData);
-      throw new Error(`Gemini API error: ${response.status} - ${errorData}`);
+      const errorText = await response.text();
+      console.error('❌ Gemini API Error:', response.status, errorText);
+
+      if (response.status === 400) {
+        return `API Error: Bad request. This might be due to an invalid API key or a problem with the request format. Please check the console logs.`;
+      }
+      if (response.status === 429) {
+        return `API Error: You have exceeded your API quota. Please check your Google Cloud billing account or wait before trying again.`;
+      }
+      if (response.status === 503 || response.status === 500) {
+        return `API Error: The model is currently overloaded or unavailable. Please try again in a few moments.`;
+      }
+
+      throw new Error(`Gemini API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
-    console.log('Gemini response:', JSON.stringify(data, null, 2));
 
     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
       return data.candidates[0].content.parts[0].text;
@@ -271,13 +301,138 @@ Respond in a helpful, conversational manner. Keep your response under 300 words.
 
   } catch (error) {
     console.error('Gemini API error:', error);
-    return "I apologize, but I'm having trouble connecting to my knowledge base right now. Please try again in a moment, or feel free to ask about specific monasteries like Rumtek, Pemayangtse, or Enchey!";
+    return "I apologize, but I'm having trouble connecting to my knowledge base right now. Please try again in a moment.";
   }
 };
+
+// --- Chat History Storage Functions ---
+
+/**
+ * Get or create a conversation for the current user.
+ * @returns The conversation ID.
+ */
+export const getOrCreateConversation = async (): Promise<string | null> => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  // Check for an existing recent conversation
+  let { data: conversation, error } = await supabase
+    .from('chat_conversations')
+    .select('id')
+    .eq('user_id', user.id)
+    .order('updated_at', { ascending: false })
+    .limit(1);
+
+  if (error) {
+    console.error('Error fetching conversation:', error);
+    return null;
+  }
+
+  if (conversation && conversation.length > 0) {
+    return conversation[0].id;
+  } else {
+    // Create a new conversation
+    let { data: newConversation, error: insertError } = await supabase
+      .from('chat_conversations')
+      .insert({ user_id: user.id })
+      .select('id')
+      .single();
+
+    if (insertError) {
+      console.error('Error creating conversation:', insertError);
+      return null;
+    }
+    return newConversation?.id || null;
+  }
+};
+
+/**
+ * Fetches all conversations for the current user.
+ * @returns An array of conversations.
+ */
+export const getAllConversations = async (): Promise<{ id: string; summary: string | null; updated_at: string; }[]> => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  const { data, error } = await supabase
+    .from('chat_conversations')
+    .select('id, summary, updated_at')
+    .eq('user_id', user.id)
+    .order('updated_at', { ascending: false });
+
+  if (error) {
+    console.error('Error fetching all conversations:', error);
+    return [];
+  }
+  return data || [];
+};
+
+/**
+ * Fetches the chat history for a given conversation.
+ * @param conversationId The ID of the conversation.
+ * @returns An array of messages.
+ */
+export const getChatHistory = async (conversationId: string): Promise<Message[]> => {
+  const { data, error } = await supabase
+    .from('chat_messages')
+    .select('id, text, sender, created_at')
+    .eq('conversation_id', conversationId)
+    .order('created_at', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching chat history:', error);
+    return [];
+  }
+
+  return data.map(msg => ({
+    id: msg.id,
+    text: msg.text,
+    isUser: msg.sender === 'user',
+    timestamp: new Date(msg.created_at),
+  }));
+};
+
+/**
+ * Saves a message to the database.
+ * @param conversationId The ID of the conversation.
+ * @param message The message object to save.
+ */
+export const saveMessage = async (conversationId: string, message: Message): Promise<void> => {
+  const { error } = await supabase.from('chat_messages').insert({
+    conversation_id: conversationId,
+    sender: message.isUser ? 'user' : 'bot',
+    text: message.text,
+  });
+
+  if (error) {
+    console.error('Error saving message:', error);
+  }
+
+  // Also update the conversation's updated_at timestamp
+  const { error: updateError } = await supabase
+    .from('chat_conversations')
+    .update({ updated_at: new Date().toISOString() })
+    .eq('id', conversationId);
+
+  if (updateError) {
+    console.error('Error updating conversation timestamp:', updateError);
+  }
+};
+
+// --- Main Chat Logic ---
 
 // Main chat service function
 export const processChatMessage = async (message: string, conversationHistory: Message[] = []): Promise<string> => {
   try {
+    // Check cache first
+    const cacheKey = getCacheKey(message, conversationHistory);
+    const cachedResponse = responseCache.get(cacheKey);
+
+    if (cachedResponse && (Date.now() - cachedResponse.timestamp) < CACHE_DURATION) {
+      console.log('🎯 Returning cached response for:', message.slice(0, 50));
+      return cachedResponse.response;
+    }
+
     // Initialize RAG database if not already done
     if (monasteryDatabase.length === 0) {
       await initializeRAG();
@@ -291,6 +446,40 @@ export const processChatMessage = async (message: string, conversationHistory: M
 
     // Get response from Gemini
     const response = await callGeminiAPI(context);
+
+    // Get or create the conversation ID
+    const conversationId = await getOrCreateConversation();
+    if (conversationId) {
+      // Save the user message
+      await saveMessage(conversationId, {
+        id: crypto.randomUUID(),
+        text: message,
+        isUser: true,
+        timestamp: new Date(),
+      });
+
+      // Save the bot response
+      await saveMessage(conversationId, {
+        id: crypto.randomUUID(),
+        text: response,
+        isUser: false,
+        timestamp: new Date(),
+      });
+    }
+
+    // Cache the response for future identical queries
+    responseCache.set(cacheKey, {
+      response: response,
+      timestamp: Date.now()
+    });
+
+    // Clean up old cache entries (simple cleanup)
+    if (responseCache.size > 50) {
+      const oldestKey = responseCache.keys().next().value;
+      if (oldestKey) {
+        responseCache.delete(oldestKey);
+      }
+    }
 
     return response;
 
