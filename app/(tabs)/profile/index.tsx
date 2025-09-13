@@ -6,19 +6,16 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  Dimensions,
 } from 'react-native';
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-  useAnimatedStyle,
-  interpolate,
-  Extrapolate,
-} from 'react-native-reanimated';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from 'react-i18next';
-import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar } from 'lucide-react-native';
+import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar, Settings, BookOpen, CreditCard, Gift } from 'lucide-react-native';
 import { useAuth } from '../../../contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import SafeScreen from '../../../components/SafeScreen';
+
+const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
   const { t, i18n } = useTranslation();
@@ -84,97 +81,169 @@ const headerStyle = useAnimatedStyle(() => {
 
   return (
     <SafeScreen style={styles.container}>
-      <Animated.View style={[styles.topBar, headerStyle]}>
-        <View style={styles.logoContainer}>
-          <Image source={require('../../../assets/images/icon.png')} style={styles.logo} />
-          <Text style={styles.appName}>{t('profile')}</Text>
-        </View>
-      </Animated.View>
-      <Animated.ScrollView
-        onScroll={scrollHandler}
-        scrollEventThrottle={16}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <View style={styles.profileCard}>
-          <View style={styles.profileHeader}>
-            <View style={styles.avatarContainer}>
-              <User size={40} color="#DF8020" />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Header with curved background */}
+        <View style={styles.header}>
+          <LinearGradient
+            colors={['#FF8A50', '#FFAA70', '#FFE8B0', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#FFFFFF', '#E8F5E8', '#C8E6C8', '#A8D7A8']}
+            locations={[0, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.headerGradient}
+          >
+            {/* Additional decorative curves */}
+            <View style={styles.decorativeCircle1} />
+            <View style={styles.decorativeCircle2} />
+          </LinearGradient>
+          
+          {/* Curved bottom overlay */}
+          <View style={styles.curvedBackground} />
+          
+          {/* Profile Section */}
+          <View style={styles.profileSection}>
+            <View style={styles.profileImageContainer}>
+              <View style={styles.profileImageBorder}>
+                <View style={styles.profileImage}>
+                  <User size={50} color="#FF9933" />
+                </View>
+              </View>
             </View>
-            <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>Welcome!</Text>
-              <Text style={styles.profileEmail}>{user?.email}</Text>
-            </View>
+            <Text style={styles.profileName}>{user?.email?.split('@')[0] || 'User'}</Text>
+            <Text style={styles.profileRole}>Monastery Explorer</Text>
           </View>
         </View>
 
+        {/* Language Selection */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Language / भाषा / भाषा</Text>
-          <View style={styles.languageButtons}>
+          <View style={styles.sectionHeader}>
+            <Globe size={20} color="#FF9933" />
+            <Text style={styles.sectionTitle}>Language Preferences</Text>
+          </View>
+          <View style={styles.languageContainer}>
             <TouchableOpacity
               style={[
-                styles.languageButton,
-                i18n.language === 'en' && styles.languageButtonActive,
+                styles.languageOption,
+                i18n.language === 'en' && styles.languageOptionActive,
               ]}
               onPress={() => changeLanguage('en')}
             >
-              <Globe size={16} color={i18n.language === 'en' ? '#FFF' : '#6B7280'} />
-              <Text
-                style={[
-                  styles.languageButtonText,
-                  i18n.language === 'en' && styles.languageButtonTextActive,
-                ]}
-              >
-                English
-              </Text>
+              <Text style={[
+                styles.languageText,
+                i18n.language === 'en' && styles.languageTextActive,
+              ]}>English</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
-                styles.languageButton,
-                i18n.language === 'hi' && styles.languageButtonActive,
+                styles.languageOption,
+                i18n.language === 'hi' && styles.languageOptionActive,
               ]}
               onPress={() => changeLanguage('hi')}
             >
-              <Globe size={16} color={i18n.language === 'hi' ? '#FFF' : '#6B7280'} />
-              <Text
-                style={[
-                  styles.languageButtonText,
-                  i18n.language === 'hi' && styles.languageButtonTextActive,
-                ]}
-              >
-                हिन्दी
-              </Text>
+              <Text style={[
+                styles.languageText,
+                i18n.language === 'hi' && styles.languageTextActive,
+              ]}>हिन्दी</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.languageOption,
+                i18n.language === 'ne' && styles.languageOptionActive,
+              ]}
+              onPress={() => changeLanguage('ne')}
+            >
+              <Text style={[
+                styles.languageText,
+                i18n.language === 'ne' && styles.languageTextActive,
+              ]}>नेपाली</Text>
             </TouchableOpacity>
           </View>
         </View>
 
+        {/* Manage Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Manage</Text>
-          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/profile/user-bookings')}>
-            <Heart size={20} color="#6B7280" />
-            <Text style={styles.menuItemText}>Your Bookings</Text>
-            <ChevronRight size={20} color="#6B7280" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/donations-bookings')}>
-            <Heart size={20} color="#6B7280" />
-            <Text style={styles.menuItemText}>Donations & Bookings</Text>
-            <ChevronRight size={20} color="#6B7280" />
-          </TouchableOpacity>
+          <View style={styles.sectionHeader}>
+            <Settings size={20} color="#FF9933" />
+            <Text style={styles.sectionTitle}>Manage</Text>
+          </View>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity 
+              style={styles.optionCard} 
+              onPress={() => router.push('/profile/user-bookings')}
+            >
+              <View style={styles.optionIconContainer}>
+                <Calendar size={24} color="#FF9933" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>My Bookings</Text>
+                <Text style={styles.optionSubtitle}>View and manage your monastery bookings</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.optionCard} 
+              onPress={() => router.push('/donations-bookings')}
+            >
+              <View style={styles.optionIconContainer}>
+                <Heart size={24} color="#EC4899" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>Donations</Text>
+                <Text style={styles.optionSubtitle}>Track your contributions and support</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+          </View>
         </View>
 
+        {/* My Rewards Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Rewards</Text>
-          <TouchableOpacity style={styles.menuItem} onPress={() => router.push('/explorer-badges')}>
-            <Award size={20} color="#6B7280" />
-            <Text style={styles.menuItemText}>Explorer Badges</Text>
-            <ChevronRight size={20} color="#6B7280" />
-          </TouchableOpacity>
+          <View style={styles.sectionHeader}>
+            <Award size={20} color="#FF9933" />
+            <Text style={styles.sectionTitle}>My Rewards</Text>
+          </View>
+          <View style={styles.optionsContainer}>
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to rewards or achievements screen
+                Alert.alert('Coming Soon', 'Rewards system will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <Award size={24} color="#F59E0B" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>Explorer Badges</Text>
+                <Text style={styles.optionSubtitle}>Your monastery exploration achievements</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.optionCard}
+              onPress={() => {
+                // Navigate to rewards or achievements screen
+                Alert.alert('Coming Soon', 'Rewards system will be available soon!');
+              }}
+            >
+              <View style={styles.optionIconContainer}>
+                <Gift size={24} color="#10B981" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>Rewards Points</Text>
+                <Text style={styles.optionSubtitle}>View your earned points and benefits</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {user && (
-          <View style={styles.section}>
+          <View style={styles.signOutSection}>
             <TouchableOpacity style={styles.signOutButton} onPress={handleSignOut}>
               <LogOut size={20} color="#EF4444" />
-              <Text style={styles.signOutButtonText}>{t('logout')}</Text>
+              <Text style={styles.signOutButtonText}>Sign Out</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -186,149 +255,215 @@ const headerStyle = useAnimatedStyle(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#F9FAFB',
   },
-  scrollContent: {
-    paddingTop: 60, // Height of the topBar
+  header: {
+    position: 'relative',
+    height: 280,
+    marginBottom: 20,
   },
-  topBar: {
+  headerGradient: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
-    backgroundColor: '#FFFFFF',
-    zIndex: 1000,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
+    height: 220,
+    borderBottomLeftRadius: 40,
+    borderBottomRightRadius: 40,
+    overflow: 'hidden',
   },
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  decorativeCircle1: {
+    position: 'absolute',
+    top: -50,
+    right: -30,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
-  logo: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    marginRight: 8,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+  decorativeCircle2: {
+    position: 'absolute',
+    top: 20,
+    left: -40,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
   },
-  appName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#1F2937',
-  },
-  profileCard: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginHorizontal: 24,
-    marginTop: 24,
-    padding: 20,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-  },
-  profileHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  avatarContainer: {
-    width: 60,
+  curvedBackground: {
+    position: 'absolute',
+    bottom: -30,
+    left: 0,
+    right: 0,
     height: 60,
-    borderRadius: 30,
-    backgroundColor: '#FDEEDC',
+    backgroundColor: '#F9FAFB',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+  },
+  profileSection: {
+    position: 'absolute',
+    top: 120,
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    zIndex: 10,
+  },
+  profileImageContainer: {
+    marginBottom: 16,
+    position: 'relative',
+  },
+  profileImageBorder: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 12,
+    elevation: 12,
+    borderWidth: 4,
+    borderColor: '#FFFFFF',
+  },
+  profileImage: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileName: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1F2937',
+    marginBottom: 4,
+    textTransform: 'capitalize',
+  },
+  profileRole: {
+    fontSize: 16,
+    color: '#6B7280',
+    fontWeight: '500',
+  },
+  section: {
+    marginHorizontal: 20,
+    marginBottom: 24,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#1F2937',
+    marginLeft: 8,
+  },
+  languageContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  languageOption: {
+    flex: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  languageOptionActive: {
+    backgroundColor: '#FF9933',
+  },
+  languageText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#6B7280',
+  },
+  languageTextActive: {
+    color: '#FFFFFF',
+  },
+  optionsContainer: {
+    gap: 12,
+  },
+  optionCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  optionIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#F3F4F6',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
   },
-  profileInfo: {
+  optionContent: {
     flex: 1,
   },
-  profileName: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#1F2937',
-  },
-  profileEmail: {
-    fontSize: 14,
-    color: '#6B7280',
-    marginTop: 2,
-  },
-  section: {
-    marginTop: 32,
-    marginHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#4B5563',
-    marginBottom: 16,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-  },
-  menuItemText: {
-    flex: 1,
+  optionTitle: {
     fontSize: 16,
     fontWeight: '600',
     color: '#1F2937',
-    marginLeft: 16,
+    marginBottom: 2,
   },
-  languageButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 8,
-  },
-  languageButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    borderRadius: 8,
-    marginHorizontal: 4,
-  },
-  languageButtonActive: {
-    backgroundColor: '#DF8020',
-  },
-  languageButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
+  optionSubtitle: {
+    fontSize: 13,
     color: '#6B7280',
+    lineHeight: 18,
+  },
+  optionArrow: {
     marginLeft: 8,
   },
-  languageButtonTextActive: {
-    color: '#FFFFFF',
+  signOutSection: {
+    marginHorizontal: 20,
+    marginTop: 20,
+    marginBottom: 40,
   },
   signOutButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
     justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#FEE2E2',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   signOutButtonText: {
     fontSize: 16,
