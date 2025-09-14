@@ -171,7 +171,36 @@ export type Database = {
           image_urls?: string[] | null;
         };
       };
-      proflies : {
+      journal_entries: {
+        Row: {
+          id: string;
+          created_at: string;
+          user_id: string;
+          monastery_id: string;
+          title: string | null;
+          content: string;
+          image_urls: string[];
+          latitude: number | null;
+          longitude: number | null;
+        };
+        Insert: {
+          user_id: string;
+          monastery_id: string;
+          title?: string | null;
+          content: string;
+          image_urls?: string[];
+          latitude?: number | null;
+          longitude?: number | null;
+        };
+        Update: {
+          title?: string | null;
+          content?: string;
+          image_urls?: string[];
+          latitude?: number | null;
+          longitude?: number | null;
+        };
+      };
+      profiles: {
         Row: {
           id: string;
           username: string;

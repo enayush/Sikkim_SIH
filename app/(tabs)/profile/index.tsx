@@ -246,6 +246,20 @@ const headerStyle = useAnimatedStyle(() => {
               </View>
               <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
             </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.optionCard} 
+              onPress={() => router.push('/journal' as any)}
+            >
+              <View style={styles.optionIconContainer}>
+                <BookOpen size={24} color="#10B981" />
+              </View>
+              <View style={styles.optionContent}>
+                <Text style={styles.optionTitle}>My Explorer's Journal</Text>
+                <Text style={styles.optionSubtitle}>Document your journey and memories</Text>
+              </View>
+              <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
+            </TouchableOpacity>
           </View>
         </View>
 

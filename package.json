@@ -36,6 +36,7 @@
     "expo-symbols": "~0.4.3",
     "expo-system-ui": "~5.0.11",
     "expo-web-browser": "~14.2.0",
+    "expo-image-picker": "~16.1.4",
     "i18next": "^25.5.2",
     "lucide-react-native": "^0.475.0",
     "react": "19.0.0",
