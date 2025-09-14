@@ -26,40 +26,16 @@ export default function LoginScreen() {
       return;
     }
 
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      Alert.alert('Error', 'Please enter a valid email address');
-      return;
-    }
-
     setLoading(true);
     try {
       const { error } = await signIn(email, password);
       if (error) {
-        console.error('Login error details:', error);
-        let errorMessage = error.message;
-        
-        // Provide more user-friendly error messages
-        if (error.message.includes('Invalid login credentials') || error.message.includes('invalid credentials')) {
-          errorMessage = 'Invalid email or password. Please check your credentials and try again.';
-        } else if (error.message.includes('Email not confirmed') || error.message.includes('email not confirmed')) {
-          errorMessage = 'Please check your email and confirm your account before signing in.';
-        } else if (error.message.includes('Too many requests') || error.message.includes('rate limit')) {
-          errorMessage = 'Too many login attempts. Please wait a moment and try again.';
-        } else if (error.message.includes('JWT') || error.message.includes('token')) {
-          errorMessage = 'Authentication error. Please try again.';
-        } else if (error.message.includes('Database error') || error.message.includes('database')) {
-          errorMessage = 'Unable to sign in. Please try again later.';
-        }
-        
-        Alert.alert('Login Error', errorMessage);
+        Alert.alert('Error', error.message);
       } else {
         router.replace('/(tabs)');
       }
     } catch (error) {
-      console.error('Login exception:', error);
-      Alert.alert('Error', 'An unexpected error occurred. Please try again.');
+      Alert.alert('Error', 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }
