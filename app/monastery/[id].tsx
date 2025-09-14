@@ -17,7 +17,7 @@ import { BlurView } from 'expo-blur';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ArrowLeft, Star, ChevronLeft, ChevronRight, Volume2, X } from 'lucide-react-native';
+import { ArrowLeft, Star, ChevronLeft, ChevronRight, Volume2, X, BookOpen } from 'lucide-react-native';
 import { supabase } from '../../lib/supabase';
 import { getMonasteryById, getMonasteryReviews, Monastery, MonasteryReviewWithUser } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
@@ -207,6 +207,15 @@ export default function MonasteryDetailScreen() {
     } as any);
   };
 
+  const navigateToJournal = () => {
+    if (!monastery) return;
+    
+    router.push({
+      pathname: '/journal/create',
+      params: { monasteryId: monastery.id }
+    } as any);
+  };
+
   const renderStars = (rating: number, size: number = 16) => {
     return Array.from({ length: 5 }, (_, index) => (
       <Star
@@ -391,6 +400,14 @@ export default function MonasteryDetailScreen() {
             onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
           >
             <Text style={Monstyles.hero360ButtonText}>360°</Text>
+          </TouchableOpacity>
+
+          {/* Journal Button - Fixed top right, below 360° */}
+          <TouchableOpacity 
+            style={Monstyles.heroJournalButton}
+            onPress={navigateToJournal}
+          >
+            <BookOpen size={20} color="#DF8020" />
           </TouchableOpacity>
           
           <View style={Monstyles.heroTextOverlay}>

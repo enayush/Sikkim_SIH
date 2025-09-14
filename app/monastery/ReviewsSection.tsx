@@ -245,7 +245,7 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
 
       {/* Fixed Bottom Section - Button or Form */}
       <View style={[
-        Monstyles.fixedBottomSection,
+        Monstyles.fixedBottomReviewSection,
         { 
           paddingBottom: keyboardVisible ? 10 : 20 + insets.bottom,
           transform: keyboardVisible && showReviewForm ? [{ translateY: -keyboardHeight }] : [{ translateY: 0 }],
