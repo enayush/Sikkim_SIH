@@ -143,7 +143,17 @@ export default function ManageProfileScreen() {
       // Update original values
       setOriginalUsername(username);
       setIsEditing(false);
-      Alert.alert('Success', 'Profile updated successfully!');
+      // Show success message and navigate back
+      Alert.alert(
+        'Success', 
+        'Profile updated successfully!',
+        [
+          {
+            text: 'OK',
+            onPress: () => router.back()
+          }
+        ]
+      );
     } catch (error) {
       console.error('Profile update error:', error);
       Alert.alert('Error', 'Failed to update profile');
