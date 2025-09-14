@@ -26,12 +26,12 @@ export interface MonasteryReview {
   user_id: string;
   rating: number;
   comment: string;
-  user_email: string;
+  username: string;
   created_at: string;
 }
 
 export interface MonasteryReviewWithUser extends MonasteryReview {
-  // This interface can now be the same as MonasteryReview since user_email is included
+  // Username is now directly stored in the reviews table
 }
 
 // Helper function to process monasteries with nested reviews
@@ -255,6 +255,20 @@ export const addMonasteryReview = async (
       throw new Error('User must be authenticated to add a review');
     }
 
+    // Fetch username from profiles table
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('username')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError) {
+      console.error('Error fetching profile:', profileError);
+      throw new Error('Failed to fetch user profile');
+    }
+
+    const username = profile?.username || user.email?.split('@')[0] || 'Anonymous User';
+
     const { data, error } = await supabase
       .from('reviews')
       .insert({
@@ -262,7 +276,7 @@ export const addMonasteryReview = async (
         user_id: user.id,
         rating,
         comment,
-        user_email: user.email || 'Anonymous User',
+        username: username,
       })
       .select()
       .single();

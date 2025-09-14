@@ -322,6 +322,16 @@ const Monstyles = StyleSheet.create({
     borderTopColor: '#E5E7EB',
     padding: 20,
   },
+  fixedBottomReviewSection: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    paddingTop: 10,
+  },
   buttonRow: {
     flexDirection: 'row',
     gap: 12,

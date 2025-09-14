@@ -47,7 +47,7 @@ export type Database = {
           id: string;
           monastery_id: string;
           user_id: string;
-          user_email: string;
+          username: string;
           rating: number;
           comment: string;
           created_at: string;
@@ -55,14 +55,14 @@ export type Database = {
         Insert: {
           monastery_id: string;
           user_id: string;
-          user_email?: string;
+          username: string;
           rating: number;
           comment: string;
         };
         Update: {
           rating?: number;
           comment?: string;
-          user_email?: string;
+          username: string;
         };
       };
       bookings: {

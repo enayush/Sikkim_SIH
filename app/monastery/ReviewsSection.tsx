@@ -134,16 +134,11 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
     );
   };
 
-  const getInitials = (email: string) => {
-    if (!email || email === 'Anonymous User') return 'A';
+  const getInitials = (displayName: string) => {
+    if (!displayName || displayName === 'Anonymous User') return 'A';
     
-    // If it's an email, get the first letter before @
-    if (email.includes('@')) {
-      return email.split('@')[0].charAt(0).toUpperCase();
-    }
-    
-    // Otherwise get the first letter
-    return email.charAt(0).toUpperCase();
+    // Get the first letter
+    return displayName.charAt(0).toUpperCase();
   };
 
   const renderReviewCard = (review: MonasteryReviewWithUser) => (
@@ -151,9 +146,9 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
       <View style={Monstyles.reviewHeader}>
         <View style={Monstyles.reviewUserInfo}>
           <View style={Monstyles.profileIcon}>
-            {review.user_email && review.user_email !== 'Anonymous User' ? (
+            {review.username && review.username !== 'Anonymous User' ? (
               <Text style={Monstyles.profileIconText}>
-                {getInitials(review.user_email)}
+                {getInitials(review.username)}
               </Text>
             ) : (
               <User size={20} color="#FFFFFF" />
@@ -161,7 +156,7 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
           </View>
           <View style={Monstyles.reviewUserDetails}>
             <Text style={Monstyles.reviewUserEmail}>
-              {review.user_email || 'Anonymous User'}
+              {review.username || 'Anonymous User'}
             </Text>
             <View style={Monstyles.reviewRating}>
               {renderStars(review.rating, 14)}
@@ -201,7 +196,7 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
 
       {/* Fixed Bottom Section - Button or Form */}
       <View style={[
-        Monstyles.fixedBottomSection,
+        Monstyles.fixedBottomReviewSection,
         { 
           paddingBottom: keyboardVisible ? 10 : 20 + insets.bottom,
           transform: keyboardVisible && showReviewForm ? [{ translateY: -keyboardHeight }] : [{ translateY: 0 }],

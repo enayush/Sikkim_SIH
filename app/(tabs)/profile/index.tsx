@@ -12,9 +12,9 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTranslation } from 'react-i18next';
-import { User, LogOut, Globe, Heart, Award, ChevronRight, Calendar, Settings, BookOpen, CreditCard, Gift } from 'lucide-react-native';
+import { User, Globe, Heart, Award, ChevronRight, Calendar, Settings, BookOpen, CreditCard, Gift } from 'lucide-react-native';
 import { useAuth } from '../../../contexts/AuthContext';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect} from 'expo-router';
 import SafeScreen from '../../../components/SafeScreen';
 import { useSharedValue, useAnimatedScrollHandler, useAnimatedStyle } from 'react-native-reanimated';
 import { profileService, Profile } from '../../../lib/profileService';
@@ -31,29 +31,38 @@ export default function ProfileScreen() {
   const [loading, setLoading] = useState(true);
 
   // Fetch user profile
+  const fetchProfile = async () => {
+    if (!user?.id) {
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const { profile: userProfile, error } = await profileService.getProfile(user.id);
+      if (error) {
+        console.error('Error fetching profile:', error);
+      } else {
+        setProfile(userProfile);
+      }
+    } catch (error) {
+      console.error('Profile fetch error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchProfile = async () => {
-      if (!user?.id) {
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const { profile: userProfile, error } = await profileService.getProfile(user.id);
-        if (error) {
-          console.error('Error fetching profile:', error);
-        } else {
-          setProfile(userProfile);
-        }
-      } catch (error) {
-        console.error('Profile fetch error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProfile();
   }, [user?.id]);
+
+  // Refresh profile when screen comes into focus (e.g., returning from manage-profile)
+  useFocusEffect(
+    React.useCallback(() => {
+      if (user?.id) {
+        fetchProfile();
+      }
+    }, [user?.id])
+  );
 
 const HEADER_MAX_HEIGHT = 60; // or whatever your header height is
 
@@ -205,7 +214,7 @@ const headerStyle = useAnimatedStyle(() => {
                 <User size={24} color="#3B82F6" />
               </View>
               <View style={styles.optionContent}>
-                <Text style={styles.optionTitle}>Edit Profile</Text>
+                <Text style={styles.optionTitle}>Manage Profile</Text>
                 <Text style={styles.optionSubtitle}>Update your personal information and preferences</Text>
               </View>
               <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
