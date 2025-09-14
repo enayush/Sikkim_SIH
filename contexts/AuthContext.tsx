@@ -32,14 +32,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         if (error) {
           console.error('AuthProvider: Error getting session:', error);
-          // If there's an error getting session, clear everything
-          if (mounted) {
-            setSession(null);
-            setUser(null);
-            setInitialized(true);
-            setLoading(false);
-          }
-          return;
         }
         
         if (mounted) {
@@ -70,31 +62,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       
       if (mounted) {
-        console.log('AuthProvider: Auth state change:', event);
-        
-        // Handle different auth events
-        if (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
-          console.log('AuthProvider: User signed out or token refreshed, clearing state');
+        // Handle sign out event specifically
+        if (event === 'SIGNED_OUT') {
+          console.log('AuthProvider: User signed out, clearing state');
           setSession(null);
           setUser(null);
           setLoading(false);
-        } else if (event === 'SIGNED_IN') {
-          console.log('AuthProvider: User signed in');
+        } else {
           setSession(session);
           setUser(session?.user ?? null);
-          setLoading(false);
-        } else if (event === 'INITIAL_SESSION') {
-          console.log('AuthProvider: Initial session loaded');
-          setSession(session);
-          setUser(session?.user ?? null);
-          if (initialized) {
+          
+          // Don't set loading to false immediately on auth changes if we haven't initialized
+          if (initialized || event !== 'INITIAL_SESSION') {
             setLoading(false);
           }
-        } else {
-          // Handle other events like PASSWORD_RECOVERY, etc.
-          setSession(session);
-          setUser(session?.user ?? null);
-          setLoading(false);
         }
       }
     });
@@ -109,45 +90,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [initialized]);
 
   const signUp = async (email: string, password: string, username: string) => {
-    try {
-      const result = await supabase.auth.signUp({ 
-        email, 
-        password,
-        options: {
-          data: {
-            username: username
-          }
+    return await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        data: {
+          username: username
         }
-      });
-      
-      // Handle specific auth errors
-      if (result.error) {
-        console.error('Signup error:', result.error);
-        // Don't throw, let the calling component handle the error
       }
-      
-      return result;
-    } catch (error) {
-      console.error('Signup exception:', error);
-      throw error;
-    }
+    });
   };
 
   const signIn = async (email: string, password: string) => {
-    try {
-      const result = await supabase.auth.signInWithPassword({ email, password });
-      
-      // Handle specific auth errors
-      if (result.error) {
-        console.error('Signin error:', result.error);
-        // Don't throw, let the calling component handle the error
-      }
-      
-      return result;
-    } catch (error) {
-      console.error('Signin exception:', error);
-      throw error;
-    }
+    return await supabase.auth.signInWithPassword({ email, password });
   };
 
   const signOut = async () => {

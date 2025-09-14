@@ -16,7 +16,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Star, MessageCircle, Send, User } from 'lucide-react-native';
 import { getMonasteryReviews, addMonasteryReview, MonasteryReviewWithUser } from '../../lib/monasteryService';
 import { useAuth } from '../../contexts/AuthContext';
-import { profileService } from '../../lib/profileService';
 import Monstyles from './styles/style';
 
 interface ReviewsSectionProps {
@@ -30,7 +29,6 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
   const insets = useSafeAreaInsets();
   
   const [reviews, setReviews] = useState<MonasteryReviewWithUser[]>([]);
-  const [usernames, setUsernames] = useState<{[userId: string]: string}>({});
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [newRating, setNewRating] = useState(5);
   const [newComment, setNewComment] = useState('');
@@ -59,41 +57,10 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
     };
   }, []);
 
-  const fetchUsernames = async (reviewData: MonasteryReviewWithUser[]) => {
-    try {
-      const usernameMap: {[userId: string]: string} = {};
-      
-      // Get unique user IDs from reviews
-      const userIds = [...new Set(reviewData.map(review => review.user_id))];
-      
-      // Fetch usernames for each user
-      for (const userId of userIds) {
-        try {
-          const { profile } = await profileService.getProfile(userId);
-          if (profile?.username) {
-            usernameMap[userId] = profile.username;
-          }
-        } catch (error) {
-          console.error(`Error fetching username for user ${userId}:`, error);
-          // Keep the email as fallback
-        }
-      }
-      
-      setUsernames(usernameMap);
-    } catch (error) {
-      console.error('Error fetching usernames:', error);
-    }
-  };
-
   const fetchReviews = async () => {
     try {
       const data = await getMonasteryReviews(monasteryId);
       setReviews(data || []);
-      
-      // Fetch usernames for the reviews
-      if (data && data.length > 0) {
-        await fetchUsernames(data);
-      }
     } catch (error) {
       console.error('Error fetching reviews:', error);
       setReviews([]);
@@ -120,7 +87,7 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
       setNewRating(5);
       setShowReviewForm(false);
       
-      // Refresh reviews and usernames
+      // Refresh reviews
       await fetchReviews();
       
       // Notify parent component
@@ -167,58 +134,47 @@ export default function ReviewsSection({ monasteryId, onReviewsUpdated }: Review
     );
   };
 
-  const getInitials = (username: string) => {
-    if (!username || username === 'Anonymous User') return 'A';
+  const getInitials = (email: string) => {
+    if (!email || email === 'Anonymous User') return 'A';
     
-    // Get the first letter of the username
-    return username.charAt(0).toUpperCase();
-  };
-
-  const getDisplayName = (review: MonasteryReviewWithUser) => {
-    // Try to get username first, fallback to email
-    const username = usernames[review.user_id];
-    if (username) {
-      return username;
+    // If it's an email, get the first letter before @
+    if (email.includes('@')) {
+      return email.split('@')[0].charAt(0).toUpperCase();
     }
     
-    // Fallback to email (for backward compatibility)
-    return review.user_email || 'Anonymous User';
+    // Otherwise get the first letter
+    return email.charAt(0).toUpperCase();
   };
 
-  const renderReviewCard = (review: MonasteryReviewWithUser) => {
-    const displayName = getDisplayName(review);
-    const isUsername = usernames[review.user_id];
-    
-    return (
-      <View key={review.id} style={Monstyles.reviewCard}>
-        <View style={Monstyles.reviewHeader}>
-          <View style={Monstyles.reviewUserInfo}>
-            <View style={Monstyles.profileIcon}>
-              {displayName && displayName !== 'Anonymous User' ? (
-                <Text style={Monstyles.profileIconText}>
-                  {getInitials(displayName)}
-                </Text>
-              ) : (
-                <User size={20} color="#FFFFFF" />
-              )}
-            </View>
-            <View style={Monstyles.reviewUserDetails}>
-              <Text style={Monstyles.reviewUserEmail}>
-                {displayName}
+  const renderReviewCard = (review: MonasteryReviewWithUser) => (
+    <View key={review.id} style={Monstyles.reviewCard}>
+      <View style={Monstyles.reviewHeader}>
+        <View style={Monstyles.reviewUserInfo}>
+          <View style={Monstyles.profileIcon}>
+            {review.user_email && review.user_email !== 'Anonymous User' ? (
+              <Text style={Monstyles.profileIconText}>
+                {getInitials(review.user_email)}
               </Text>
-              <View style={Monstyles.reviewRating}>
-                {renderStars(review.rating, 14)}
-              </View>
+            ) : (
+              <User size={20} color="#FFFFFF" />
+            )}
+          </View>
+          <View style={Monstyles.reviewUserDetails}>
+            <Text style={Monstyles.reviewUserEmail}>
+              {review.user_email || 'Anonymous User'}
+            </Text>
+            <View style={Monstyles.reviewRating}>
+              {renderStars(review.rating, 14)}
             </View>
           </View>
-          <Text style={Monstyles.reviewDate}>
-            {new Date(review.created_at).toLocaleDateString()}
-          </Text>
         </View>
-        <Text style={Monstyles.reviewComment}>{review.comment}</Text>
+        <Text style={Monstyles.reviewDate}>
+          {new Date(review.created_at).toLocaleDateString()}
+        </Text>
       </View>
-    );
-  };
+      <Text style={Monstyles.reviewComment}>{review.comment}</Text>
+    </View>
+  );
 
   return (
     <View style={Monstyles.reviewsContainer}>
