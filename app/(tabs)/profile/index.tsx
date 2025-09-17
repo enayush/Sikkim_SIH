@@ -258,10 +258,7 @@ const headerStyle = useAnimatedStyle(() => {
           <View style={styles.optionsContainer}>
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to rewards or achievements screen
-                Alert.alert('Coming Soon', 'Rewards system will be available soon!');
-              }}
+              onPress={() => router.push('/explorer-badges')}
             >
               <View style={styles.optionIconContainer}>
                 <Award size={24} color="#F59E0B" />
@@ -272,13 +269,9 @@ const headerStyle = useAnimatedStyle(() => {
               </View>
               <ChevronRight size={20} color="#9CA3AF" style={styles.optionArrow} />
             </TouchableOpacity>
-
             <TouchableOpacity 
               style={styles.optionCard}
-              onPress={() => {
-                // Navigate to rewards or achievements screen
-                Alert.alert('Coming Soon', 'Rewards system will be available soon!');
-              }}
+              onPress={() => router.push('/rewards')}
             >
               <View style={styles.optionIconContainer}>
                 <Gift size={24} color="#10B981" />

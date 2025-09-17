@@ -57,7 +57,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="digital-archive"
         options={{
-          title: t('archive'),
+          title: t('Archive'),
           tabBarIcon: ({ size, color }) => (
             <Archive size={size} color={color} strokeWidth={2} />
           ),
