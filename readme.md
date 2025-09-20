@@ -1,5 +1,6 @@
-# Sacred Sikkim
-## Major Features
+# SIH25061
+## 	Digitize and Showcase Monasteries of Sikkim for Tourism and Cultural Preservation
+
 1. **Interactive Maps & Location Services**
 Interactive map with monastery markers, GPS tracking, 360° Street View integration, and location-based search functionality.
 
@@ -18,59 +19,23 @@ User reviews, explorer badges, community challenges, donation platform, and prog
 6. **AI-Powered Multilingual Experience**
 Smart chatbot assistance, personalized recommendations, support for English/Hindi/Nepali, and offline capabilities.
 
+## Team Details
 
-## Quick Start
+**Team Name:** NHK.ai
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-2. **Edit `.env` file with your API keys:**
-   ```env
-   EXPO_PUBLIC_SUPABASE_URL=your_supabase_url_here
-   EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
-   EXPO_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
-   ```
+**Team Leader:** [@Kusha008](https://github.com/Kusha008)
 
-3. **Start Expo for Testing**
-   ```bash
-   npx expo start
-   ```
+**Team Members:**
 
-## How to build APK
+- **MEMBER_1** - 2022UCS1588 - [@Kusha008](https://github.com/Kusha008)
+- **MEMBER_2** - 2022UCS1520 - [@enayush](https://github.com/enayush)
+- **MEMBER_3** - 2022UCS1517 - [@shibs-01](https://github.com/shibs-01)
+- **MEMBER_4** - 2022UCS1572 - [@Laksh-01](https://github.com/Laksh-01)
+- **MEMBER_5** - 2022UCS1547 - [@Piyush-Sharma79](https://github.com/Piyush-Sharma79)
+- **MEMBER_6** - 2022UCS1574 - [@USERNAME](https://github.com/USERNAME)
 
-### Method 1: Using EAS Build (Recommended)
-```bash
-# Install EAS CLI if you haven't already
-npm install -g @expo/eas-cli
+## Project Links
 
-# Login to Expo
-eas login
-
-# Build APK
-eas build --platform android --profile preview
-```
-
-### Method 2: Local Build
-```bash
-# Prebuild to generate native code
-npx expo prebuild --clean
-
-# Build APK using Gradle
-cd android
-./gradlew assembleRelease
-
-# APK will be generated at: android/app/build/outputs/apk/release/app-release.apk
-```
-
-## Google Maps Setup
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a project and enable these APIs:
-   - Maps SDK for Android
-   - Maps SDK for iOS
-   - Maps JavaScript API (for web)
-3. Create an API key and add it to your `.env` file
-4. **Important:** Set up API restrictions and quotas to control costs
-
-That's it! Your monastery app is ready to go.
+- **SIH Presentation:** [Final SIH Presentation](URL TO PPT UPLOADED TO GITHUB)
+- **Video Demonstration:** [Watch Video](UNLISTED YOUTUBE LINK)
+- **Source Code:** [GitHub Repository](GITHUB LINK TO THE REPO)
