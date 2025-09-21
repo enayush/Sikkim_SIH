@@ -22,12 +22,12 @@ import {
   Dimensions,
   ScrollView,
   Keyboard,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Send, MessageSquare, Sparkles, History } from 'lucide-react-native';
 import Markdown from 'react-native-markdown-display';
-import SafeScreen from '@/components/SafeScreen';
 import { processChatMessage, getChatHistory, getOrCreateConversation, saveMessage, getAllConversations } from '@/lib/chatService';
 import { getAllMonasteries } from '@/lib/monasteryService';
 import { createBooking, BookingInsert } from '@/lib/bookingService';
@@ -59,7 +59,6 @@ export default function Chatbot() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [conversations, setConversations] = useState<any[]>([]);
   const [isLoadingConversations, setIsLoadingConversations] = useState(false);
-  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   // Booking flow state
@@ -93,23 +92,6 @@ export default function Chatbot() {
     };
     loadHistory();
   }, [user]);
-
-  // Keyboard listeners
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      'keyboardDidShow',
-      (e) => setKeyboardHeight(e.endCoordinates.height)
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      'keyboardDidHide',
-      () => setKeyboardHeight(0)
-    );
-
-    return () => {
-      keyboardDidShowListener?.remove();
-      keyboardDidHideListener?.remove();
-    };
-  }, []);
 
   const loadConversations = async () => {
     if (!user) return;
@@ -1022,9 +1004,13 @@ You will receive a confirmation email shortly. The monastery staff will contact 
   const groupedConversations = groupConversationsByDate(conversations);
 
   return (
-    <SafeScreen>
+    <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
-      <View style={[styles.container, { paddingBottom: keyboardHeight }]}>
+      <KeyboardAvoidingView 
+        style={styles.container} 
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 30 : 40}
+      >
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
@@ -1051,7 +1037,7 @@ You will receive a confirmation email shortly. The monastery staff will contact 
           renderItem={renderMessage}
           keyExtractor={(item) => item.id}
           style={styles.messagesList}
-          contentContainerStyle={[styles.messagesContent, { paddingBottom: keyboardHeight > 0 ? 120 : 80 }]}
+          contentContainerStyle={styles.messagesContent}
           showsVerticalScrollIndicator={false}
         />
 
@@ -1083,6 +1069,7 @@ You will receive a confirmation email shortly. The monastery staff will contact 
             </TouchableOpacity>
           </View>
         </View>
+      </KeyboardAvoidingView>
 
         {/* Chat History Sidebar */}
         <Modal
@@ -1098,29 +1085,29 @@ You will receive a confirmation email shortly. The monastery staff will contact 
               <Text style={styles.sidebarTitle}>Chat History</Text>
               <ScrollView style={styles.historyList} showsVerticalScrollIndicator={false}>
                 {Object.entries(groupedConversations).map(([date, dateConversations]) => (
-                  <View key={date} style={styles.dateSection}>
+                  <View key={date}>
                     <Text style={styles.dateHeader}>{date}</Text>
-                    {dateConversations.map((conv) => (
+                    {dateConversations.map((conversation) => (
                       <TouchableOpacity
-                        key={conv.id}
-                        onPress={() => handleSelectConversation(conv.id)}
+                        key={conversation.id}
                         style={styles.historyItem}
+                        onPress={() => handleSelectConversation(conversation.id)}
                       >
-                        <Text style={styles.historyText}>
-                          {conv.summary || 'New Conversation'}
+                        <Text style={styles.historyTime} numberOfLines={1}>
+                          {conversation.summary || `Chat ${conversation.id.slice(0, 8)}`}
                         </Text>
-                        <Text style={styles.historyTime}>
-                          {new Date(conv.updated_at).toLocaleTimeString('en-US', {
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
+                        <Text style={styles.historyItem}>
+                          {new Date(conversation.updated_at).toLocaleTimeString()}
                         </Text>
                       </TouchableOpacity>
                     ))}
                   </View>
                 ))}
-                {conversations.length === 0 && (
-                  <View style={styles.emptyState}>
+                <TouchableOpacity style={styles.historyItem} onPress={handleNewChat}>
+                  <Text style={styles.historyTime}>+ Start New Chat</Text>
+                </TouchableOpacity>
+                {conversations.length === 0 && !isLoadingConversations && (
+                  <View style={styles.messagesList}>
                     <Text style={styles.emptyText}>No chat history yet</Text>
                     <Text style={styles.emptySubtext}>Start a conversation to see it here</Text>
                   </View>
@@ -1129,12 +1116,15 @@ You will receive a confirmation email shortly. The monastery staff will contact 
             </View>
           </View>
         </Modal>
-      </View>
-    </SafeScreen>
-  );
-}
+      </SafeAreaView>
+    );
+  }
 
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#F9FAFB',
+  },
   container: {
     flex: 1,
     backgroundColor: '#F9FAFB',
@@ -1183,7 +1173,7 @@ const styles = StyleSheet.create({
   },
   messagesContent: {
     padding: 16,
-    paddingBottom: 8,
+    paddingBottom: 120,
   },
   messageContainer: {
     flexDirection: 'row',

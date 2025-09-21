@@ -24,17 +24,17 @@ import indstyle from './map/styles/indstyle';
 
 // Define hardcoded monastery UUIDs
 const CAROUSEL_MONASTERY_IDS = [
-  'eceb7332-81c1-4888-850f-6a9196e4c71a',
-  'ecbb904c-8103-4847-be38-3c79be529d9c',
-  'ec47a454-ee59-40f5-838d-3a76098a0412',
-  'eaf16139-1c03-4233-993d-885300136665'
+  '3d5d7d8c-da97-4918-83b5-0eab661f330a',
+  'e8b8751d-0ad4-45e3-b87e-79251b319847',
+  '58533da4-51fe-4b14-80b3-f67da2647351',
+  '611c2131-1bfa-4996-8376-c7e699b46f26'
 ];
 
 const POPULAR_MONASTERY_IDS = [
   'eceb7332-81c1-4888-850f-6a9196e4c71a',
-  'ecbb904c-8103-4847-be38-3c79be529d9c',
-  'ec47a454-ee59-40f5-838d-3a76098a0412',
-  'eaf16139-1c03-4233-993d-885300136665'
+  '907feb61-d267-404c-b5be-4331d17cc0c6',
+  'e2082f48-ffe4-496d-8cab-da40ae177205',
+  '90899b00-b549-47bd-ab40-251cf75041a7'
 ];
 
 const { width } = Dimensions.get('window');
