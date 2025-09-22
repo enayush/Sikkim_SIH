@@ -14,6 +14,7 @@
       "backgroundColor": "#000000"
     },
     "ios": {
+      "bundleIdentifier": "com.nhkai.monastery360",
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show nearby monasteries."
@@ -44,6 +45,7 @@
       "router": {}
     },
     "android": {
+      "package": "com.nhkai.monastery360",
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "INTERNET"
