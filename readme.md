@@ -32,7 +32,7 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
 - **MEMBER_3** - 2022UCS1517 - [@shibs-01](https://github.com/shibs-01)
 - **MEMBER_4** - 2022UCS1572 - [@Laksh-01](https://github.com/Laksh-01)
 - **MEMBER_5** - 2022UCS1547 - [@Piyush-Sharma79](https://github.com/Piyush-Sharma79)
-- **MEMBER_6** - 2022UCS1574 - [@USERNAME](https://github.com/BhavyaTiwari)
+- **MEMBER_6** - 2022UCS1574 - [@BhavyaTiwari](https://github.com/BhavyaTiwari)
 
 ## Project Links
 
