@@ -49,7 +49,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: "**Welcome to Sacred Sikkim!** 🙏\n\nI'm your guide to Sikkim's Buddhist monasteries. I can help you:\n\n• Learn about monastery history and significance\n• Plan visits and get practical information\n• Explore Buddhist culture and traditions\n• Book monastery visits\n\nWhat would you like to know about Sikkim's sacred heritage?",
+      text: "**Welcome to Monastery360!** 🙏\n\nI'm your guide to Sikkim's Buddhist monasteries. I can help you:\n\n• Learn about monastery history and significance\n• Plan visits and get practical information\n• Explore Buddhist culture and traditions\n• Book monastery visits\n\nWhat would you like to know about Sikkim's sacred heritage?",
       isUser: false,
       timestamp: new Date(),
     }
@@ -126,7 +126,7 @@ export default function Chatbot() {
     setMessages([
       {
         id: '1',
-        text: "🙏 Namaste! I'm your Sacred Sikkim guide. I can help you learn about monasteries, plan visits, and explore our beautiful Buddhist heritage. What would you like to know?",
+        text: "🙏 Namaste! I'm your Monastery360 guide. I can help you learn about monasteries, plan visits, and explore our beautiful Buddhist heritage. What would you like to know?",
         isUser: false,
         timestamp: new Date(),
       }
@@ -243,7 +243,7 @@ export default function Chatbot() {
         {item.isTyping ? (
           <View style={styles.typingContainer}>
             <ActivityIndicator size="small" color="#6B7280" />
-            <Text style={styles.typingText}>Sacred Sikkim is typing...</Text>
+            <Text style={styles.typingText}>Monastery360 is typing...</Text>
           </View>
         ) : item.isUser ? (
           <Text style={[styles.messageText, styles.userText]}>
@@ -631,7 +631,7 @@ Your visit to **${bookingData.monasteryName}** has been booked successfully!
 📅 Visit Date: ${bookingData.visitDate}
 🎫 Status: Pending approval
 
-Thank you for choosing Sacred Sikkim! 🙏`);
+Thank you for choosing Monastery360! 🙏`);
 
       // Reset booking flow
       setIsInBookingFlow(false);
@@ -1021,7 +1021,7 @@ You will receive a confirmation email shortly. The monastery staff will contact 
               <Sparkles size={20} color="#FFFFFF" />
             </View>
             <View>
-              <Text style={styles.headerTitle}>Sacred Sikkim Guide</Text>
+              <Text style={styles.headerTitle}>Monastery360 Guide</Text>
               <Text style={styles.headerSubtitle}>Monastery Expert Assistant</Text>
             </View>
           </View>

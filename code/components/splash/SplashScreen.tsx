@@ -208,7 +208,7 @@ export default function SplashScreen() {
             </Animated.View>
 
             <Animated.View style={{ transform: [{ translateY: slideAnim }] }}>
-                <Text style={styles.title}>Sacred Sikkim</Text>
+                <Text style={styles.title}>Monastery360</Text>
                 <Text style={styles.subtitle}>Discover spiritual places near you</Text>
             </Animated.View>
 

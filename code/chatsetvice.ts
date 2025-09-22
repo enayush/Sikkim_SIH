@@ -319,7 +319,7 @@ const buildContextWithoutRAG = (query: string, conversationHistory: string, curr
     : '';
 
   return `
-You are Sacred Sikkim Assistant, an expert guide for Sikkim's Buddhist monasteries.
+You are Monastery360 Assistant, an expert guide for Sikkim's Buddhist monasteries.
 
 CONVERSATION HISTORY:
 ${conversationHistory}
@@ -351,7 +351,7 @@ const callGeminiAPI = async (context: string): Promise<string> => {
     const requestBody = {
       contents: [{
         parts: [{
-          text: `You are Sacred Sikkim Assistant, an expert guide for Sikkim's Buddhist monasteries.
+          text: `You are Monastery360 Assistant, an expert guide for Sikkim's Buddhist monasteries.
 
 ${context}
 

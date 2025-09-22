@@ -66,7 +66,7 @@ const developers: Developer[] = [
     id: '6',
     name: 'Bhavya Tiwari',
     role: 'UI/UX Designer',
-    github: 'bhavya-tiwari',
+    github: 'BhavyaTiwari',
     avatar: 'https://via.placeholder.com/80x80/FF9933/FFFFFF?text=BT',
     description: 'Creative designer focused on creating intuitive and beautiful user experiences.'
   }
@@ -110,11 +110,11 @@ export default function AboutScreen() {
             </View>
           </View>
           
-          <Text style={styles.appTitle}>Sacred Sikkim</Text>
+          <Text style={styles.appTitle}>Monastery360</Text>
           <Text style={styles.appSubtitle}>Discover the Spiritual Heritage of Sikkim</Text>
           
           <Text style={styles.appDescription}>
-            Sacred Sikkim is a comprehensive mobile application designed to help you explore 
+            Monastery360 is a comprehensive mobile application designed to help you explore 
             and discover the rich cultural heritage of monasteries in Sikkim. Our mission is 
             to preserve and share the spiritual wisdom and architectural beauty of these 
             sacred places through technology.
@@ -205,7 +205,7 @@ export default function AboutScreen() {
         <View style={styles.versionSection}>
           <Text style={styles.versionText}>Version 1.0.0</Text>
           <Text style={styles.copyrightText}>
-            © 2024 Sacred Sikkim. All rights reserved.
+            © 2024 Monastery360. All rights reserved.
           </Text>
         </View>
       </ScrollView>

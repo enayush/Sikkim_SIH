@@ -234,7 +234,7 @@ const HomeScreen = React.memo(() => {
       <Animated.View style={[indstyle.topBar, headerStyle]}>
         <View style={indstyle.logoContainer}>
           <Image source={require('../../assets/images/icon.png')} style={indstyle.logo} />
-          <Text style={indstyle.appName}>Sacred Sikkim</Text>
+          <Text style={indstyle.appName}>Monastery360</Text>
         </View>
         <TouchableOpacity onPress={() => router.push('/notification')}>
           <Bell size={24} color="#1F2937" />

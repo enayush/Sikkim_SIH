@@ -21,8 +21,8 @@ const faqData: FAQItem[] = [
   // General Questions
   {
     id: '1',
-    question: 'What is Sacred Sikkim?',
-    answer: 'Sacred Sikkim is a comprehensive mobile application designed to help you explore and discover the rich cultural heritage of monasteries in Sikkim. It provides interactive maps, detailed monastery information, booking services, and cultural archives.',
+    question: 'What is Monastery360?',
+    answer: 'Monastery360 is a comprehensive mobile application designed to help you explore and discover the rich cultural heritage of monasteries in Sikkim. It provides interactive maps, detailed monastery information, booking services, and cultural archives.',
     category: 'General'
   },
   {
@@ -34,7 +34,7 @@ const faqData: FAQItem[] = [
   {
     id: '3',
     question: 'Is the app free to use?',
-    answer: 'Yes, Sacred Sikkim is completely free to download and use. All core features including monastery exploration, maps, and basic booking services are available at no cost.',
+    answer: 'Yes, Monastery360 is completely free to download and use. All core features including monastery exploration, maps, and basic booking services are available at no cost.',
     category: 'General'
   },
   
@@ -68,7 +68,7 @@ const faqData: FAQItem[] = [
   {
     id: '8',
     question: 'How do I enable location services?',
-    answer: 'Go to your device settings, find Sacred Sikkim in the app list, and enable location permissions. This allows the app to show your current location on the map and provide nearby monastery recommendations.',
+    answer: 'Go to your device settings, find Monastery360 in the app list, and enable location permissions. This allows the app to show your current location on the map and provide nearby monastery recommendations.',
     category: 'Technical Support'
   },
   {

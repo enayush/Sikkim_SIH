@@ -244,7 +244,7 @@ const callGeminiAPI = async (context: string): Promise<string> => {
     const requestBody = {
       contents: [{
         parts: [{
-          text: `You are Sacred Sikkim Assistant, an expert guide for Sikkim's Buddhist monasteries.
+          text: `You are Monastery360 Assistant, an expert guide for Sikkim's Buddhist monasteries.
 
 ${context}
 
@@ -513,7 +513,7 @@ ${ragResults.map((result, index) => `
     : 'Monastery Database Search Results: No relevant monasteries found for the current query.';
 
   const prompt = `
-You are Sacred Sikkim Assistant, a conversational AI expert on Sikkim's monasteries. Your task is to analyze a user's query and decide how to respond based on conversation history and database search results.
+You are Monastery360 Assistant, a conversational AI expert on Sikkim's monasteries. Your task is to analyze a user's query and decide how to respond based on conversation history and database search results.
 
 **Previous Conversation Turn:**
 - Last User Question: "${lastUserMessage}"

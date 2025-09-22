@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Sacred Sikkim",
-    "slug": "sacred-sikkim",
+    "name": "Monastery360",
+    "slug": "monastery360",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "sacredsikkim",
+    "scheme": "monastery360",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {

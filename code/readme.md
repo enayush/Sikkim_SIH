@@ -1,4 +1,4 @@
-# Sacred Sikkim
+# Monastery360
 
 ## Tasks Accomplished
 
@@ -127,4 +127,4 @@ Follow these steps to run the project locally:
 
 ---
 
-That's it! Your Sacred Sikkim app is ready to go.
+That's it! Your Monastery360 app is ready to go.

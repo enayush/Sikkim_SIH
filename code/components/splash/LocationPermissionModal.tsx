@@ -132,7 +132,7 @@ export default function LocationPermissionModal({
 
             {/* Description */}
             <Text style={styles.description}>
-              Sacred Sikkim needs access to your location to show nearby monasteries, temples, and spiritual places on the map.
+              Monastery360 needs access to your location to show nearby monasteries, temples, and spiritual places on the map.
             </Text>
 
             {/* Benefits */}
