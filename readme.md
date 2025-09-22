@@ -27,7 +27,7 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
 
 **Team Members:**
 
-- **MEMBER_1** - 2022UCS1588 - [@Kusha008](https://github.com/Kusha008)
+- **MEMBER_1** - 2022UCS1587 - [@Kusha008](https://github.com/Kusha008)
 - **MEMBER_2** - 2022UCS1520 - [@enayush](https://github.com/enayush)
 - **MEMBER_3** - 2022UCS1517 - [@shibs-01](https://github.com/shibs-01)
 - **MEMBER_4** - 2022UCS1572 - [@Laksh-01](https://github.com/Laksh-01)
