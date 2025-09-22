@@ -36,7 +36,7 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
 
 ## Project Links
 
-- **SIH Presentation:** 
+- **SIH Presentation(Github Link):** https://github.com/enayush/Sikkim_SIH/blob/main/files/Internal_PPT_NHK.ai.pdf
 - **SIH Presentation(G-drive Link):** https://drive.google.com/file/d/1Ooe6mxZr2QYMGDHe84lXDkPI1afoPLCN/view?usp=drive_link
 - **App APK(G-drive Link):** https://drive.google.com/file/d/1xE_kwyScJIY7a1wYR1442M63gLriPfCs/view?usp=drive_link
 - **Video Demonstration:** [Watch Video](UNLISTED YOUTUBE LINK)
