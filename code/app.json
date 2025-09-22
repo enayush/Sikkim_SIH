@@ -15,7 +15,6 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ashhhh1535.sacredsikkim",
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "This app needs access to your location to show nearby monasteries."
       }
@@ -45,7 +44,6 @@
       "router": {}
     },
     "android": {
-      "package": "com.ashhhh1535.sacredsikkim",
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "INTERNET"
