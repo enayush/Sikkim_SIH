@@ -36,6 +36,9 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
 
 ## Project Links
 
-- **SIH Presentation:** [Final SIH Presentation](URL TO PPT UPLOADED TO GITHUB)
+- **SIH Presentation:** 
+- **SIH Presentation(G-drive Link):** https://drive.google.com/file/d/1Ooe6mxZr2QYMGDHe84lXDkPI1afoPLCN/view?usp=drive_link
+- **App APK(G-drive Link):** https://drive.google.com/file/d/1xE_kwyScJIY7a1wYR1442M63gLriPfCs/view?usp=drive_link
 - **Video Demonstration:** [Watch Video](UNLISTED YOUTUBE LINK)
-- **Source Code:** [GitHub Repository](GITHUB LINK TO THE REPO)
+- **Source Code:** https://github.com/enayush/Sikkim_SIH
+
