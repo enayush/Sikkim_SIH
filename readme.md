@@ -42,3 +42,7 @@ Smart chatbot assistance, personalized recommendations, support for English/Hind
 - **Video Demonstration:** https://youtube.com/shorts/5l10d4hJuTs?feature=share
 - **Source Code:** https://github.com/enayush/Sikkim_SIH
 
+### Test Credentials For Apk
+- You can sign up and create a new account or use
+- email : test@gmail.com
+- password : 123456@
