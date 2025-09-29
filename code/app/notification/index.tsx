@@ -1,12 +1,13 @@
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, Platform, StatusBar } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Platform, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
+import SafeScreen from '@/components/SafeScreen';
 
 export default function Notifications() {
   const router = useRouter();
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <ArrowLeft size={24} color="#1F2937" />
@@ -17,7 +18,7 @@ export default function Notifications() {
       <View style={styles.content}>
         <Text>No new notifications.</Text>
       </View>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 

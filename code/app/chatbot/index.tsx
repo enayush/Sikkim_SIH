@@ -16,7 +16,6 @@ import {
   FlatList,
   StyleSheet,
   Platform,
-  SafeAreaView,
   ActivityIndicator,
   Modal,
   Dimensions,
@@ -33,6 +32,7 @@ import { getAllMonasteries } from '@/lib/monasteryService';
 import { createBooking, BookingInsert } from '@/lib/bookingService';
 import { useAuth } from '@/contexts/AuthContext';
 import ChatHistorySidebar from '@/components/ChatHistorySidebar';
+import SafeScreen from '@/components/SafeScreen';
 
 interface Message {
   id: string;
@@ -1022,7 +1022,7 @@ You will receive a confirmation email shortly. The monastery staff will contact 
   const groupedConversations = groupConversationsByDate(conversations);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
       <StatusBar style="dark" />
       <KeyboardAvoidingView
         style={styles.container}
@@ -1134,7 +1134,7 @@ You will receive a confirmation email shortly. The monastery staff will contact 
             </View>
           </View>
         </Modal>
-      </SafeAreaView>
+      </SafeScreen>
     );
   }
 

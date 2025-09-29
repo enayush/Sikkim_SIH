@@ -3,7 +3,6 @@ import {
   Text,
   View,
   StyleSheet,
-  SafeAreaView,
   TouchableOpacity,
   Platform,
   StatusBar,
@@ -16,6 +15,7 @@ import { useRouter } from 'expo-router';
 import { ArrowLeft, Play, Volume2 } from 'lucide-react-native';
 import { getMonasteriesWithAudioGuide, Monastery } from '@/lib/monasteryService';
 import AudioGuideModal from '@/components/AudioGuideModal';
+import SafeScreen from '@/components/SafeScreen';
 
 export default function AudioGuide() {
   const router = useRouter();
@@ -80,7 +80,7 @@ export default function AudioGuide() {
 
   if (loading) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => router.back()}>
             <ArrowLeft size={24} color="#1F2937" />
@@ -92,12 +92,12 @@ export default function AudioGuide() {
           <ActivityIndicator size="large" color="#DF8020" />
           <Text style={styles.loadingText}>Loading monasteries...</Text>
         </View>
-      </SafeAreaView>
+      </SafeScreen>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => router.back()}>
           <ArrowLeft size={24} color="#1F2937" />
@@ -126,7 +126,7 @@ export default function AudioGuide() {
         monastery={selectedMonastery}
         onClose={closeModal}
       />
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 

@@ -10,7 +10,6 @@ import {
     Alert, 
     ActivityIndicator,
     KeyboardAvoidingView,
-    SafeAreaView,
     StatusBar,
     Modal
 } from 'react-native';
@@ -20,6 +19,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { createBooking } from '../../lib/bookingService';
 import { getMonasteryById, Monastery } from '../../lib/monasteryService';
 import Bookstyle from './styles/Bookstyle';
+import SafeScreen from '../../components/SafeScreen';
 
 // It's good practice to define props interfaces clearly.
 interface BookingFormProps {
@@ -465,7 +465,7 @@ export default function BookingPage() {
   };
 
   return (
-    <SafeAreaView style={Bookstyle.safeArea}>
+    <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
       <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView 
         style={Bookstyle.container} 
@@ -489,7 +489,7 @@ export default function BookingPage() {
           {renderContent()}
         </ScrollView>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </SafeScreen>
   );
 }
 
