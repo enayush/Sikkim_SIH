@@ -166,7 +166,7 @@ export default function Chatbot() {
     }
 
     // Check for booking intent keywords
-    const bookingKeywords = ['book', 'booking', 'reserve', 'reservation', 'visit', 'schedule', 'appointment'];
+    const bookingKeywords = ['book', 'booking', 'reserve', 'reservation', 'schedule'];
     const containsBookingKeyword = bookingKeywords.some(keyword =>
       currentInput.toLowerCase().includes(keyword)
     );
@@ -1006,8 +1006,8 @@ You will receive a confirmation email shortly. The monastery staff will contact 
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
-      <KeyboardAvoidingView 
-        style={styles.container} 
+      <KeyboardAvoidingView
+        style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 30 : 40}
       >
