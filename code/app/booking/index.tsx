@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { 
-    View, 
-    Text, 
-    TextInput, 
-    TouchableOpacity, 
-    StyleSheet, 
-    Platform, 
-    ScrollView, 
-    Alert, 
+import {
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    Platform,
+    ScrollView,
+    Alert,
     ActivityIndicator,
     KeyboardAvoidingView,
     StatusBar,
@@ -81,24 +81,24 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
   const generateCalendarDays = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Normalize to start of day
-    
+
     const currentMonth = selectedDate.getMonth();
     const currentYear = selectedDate.getFullYear();
     const firstDay = new Date(currentYear, currentMonth, 1);
     const startDate = new Date(firstDay);
     startDate.setDate(startDate.getDate() - firstDay.getDay());
-    
+
     const days = [];
     const currentDate = new Date(startDate);
-    
+
     for (let i = 0; i < 42; i++) {
       // Create a clean date object to avoid timezone issues
       const dayDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
-      
+
       const isCurrentMonth = dayDate.getMonth() === currentMonth;
       const isToday = dayDate.getTime() === today.getTime();
       const isPast = dayDate < today;
-      
+
       // Check if this date matches the selected visit date
       let isSelected = false;
       if (visitDate) {
@@ -106,7 +106,7 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
         const visitLocalDate = new Date(visitDateObj.getFullYear(), visitDateObj.getMonth(), visitDateObj.getDate());
         isSelected = dayDate.getTime() === visitLocalDate.getTime();
       }
-      
+
       days.push({
         date: new Date(dayDate),
         day: dayDate.getDate(),
@@ -115,20 +115,20 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
         isPast,
         isSelected
       });
-      
+
       currentDate.setDate(currentDate.getDate() + 1);
     }
-    
+
     return days;
   };
 
   const handleDateSelect = (date: Date) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     // Create a new date with local timezone to avoid timezone shifts
     const selectedLocalDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    
+
     if (selectedLocalDate >= today) {
       setVisitDate(formatDate(selectedLocalDate));
       setShowDatePicker(false);
@@ -237,16 +237,16 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
             <Text style={Bookstyle.visitorLabel}>Visitors</Text>
           </View>
           <View style={Bookstyle.visitorControls}>
-            <TouchableOpacity 
-              style={[Bookstyle.visitorButton, numberOfPeople <= 1 && Bookstyle.visitorButtonDisabled]} 
+            <TouchableOpacity
+              style={[Bookstyle.visitorButton, numberOfPeople <= 1 && Bookstyle.visitorButtonDisabled]}
               onPress={decrementPeople}
               disabled={numberOfPeople <= 1}
             >
               <Minus size={20} color={numberOfPeople <= 1 ? "#D1D5DB" : "#FFFFFF"} />
             </TouchableOpacity>
             <Text style={Bookstyle.visitorCount}>{numberOfPeople}</Text>
-            <TouchableOpacity 
-              style={[Bookstyle.visitorButton, numberOfPeople >= 50 && Bookstyle.visitorButtonDisabled]} 
+            <TouchableOpacity
+              style={[Bookstyle.visitorButton, numberOfPeople >= 50 && Bookstyle.visitorButtonDisabled]}
               onPress={incrementPeople}
               disabled={numberOfPeople >= 50}
             >
@@ -304,13 +304,13 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
                 <ArrowLeft size={20} color="#DF8020" style={{ transform: [{ rotate: '180deg' }] }} />
               </TouchableOpacity>
             </View>
-            
+
             <View style={Bookstyle.weekDays}>
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
                 <Text key={day} style={Bookstyle.weekDay}>{day}</Text>
               ))}
             </View>
-            
+
             <View style={Bookstyle.calendar}>
               {generateCalendarDays().map((dayInfo, index) => (
                 <TouchableOpacity
@@ -337,9 +337,9 @@ function BookingForm({ monastery, userEmail, isSubmitting, onSubmit }: BookingFo
                 </TouchableOpacity>
               ))}
             </View>
-            
-            <TouchableOpacity 
-              style={Bookstyle.calendarCloseButton} 
+
+            <TouchableOpacity
+              style={Bookstyle.calendarCloseButton}
               onPress={() => setShowDatePicker(false)}
             >
               <Text style={Bookstyle.calendarCloseText}>Close</Text>
@@ -355,7 +355,7 @@ export default function BookingPage() {
   const router = useRouter();
   const { user } = useAuth();
   const { monasteryId } = useLocalSearchParams();
-  
+
   const [monastery, setMonastery] = useState<Monastery | null>(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -436,8 +436,8 @@ export default function BookingPage() {
       return (
         <View style={Bookstyle.formContent}>
           <Text style={Bookstyle.infoText}>Please log in to make a booking.</Text>
-          <TouchableOpacity 
-            style={[Bookstyle.button, { backgroundColor: '#6B7280' }]} 
+          <TouchableOpacity
+            style={[Bookstyle.button, { backgroundColor: '#6B7280' }]}
             onPress={() => router.push('/auth/login')} // Or your login route
           >
             <Text style={Bookstyle.buttonText}>Login</Text>
@@ -467,8 +467,8 @@ export default function BookingPage() {
   return (
     <SafeScreen backgroundColor="#FFFFFF" forceTopPadding>
       <StatusBar barStyle="dark-content" />
-      <KeyboardAvoidingView 
-        style={Bookstyle.container} 
+      <KeyboardAvoidingView
+        style={Bookstyle.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
         <View style={Bookstyle.header}>
@@ -480,7 +480,7 @@ export default function BookingPage() {
           </View>
           <View style={Bookstyle.headerRight} />
         </View>
-        <ScrollView 
+        <ScrollView
           style={Bookstyle.scrollView}
           contentContainerStyle={Bookstyle.scrollContent}
           keyboardShouldPersistTaps="handled"
@@ -492,4 +492,3 @@ export default function BookingPage() {
     </SafeScreen>
   );
 }
-
