@@ -28,7 +28,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import { ArrowLeft, Send, MessageSquare, Sparkles, History } from 'lucide-react-native';
 import Markdown from 'react-native-markdown-display';
-import { processChatMessage, getChatHistory, getOrCreateConversation, saveMessage, getAllConversations } from '@/lib/chatService';
+import { processChatMessage, getChatHistory, getOrCreateConversation, createNewConversation, saveMessage, getAllConversations } from '@/lib/chatService';
 import { getAllMonasteries } from '@/lib/monasteryService';
 import { createBooking, BookingInsert } from '@/lib/bookingService';
 import { useAuth } from '@/contexts/AuthContext';
@@ -77,20 +77,25 @@ export default function Chatbot() {
   const flatListRef = useRef<FlatList>(null);
 
   useEffect(() => {
-    const loadHistory = async () => {
+    const startNewChat = async () => {
       if (user) {
-        // This will get the latest conversation or create a new one
-        const convId = await getOrCreateConversation();
-        if (convId) {
-          setConversationId(convId);
-          const history = await getChatHistory(convId);
-          if (history.length > 0) {
-            setMessages(history);
-          }
+        // Always create a new conversation when chatbot opens
+        const newConvId = await createNewConversation();
+        if (newConvId) {
+          setConversationId(newConvId);
+          // Start with fresh welcome message
+          setMessages([
+            {
+              id: '1',
+              text: "**Welcome to Monastery360!** 🙏\n\nI'm your guide to Sikkim's Buddhist monasteries. I can help you:\n\n• Learn about monastery history and significance\n• Plan visits and get practical information\n• Explore Buddhist culture and traditions\n• Book monastery visits\n\nWhat would you like to know about Sikkim's sacred heritage?",
+              isUser: false,
+              timestamp: new Date(),
+            }
+          ]);
         }
       }
     };
-    loadHistory();
+    startNewChat();
   }, [user]);
 
   const loadConversations = async () => {
@@ -121,17 +126,30 @@ export default function Chatbot() {
   };
 
   const handleNewChat = async () => {
-    const newConvId = await getOrCreateConversation();
+    const newConvId = await createNewConversation();
     setConversationId(newConvId);
     setMessages([
       {
         id: '1',
-        text: "🙏 Namaste! I'm your Monastery360 guide. I can help you learn about monasteries, plan visits, and explore our beautiful Buddhist heritage. What would you like to know?",
+        text: "**Welcome to Monastery360!** 🙏\n\nI'm your guide to Sikkim's Buddhist monasteries. I can help you:\n\n• Learn about monastery history and significance\n• Plan visits and get practical information\n• Explore Buddhist culture and traditions\n• Book monastery visits\n\nWhat would you like to know about Sikkim's sacred heritage?",
         isUser: false,
         timestamp: new Date(),
       }
     ]);
     setIsSidebarVisible(false);
+
+    // Reset any booking flow state
+    setIsInBookingFlow(false);
+    setBookingStep('');
+    setBookingData({
+      monasteryId: '',
+      monasteryName: '',
+      email: '',
+      phone: '',
+      numberOfPeople: '',
+      visitDate: '',
+      specialRequests: ''
+    });
   };
 
   const handleOpenSidebar = () => {
@@ -166,7 +184,7 @@ export default function Chatbot() {
     }
 
     // Check for booking intent keywords
-    const bookingKeywords = ['book', 'booking', 'reserve', 'reservation', 'visit', 'schedule', 'appointment'];
+    const bookingKeywords = ['book', 'booking', 'reserve', 'reservation', 'schedule'];
     const containsBookingKeyword = bookingKeywords.some(keyword =>
       currentInput.toLowerCase().includes(keyword)
     );
@@ -1006,8 +1024,8 @@ You will receive a confirmation email shortly. The monastery staff will contact 
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
-      <KeyboardAvoidingView 
-        style={styles.container} 
+      <KeyboardAvoidingView
+        style={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 30 : 40}
       >

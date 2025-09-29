@@ -24,6 +24,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import Monstyles from './styles/style';
 import SafeScreen from '../../components/SafeScreen';
 import ReviewsSection from './ReviewsSection';
+import AudioGuideModal from '../../components/AudioGuideModal';
 
 export default function MonasteryDetailScreen() {
   const { id } = useLocalSearchParams();
@@ -31,7 +32,7 @@ export default function MonasteryDetailScreen() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const insets = useSafeAreaInsets();
-  
+
   // State management
   const [monastery, setMonastery] = useState<Monastery | null>(null);
   const [reviews, setReviews] = useState<MonasteryReviewWithUser[]>([]);
@@ -40,13 +41,14 @@ export default function MonasteryDetailScreen() {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   const [imageModalVisible, setImageModalVisible] = useState(false);
+  const [audioGuideModalVisible, setAudioGuideModalVisible] = useState(false);
 
   // Screen dimensions
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-  
+
   // Ref for horizontal scroll view
   const tabScrollViewRef = useRef<ScrollView>(null);
-  
+
   // Tab configuration
   const tabs = [
     { key: 'overview', title: 'Overview' },
@@ -62,7 +64,7 @@ export default function MonasteryDetailScreen() {
   // Data fetching
   const fetchMonasteryDetails = async () => {
     if (!id) return;
-    
+
     try {
       const data = await getMonasteryById(id as string);
       setMonastery(data);
@@ -76,7 +78,7 @@ export default function MonasteryDetailScreen() {
 
   const fetchReviews = async () => {
     if (!id) return;
-    
+
     try {
       const reviewsData = await getMonasteryReviews(id as string);
       setReviews(reviewsData);
@@ -96,11 +98,11 @@ export default function MonasteryDetailScreen() {
   const getRatingText = () => {
     const avgRating = getAverageRating();
     const reviewCount = reviews.length;
-    
+
     if (reviewCount === 0) {
       return 'No reviews yet';
     }
-    
+
     return `${avgRating} (${reviewCount} review${reviewCount !== 1 ? 's' : ''})`;
   };
 
@@ -140,12 +142,12 @@ export default function MonasteryDetailScreen() {
         onRequestClose={closeImageModal}
         statusBarTranslucent={true}
       >
-        <BlurView 
+        <BlurView
           style={Monstyles.imageModalContainer}
           intensity={80}
           tint="dark"
         >
-          <TouchableOpacity 
+          <TouchableOpacity
             style={StyleSheet.absoluteFillObject}
             activeOpacity={1}
             onPress={closeImageModal}
@@ -197,14 +199,31 @@ export default function MonasteryDetailScreen() {
   // Utility functions
   const navigateToBooking = () => {
     if (!monastery) return;
-    
+
     router.push({
       pathname: '/booking',
-      params: { 
-        monasteryId: monastery.id, 
-        monasteryName: monastery.name 
+      params: {
+        monasteryId: monastery.id,
+        monasteryName: monastery.name
       }
     } as any);
+  };
+
+  const handleAudioGuide = () => {
+    if (!monastery) return;
+
+    // Check if monastery has audio guide
+    if (monastery.audio_guide && monastery.audio_guide.trim()) {
+      // Open the audio guide modal
+      setAudioGuideModalVisible(true);
+    } else {
+      // Show alert that audio guide is not available
+      Alert.alert(
+        'Audio Guide Not Available',
+        'Audio guide is not available for this monastery right now. Please check back later.',
+        [{ text: 'OK', style: 'default' }]
+      );
+    }
   };
 
   const renderStars = (rating: number, size: number = 16) => {
@@ -222,7 +241,7 @@ export default function MonasteryDetailScreen() {
   const handleTabScroll = (event: any) => {
     const scrollX = event.nativeEvent.contentOffset.x;
     const tabIndex = Math.round(scrollX / screenWidth);
-    
+
     if (tabIndex !== activeTabIndex && tabIndex >= 0 && tabIndex < tabs.length) {
       setActiveTabIndex(tabIndex);
       setActiveTab(tabs[tabIndex].key);
@@ -259,14 +278,14 @@ export default function MonasteryDetailScreen() {
   // Render functions
   const renderImageGrid = () => {
     const imageSize = (screenWidth - 60) / 2; // 2 columns with spacing
-    
+
     return (
       <FlatList
         data={monastery?.images || []}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={[
-          Monstyles.imageGridContainer, 
+          Monstyles.imageGridContainer,
           { paddingBottom: 120 + insets.bottom }
         ]}
         columnWrapperStyle={Monstyles.imageGridRow}
@@ -290,7 +309,7 @@ export default function MonasteryDetailScreen() {
   const renderOverviewContent = () => (
     <View style={Monstyles.tabContent}>
       <View style={{ flex: 1 }}>
-        <ScrollView 
+        <ScrollView
           contentContainerStyle={{ paddingBottom: 120 + insets.bottom }}
           showsVerticalScrollIndicator={false}
         >
@@ -317,7 +336,7 @@ export default function MonasteryDetailScreen() {
         <View style={Monstyles.buttonRow}>
           <TouchableOpacity
             style={Monstyles.audioGuideButton}
-            onPress={() => router.push('/audio-guide')}
+            onPress={handleAudioGuide}
           >
             <Volume2 size={16} color="#DF8020" style={{ marginRight: 8 }} />
             <Text style={Monstyles.audioGuideButtonText}>Audio Guide</Text>
@@ -342,8 +361,8 @@ export default function MonasteryDetailScreen() {
 
   const renderReviewsContent = () => (
     <View style={Monstyles.tabContent}>
-      <ReviewsSection 
-        monasteryId={id as string} 
+      <ReviewsSection
+        monasteryId={id as string}
         onReviewsUpdated={fetchReviews}
       />
     </View>
@@ -384,15 +403,15 @@ export default function MonasteryDetailScreen() {
         {/* Hero Image with Text Overlay */}
         <View style={Monstyles.heroContainer}>
           <Image source={{ uri: monastery.images[0] }} style={Monstyles.heroImage} />
-          
+
           {/* 360° Button - Fixed top right */}
-          <TouchableOpacity 
+          <TouchableOpacity
             style={Monstyles.hero360Button}
             onPress={() => router.push({ pathname: '/monastery/360view', params: { id } })}
           >
             <Text style={Monstyles.hero360ButtonText}>360°</Text>
           </TouchableOpacity>
-          
+
           <View style={Monstyles.heroTextOverlay}>
             <Text style={Monstyles.heroMonasteryName}>{monastery?.name}</Text>
             <View style={Monstyles.starRatingContainer}>
@@ -436,6 +455,13 @@ export default function MonasteryDetailScreen() {
         </ScrollView>
 
         {renderImageModal()}
+
+        {/* Audio Guide Modal */}
+        <AudioGuideModal
+          visible={audioGuideModalVisible}
+          monastery={monastery}
+          onClose={() => setAudioGuideModalVisible(false)}
+        />
       </View>
     </SafeScreen>
   );

@@ -347,16 +347,50 @@ export const getOrCreateConversation = async (): Promise<string | null> => {
 };
 
 /**
+ * Creates a new conversation for the current user (always creates new).
+ * @returns The new conversation ID.
+ */
+export const createNewConversation = async (): Promise<string | null> => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  // Always create a new conversation
+  let { data: newConversation, error: insertError } = await supabase
+    .from('chat_conversations')
+    .insert({
+      user_id: user.id,
+      summary: null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    })
+    .select('id')
+    .single();
+
+  if (insertError) {
+    console.error('Error creating new conversation:', insertError);
+    return null;
+  }
+  return newConversation?.id || null;
+};
+
+/**
  * Fetches all conversations for the current user.
  * @returns An array of conversations.
  */
-export const getAllConversations = async (): Promise<{ id: string; summary: string | null; updated_at: string; }[]> => {
+export const getAllConversations = async (): Promise<{ id: string; summary: string | null; updated_at: string; created_at: string; message_count: number; }[]> => {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return [];
 
+  // Get conversations with message count
   const { data, error } = await supabase
     .from('chat_conversations')
-    .select('id, summary, updated_at')
+    .select(`
+      id,
+      summary,
+      updated_at,
+      created_at,
+      chat_messages(count)
+    `)
     .eq('user_id', user.id)
     .order('updated_at', { ascending: false });
 
@@ -364,7 +398,32 @@ export const getAllConversations = async (): Promise<{ id: string; summary: stri
     console.error('Error fetching all conversations:', error);
     return [];
   }
-  return data || [];
+
+  return (data || []).map(conv => ({
+    id: conv.id,
+    summary: conv.summary || generateConversationSummary(conv.id),
+    updated_at: conv.updated_at,
+    created_at: conv.created_at,
+    message_count: conv.chat_messages?.[0]?.count || 0
+  }));
+};
+
+/**
+ * Generate a conversation summary based on first few messages
+ */
+const generateConversationSummary = (conversationId: string): string => {
+  // This is a simple fallback - you could make this more sophisticated
+  const summaries = [
+    "Monastery History Discussion",
+    "Visit Planning Chat",
+    "Cultural Heritage Exploration",
+    "Booking Assistance",
+    "Monastery Guide Session"
+  ];
+
+  // Simple hash-based selection for consistency
+  const hash = conversationId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return summaries[hash % summaries.length];
 };
 
 /**

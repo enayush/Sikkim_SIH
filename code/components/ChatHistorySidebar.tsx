@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, FlatList, StyleSheet, ActivityIndicator } from 'react-native';
-import { Plus, MessageSquare, X } from 'lucide-react-native';
+import { Plus, MessageSquare, X, Clock, MessageCircle } from 'lucide-react-native';
 import { timeAgo } from '@/lib/utils'; // We will create this utility function
 
 type Conversation = {
   id: string;
   summary: string | null;
   updated_at: string;
+  created_at: string;
+  message_count: number;
 };
 
 type Props = {
@@ -34,12 +36,23 @@ export default function ChatHistorySidebar({
       ]}
       onPress={() => onSelectConversation(item.id)}
     >
-      <MessageSquare size={18} color="#9CA3AF" style={styles.icon} />
+      <View style={styles.conversationIcon}>
+        <MessageSquare size={18} color="#DF8020" />
+      </View>
       <View style={styles.conversationText}>
         <Text style={styles.summary} numberOfLines={1}>
           {item.summary || 'New Chat'}
         </Text>
-        <Text style={styles.timestamp}>{timeAgo(item.updated_at)}</Text>
+        <View style={styles.metadata}>
+          <View style={styles.metadataItem}>
+            <Clock size={12} color="#9CA3AF" />
+            <Text style={styles.timestamp}>{timeAgo(item.updated_at)}</Text>
+          </View>
+          <View style={styles.metadataItem}>
+            <MessageCircle size={12} color="#9CA3AF" />
+            <Text style={styles.messageCount}>{item.message_count} messages</Text>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -118,16 +131,26 @@ const styles = StyleSheet.create({
   },
   conversationItem: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     paddingVertical: 12,
-    paddingHorizontal: 8,
-    borderRadius: 8,
+    paddingHorizontal: 12,
+    borderRadius: 12,
     marginBottom: 8,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: 'transparent',
   },
   activeConversation: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FEF3E7',
+    borderColor: '#DF8020',
   },
-  icon: {
+  conversationIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#FEF3E7',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 12,
   },
   conversationText: {
@@ -135,12 +158,25 @@ const styles = StyleSheet.create({
   },
   summary: {
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: '600',
     color: '#374151',
+    marginBottom: 4,
+  },
+  metadata: {
+    flexDirection: 'column',
+    gap: 2,
+  },
+  metadataItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
   },
   timestamp: {
-    fontSize: 12,
-    color: '#6B7280',
-    marginTop: 2,
+    fontSize: 11,
+    color: '#9CA3AF',
+  },
+  messageCount: {
+    fontSize: 11,
+    color: '#9CA3AF',
   },
 });
