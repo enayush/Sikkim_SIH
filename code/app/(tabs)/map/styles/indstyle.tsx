@@ -7,7 +7,7 @@ const indstyle = StyleSheet.create({
     backgroundColor: '#FFFFFF',
   },
   scrollContent: {
-    paddingTop: 60, // Height of the topBar
+    paddingTop: 60, // This will be overridden by dynamic style
   },
   chatbotButton: {
     position: 'absolute',
@@ -27,7 +27,6 @@ const indstyle = StyleSheet.create({
   },
   topBar: {
     position: 'absolute',
-    top: 0,
     left: 0,
     right: 0,
     flexDirection: 'row',
@@ -72,7 +71,7 @@ const indstyle = StyleSheet.create({
   },
   carouselContainer: {
     height: 220,
-    marginTop: -60, // Pull carousel up to touch the header
+    marginTop: -20, // Slight overlap with header for visual appeal
   },
   carouselItem: {
     width: width,

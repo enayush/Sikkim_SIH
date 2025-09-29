@@ -8,16 +8,13 @@ import {
   Dimensions,
   ImageBackground,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
-import Animated, {
-  useAnimatedScrollHandler,
-  useSharedValue,
-  useAnimatedStyle,
-} from 'react-native-reanimated';
 import MapView, { Marker } from 'react-native-maps';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Calendar, Mic, MessageSquare, Bell } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { MonasteryWithRating, getMonasteriesByRegion, getMonasteriesByIdsWithRatings } from '../../lib/monasteryService';
 import SafeScreen from '../../components/SafeScreen';
 import indstyle from './map/styles/indstyle';
@@ -50,6 +47,7 @@ const initialMapRegion = {
 const HomeScreen = React.memo(() => {
   const { t } = useTranslation();
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [carouselMonasteries, setCarouselMonasteries] = useState<MonasteryWithRating[]>([]);
   const [popularMonasteries, setPopularMonasteries] = useState<MonasteryWithRating[]>([]);
   const [northernMonasteries, setNorthernMonasteries] = useState<MonasteryWithRating[]>([]);
@@ -60,27 +58,17 @@ const HomeScreen = React.memo(() => {
   const [regionalLoading, setRegionalLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Animation states for header using reanimated
-  const scrollY = useSharedValue(0);
-  const HEADER_MAX_HEIGHT = 60;
+  // Create dynamic styles for safe area - FIXED HEADER (NO ANIMATION)
+  const dynamicTopBarStyle = {
+    ...indstyle.topBar,
+    top: insets.top,
+    height: 60,
+  };
 
-  const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event, ctx: { prevY?: number }) => {
-      const y = event.contentOffset.y;
-      const diff = y - (ctx.prevY ?? 0);
-
-      if (diff > 0) {
-        scrollY.value = Math.min(scrollY.value + diff, HEADER_MAX_HEIGHT);
-      } else {
-        scrollY.value = Math.max(scrollY.value + diff, 0);
-      }
-      ctx.prevY = y;
-    },
-  });
-
-  const headerStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: -scrollY.value }],
-  }));
+  const dynamicScrollContentStyle = {
+    ...indstyle.scrollContent,
+    paddingTop: insets.top + 60, // Safe area + header height
+  };
 
   useEffect(() => {
     fetchPrimaryMonasteries();
@@ -91,10 +79,10 @@ const HomeScreen = React.memo(() => {
   const fetchPrimaryMonasteries = async () => {
     try {
       setLoading(true);
-      
+
       // Combine IDs and remove duplicates to fetch all required data in one call
       const uniqueIdsToFetch = [...new Set([...CAROUSEL_MONASTERY_IDS, ...POPULAR_MONASTERY_IDS])];
-      
+
       // Fetch only the monasteries we need
       const fetchedMonasteries = await getMonasteriesByIdsWithRatings(uniqueIdsToFetch);
       const monasteryMap = new Map(fetchedMonasteries.map(m => [m.id, m]));
@@ -137,7 +125,7 @@ const HomeScreen = React.memo(() => {
       setRegionalLoading(false);
     }
   };
-  
+
   const handleScroll = useCallback((event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / width);
@@ -195,7 +183,7 @@ const HomeScreen = React.memo(() => {
       <View style={indstyle.popularHeader}>
         <Text style={indstyle.popularTitle}>{title}</Text>
       </View>
-      <Animated.ScrollView
+      <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={indstyle.popularScrollContainer}
@@ -216,7 +204,7 @@ const HomeScreen = React.memo(() => {
             </TouchableOpacity>
           </>
         )}
-      </Animated.ScrollView>
+      </ScrollView>
     </View>
   ), [regionalLoading, renderPopularMonasteryCard, router]);
 
@@ -231,7 +219,7 @@ const HomeScreen = React.memo(() => {
 
   return (
     <SafeScreen style={indstyle.container}>
-      <Animated.View style={[indstyle.topBar, headerStyle]}>
+      <View style={dynamicTopBarStyle}>
         <View style={indstyle.logoContainer}>
           <Image source={require('../../assets/images/icon.png')} style={indstyle.logo} />
           <Text style={indstyle.appName}>Monastery360</Text>
@@ -239,14 +227,13 @@ const HomeScreen = React.memo(() => {
         <TouchableOpacity onPress={() => router.push('/notification')}>
           <Bell size={24} color="#1F2937" />
         </TouchableOpacity>
-      </Animated.View>
-      <Animated.ScrollView
-        onScroll={scrollHandler}
+      </View>
+      <ScrollView
         scrollEventThrottle={16}
-        contentContainerStyle={indstyle.scrollContent}
+        contentContainerStyle={dynamicScrollContentStyle}
       >
         <View style={indstyle.carouselContainer}>
-          <Animated.ScrollView
+          <ScrollView
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
@@ -254,7 +241,7 @@ const HomeScreen = React.memo(() => {
             scrollEventThrottle={16}
           >
             {carouselMonasteries.map(renderCarouselItem)}
-          </Animated.ScrollView>
+          </ScrollView>
           <View style={indstyle.pagination}>
             {carouselMonasteries.map((_, index) => (
               <View
@@ -267,7 +254,7 @@ const HomeScreen = React.memo(() => {
             ))}
           </View>
         </View>
-        
+
 
         <View style={indstyle.smallButtonsContainer}>
           <TouchableOpacity style={indstyle.smallButton} onPress={() => router.push('/cultural-calendar')}>
@@ -305,7 +292,7 @@ const HomeScreen = React.memo(() => {
           <View style={indstyle.popularHeader}>
             <Text style={indstyle.popularTitle}>Popular Monasteries</Text>
           </View>
-          <Animated.ScrollView
+          <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={indstyle.popularScrollContainer}
@@ -317,14 +304,14 @@ const HomeScreen = React.memo(() => {
             >
               <Text style={indstyle.moreButtonText}>More →</Text>
             </TouchableOpacity>
-          </Animated.ScrollView>
+          </ScrollView>
         </View>
 
         {renderMonasterySection('Northern Monasteries', northernMonasteries, '/search')}
         {renderMonasterySection('Eastern Monasteries', easternMonasteries, '/search')}
         {renderMonasterySection('Southern Monasteries', southernMonasteries, '/search')}
         {renderMonasterySection('Western Monasteries', westernMonasteries, '/search')}
-      </Animated.ScrollView>
+      </ScrollView>
       <TouchableOpacity
         style={indstyle.chatbotButton}
         onPress={() => router.push('/chatbot')}
