@@ -265,7 +265,7 @@ Respond in a helpful, conversational manner with markdown formatting.`
       }
     };
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -289,9 +289,21 @@ Respond in a helpful, conversational manner with markdown formatting.`
 
       throw new Error(`Gemini API error: ${response.status} - ${errorText}`);
     }
+    const contentType = response.headers.get('content-type');
+    const responseHasContent = contentType && contentType.includes('application/json');
+
+    if (!responseHasContent) {
+      const errorText = await response.text();
+      console.error('API returned success status but no JSON content:', errorText);
+      throw new Error('API returned successful status but empty/non-JSON response.');
+    }
 
     const data = await response.json();
 
+    if (!data || typeof data !== 'object') {
+        console.error('API returned a non-object or null response body:', data);
+        throw new Error('Empty or invalid data structure from Gemini API');
+    }
     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
       return data.candidates[0].content.parts[0].text;
     } else {
