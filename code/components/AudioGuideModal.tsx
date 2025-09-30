@@ -133,9 +133,9 @@ export default function AudioGuideModal({ visible, monastery, onClose }: AudioGu
       }, 100);
 
       const options = {
-        language: 'en-US',
-        pitch: 1.0,
-        rate: 0.8,
+        language: 'en-IN', // Indian English
+        pitch: 1.1, // Slightly higher pitch for female voice
+        rate: 0.8, // Good rate for narration
         quality: 'enhanced' as const,
         onStart: () => {
           setIsPlaying(true);
